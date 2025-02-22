@@ -1,6 +1,8 @@
 <script>
     import { goto } from "$app/navigation";
     import { AUTH_URL } from "../../../lib/js/api-urls.js";
+    import "$lib/css/login.css";  
+
     let username = "";
     let password = "";
     let error = false;
@@ -45,11 +47,36 @@
    
   </script>
   
-  <svelte:head>
-    <title>Login</title>
-  </svelte:head>
+  <!-- HTML for login page-->
+  <div class="login-container">
+    <!-- login image -->
+    <div class="login-image">
+      <!-- login form -->
+      <div class="login-form">
+        <!-- close button -->
+        <button class="close-button" on:click={() => goto('/')}>X</button>
+        <h2>Welcome Back!</h2>
+        <form on:submit|preventDefault={handleSubmit}>
+          <input type="username" bind:value={username} placeholder="Username" required />
+          <input type="password" bind:value={password} placeholder="Password" required />
+          <p class="forgot-password"><a href="#">Forgot Password? Get Help.</a></p>
+          <button class="login-button" type="submit">Login</button>
+          <div class="social-login">
+            <p>Or Sign In With:</p>
+            <div class="social-login-icons">
+              <img src="/images/google.png" alt="Google" />
+              <img src="/images/facebook.png" alt="Facebook" />
+            </div>
+          </div>
+          <p class="signup">
+            No Account? <a href="/signup">Get Started.</a>
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
   
-  <h1 id="loginHeader">Login</h1>
+  <!-- <h1 id="loginHeader">Login</h1>
   
     <form id="login-container" on:submit|preventDefault={handleSubmit}>
     <label for="username">Username:</label>
@@ -65,6 +92,6 @@
         <a href="/signup" on:click={() => goto("/signup")}>&#x1F64C Sign up</a>
           </span>
       </div>
-    </form>
+    </form> -->
 
   
