@@ -1,8 +1,11 @@
 <script>
-    import { goto } from "$app/navigation";
+    //commented out for now to view css and html (couldnt work if i did not comment out)
+    //import { goto } from "$app/navigation";
     import { user } from "../../../lib/components/user.js";
-    import { SIGNUP_URL } from "../../../lib/js/api-urls.js";
-  
+    //import { SIGNUP_URL } from "../../../lib/js/api-urls.js";
+    import "$lib/css/signup.css";  
+	import { goto } from "$app/navigation";
+
   let username = "";
   let firstName = "";
   let lastName = "";
@@ -87,8 +90,76 @@ body: JSON.stringify({
 
 </script>
 
-<svelte:head>
-  <title>Register</title>
+<div id="signup-container">
+  <h1>Join Us Now!</h1>
+  <!-- sign up form -->
+  <div class="signup-form">
+    <form on:submit|preventDefault={handleSignup}>
+      <!-- username -->
+      <label for="username">Username:</label>
+      <input type="text" bind:value={username} required />
+      {#if usernameTakenError}
+        <p class="error">Username is already taken. Please use a different username.</p>
+      {/if}
+
+      <!-- full name -->
+      <div class="name-field">
+        <div>
+          <label for="firstName">First Name:</label>
+          <input type="text" bind:value={firstName} required />
+        </div>
+        <div>
+          <label for="lastName">Last Name:</label>
+          <input type="text" bind:value={lastName} required />
+        </div>
+      </div>
+
+      <!-- email -->
+      <label for="email">Email:</label>
+      <input type="email" bind:value={email} required />
+      {#if emailTakenError}
+          <p class="error">Email is already taken. Please use a different email address.</p>
+      {/if}
+
+      <!-- birthday -->
+      <label for="birthday">Birthday:</label>
+      <input type="date" bind:value={birthday} required />
+
+      <!-- password -->
+      <label for="password">Password:</label>
+      <input type="password" bind:value={password} required />
+
+      <!-- confirm password -->
+      <label for="confirmedPassword">Confirm Password:</label>
+      <input type="password" bind:value={confirmedPassword} required />
+      {#if passwordMatchError}
+      <p class="error">Password does not match. Re-enter password.</p>
+      {/if}
+
+      <!-- profile picture -->
+      <div class="profile-picture">
+        <div class="profile-picture-label">
+          <label for="profilePicture">Profile Picture:</label>
+        </div>
+        <div class="profile-picture-image">
+          <img src={images[currentImage]} alt="Profile Picture">
+          <button type="button" on:click={toggleImage}>Next</button>
+        </div>
+      </div>
+
+      <!-- signup button -->
+      <button id="signup-button" type="submit">Sign Up</button>
+    </form>
+  </div>
+
+  <!-- login redirect -->
+  <div class="login">
+    <p>Already Have an Account? <a href="/login" on:click={() => goto("/login")}>Login</p>
+  </div>
+</div>
+
+<!-- <svelte:head>
+  <title>Sign Up</title>
 </svelte:head>
 
 <h1 id="registerHeader">Register</h1>
@@ -154,4 +225,4 @@ body: JSON.stringify({
         </span>
       </div>
 
-    </form>
+    </form> -->
