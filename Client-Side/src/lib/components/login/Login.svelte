@@ -1,6 +1,7 @@
 <script>
-    import { goto } from "$app/navigation";
-    import { AUTH_URL } from "../../../lib/js/api-urls.js";
+    //commented out for now to view css and html (couldnt work if i did not comment out)
+    // import { goto } from "$app/navigation";
+    // import { AUTH_URL } from "../../../lib/js/api-urls.js";
     import "$lib/css/login.css";  
 
     let username = "";
@@ -50,30 +51,31 @@
   <!-- HTML for login page-->
   <div class="login-container">
     <!-- login image -->
-    <div class="login-image">
+    <div class="login-image"></div>
       <!-- login form -->
       <div class="login-form">
         <!-- close button -->
-        <button class="close-button" on:click={() => goto('/')}>X</button>
+        <button class="close-button" on:click={() => goto('/')}>x</button>
         <h2>Welcome Back!</h2>
         <form on:submit|preventDefault={handleSubmit}>
           <input type="username" bind:value={username} placeholder="Username" required />
           <input type="password" bind:value={password} placeholder="Password" required />
-          <p class="forgot-password"><a href="#">Forgot Password? Get Help.</a></p>
+          <p class="forgot-password">
+            Forgot Password? <a href="#/"> Get Help.</a>
+          </p>
           <button class="login-button" type="submit">Login</button>
+        </form>
           <div class="social-login">
             <p>Or Sign In With:</p>
-            <div class="social-login-icons">
-              <img src="/images/google.png" alt="Google" />
-              <img src="/images/facebook.png" alt="Facebook" />
+            <div class="social-icons">
+              <img src="src/lib/components/images/google-icon.png" alt="Google" />
+              <img src="src/lib/components/images/facebook-icon.png" alt="Facebook" />
             </div>
           </div>
           <p class="signup">
             No Account? <a href="/signup">Get Started.</a>
           </p>
-        </form>
       </div>
-    </div>
   </div>
   
   <!-- <h1 id="loginHeader">Login</h1>
