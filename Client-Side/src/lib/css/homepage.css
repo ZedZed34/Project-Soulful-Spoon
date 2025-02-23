@@ -30,7 +30,42 @@
     font-weight: bold;
     color: #333;
   }
-  
+
+  .dropdown {
+    position: relative;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: navy;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    list-style: none;
+    padding: 1rem;
+    border-radius: 4px;
+    top: 100%;
+    z-index: 20;
+    min-width: 200px;
+  }
+
+  .dropdown-content li {
+    padding: 0.5rem 0;
+  }
+
+  .dropdown-content li a {
+    text-decoration: none;
+    color: darkolivegreen;
+    display: block;
+  }
+
+  .dropdown-content li a:hover  {
+    color: navy;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display:block;
+  } 
+
   /* Navigation Links */
   .nav-buttons {
     list-style: none;
