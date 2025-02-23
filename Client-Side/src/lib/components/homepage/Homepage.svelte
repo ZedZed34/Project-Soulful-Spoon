@@ -43,3 +43,4 @@
     <h1>Welcome to Soulful Spoon</h1>
     <!-- <p>Discover trending recipes, tips, and more.</p> -->
 </main>
+ 
