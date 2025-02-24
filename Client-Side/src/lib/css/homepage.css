@@ -1,4 +1,8 @@
 /**** Navbar Styling ****/
+body{
+    font-family: 'Arial', sans-serif;
+}
+
 .navbar {
     display: flex;
     align-items: center;
@@ -109,8 +113,14 @@
     color: navy;
   }
   
+  .action-buttons {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
   /* Add Button */
-  .add-button button {
+  .add-button {
     background-color: darkolivegreen;
     color: white;
     border: none;
@@ -119,15 +129,29 @@
     border-radius: 50%;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    
   }
-  
-  .add-button button:hover {
+
+  .add-button:hover {
     background-color: navy;
   }
-  
+
+  .profile-icon {
+    height: 55px;
+    width: 55px;
+    object-fit: cover;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    border-radius: 50%;
+  }
+
+  .profile-icon:hover {
+    transform: scale(1.1);
+  }
+   
   /* main */
   main {
-    padding: 2rem;
+    padding: 1rem;
     text-align: center;
   }
 

@@ -1,6 +1,7 @@
 <script>
     import '$lib/css/homepage.css'; //import homepage styles
     import logo from '$lib/components/images/Logo.png'; 
+    import profileicon from '$lib/components/images/profileicon.jpg'
     import SalmonQuinoaBowl from '$lib/components/images/SalmonQuinoaBowl.jpg';
     import PrawnSpagetti from '$lib/components/images/PrawnSpagetti.jpg';
     import BananaOatmealPancakes from '$lib/components/images/BananaOatmealPancakes.jpg';
@@ -48,8 +49,9 @@
         <li><a href="/About us">About us</a></li>
     </ul>
 
-    <div class="add-button">
-        <button title="Add New">+</button>
+    <div class="action-buttons">
+    <button class="add-button" title="Add New">+</button>
+        <img src={profileicon} alt="Profile" class="profile-icon" />
     </div>
 </nav>
 
