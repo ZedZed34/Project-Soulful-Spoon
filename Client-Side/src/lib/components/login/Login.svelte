@@ -3,11 +3,34 @@
      import { goto } from "$app/navigation";
     // import { AUTH_URL } from "../../../lib/js/api-urls.js";
     import "$lib/css/login.css";  
+    import {loginWithGoogle, logout, auth} from "$lib/firebase";
+    import {onMount} from "svelte";
 
+    let user = null;
     let username = "";
     let password = "";
     let error = false;
   
+    async function googleLogin(){
+      try{
+        const result = await loginWithGoogle();
+        user = result.user;
+        console.log("Google Login Sucess:", user);
+      } catch (error){
+          console.log("Google Login Failed:", error);
+      }
+    }
+
+    function handleLogout(){
+      logout();
+      user = null;
+    }
+
+    onMount(() => {
+      auth.onAuthStateChanged((u) => {
+        user.u;
+      });
+    });
   
     /**
      * Handles logging in by sending a POST request to /api/auth, with the given username and password.
@@ -67,13 +90,25 @@
           </p>
           <button class="login-button" type="submit">Login</button>
         </form>
+
+          {#if user}
+          <div class="user-info">
+            <img src={user.photoURL} alt="Profile">
+            <p>Welcome, {user.displayName}!</p>
+            <button on:click={handleLogout}>Logout</button>
+          </div>
+          {:else}
           <div class="social-login">
-            <p>Or Sign In With:</p>
+            <p>Or Sign Up With:</p>
             <div class="social-icons">
-              <img src="src/lib/components/images/google-icon.png" alt="Google" />
-              <img src="src/lib/components/images/facebook-icon.png" alt="Facebook" />
+              <button on:click={googleLogin}>
+                <img src="src/lib/components/images/google-icon.png" alt="Google" />
+              </button>
+              <!-- <img src="src/lib/components/images/facebook-icon.png" alt="Facebook" /> -->
             </div>
           </div>
+          {/if}
+
           <p class="signup">
             <!-- No Account? <a href="/signup" on:click={() => goto("/signup")}>Sign Up</a> -->
            No Account? <a href="/signup" rel="external">Sign Up</a>

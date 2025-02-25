@@ -10,9 +10,6 @@ body{
 
 }
 
-
-
-
 /* signup container */
 #signup-container{
     display: flex;
@@ -211,6 +208,11 @@ label{
     margin-top: 10px;
     gap: 15px;
     justify-content: center;
+}
+
+.social-icons button{
+    background: none;
+    border: none;
 }
 
 .social-icons img{

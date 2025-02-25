@@ -5,9 +5,10 @@
     //import { SIGNUP_URL } from "../../../lib/js/api-urls.js";
     import "$lib/css/signup.css";  
 	import { goto } from "$app/navigation";
-  
+  import {loginWithGoogle, logout, auth} from "$lib/firebase";
+  import {onMount} from "svelte";
 
-
+  let user = null;
   let username = "";
   let firstName = "";
   let lastName = "";
@@ -23,6 +24,27 @@
   let images = ["/src/lib/components/images/pp-jaguar.png", "/src/lib/components/images/pp-parrot.png", "/src/lib/components/images/pp-panda.png","/src/lib/components/images/pp-turtle.png", "/src/lib/components/images/pp-butterfly.png", "/src/lib/components/images/pp-jacutinga.png"];
   let currentImage = 0;
   let selectedImage = images[currentImage];
+
+  async function googleLogin(){
+    try{
+      const result = await loginWithGoogle();
+      user = result.user;
+      console.log("Google Login Sucess:", user);
+    } catch (error){
+        console.log("Google Login Failed:", error);
+    }
+  }
+
+  function handleLogout(){
+    logout();
+    user = null;
+  }
+
+  onMount(() => {
+    auth.onAuthStateChanged((u) => {
+      user.u;
+    });
+  });
 
   function toggleImage() {
     // currentImage = (currentImage + 1) % images.length; //setting default image
@@ -205,14 +227,25 @@ body: JSON.stringify({
       <!-- signup button -->
       <button id="signup-button" type="submit">Sign Up</button>
     </form>
-  
+
+    {#if user}
+      <div class="user-info">
+        <img src={user.photoURL} alt="Profile">
+        <p>Welcome, {user.displayName}!</p>
+        <button on:click={handleLogout}>Logout</button>
+      </div>
+    {:else}
     <div class="social-login">
       <p>Or Sign Up With:</p>
       <div class="social-icons">
-        <img src="src/lib/components/images/google-icon.png" alt="Google" />
-        <img src="src/lib/components/images/facebook-icon.png" alt="Facebook" />
+        <button on:click={googleLogin}>
+          <img src="src/lib/components/images/google-icon.png" alt="Google" />
+        </button>
+        <!-- <img src="src/lib/components/images/facebook-icon.png" alt="Facebook" /> -->
       </div>
     </div>
+    {/if}
+
     <!-- login redirect -->
      <div class="login">
       <p>Already Have an Account?
