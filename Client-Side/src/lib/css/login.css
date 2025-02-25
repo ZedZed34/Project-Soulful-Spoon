@@ -6,6 +6,7 @@ body{
     align-items: center;
     height: 100vh;
     margin: 0;
+    overflow: hidden;
 }
 
 /* login container */
@@ -109,6 +110,7 @@ input{
 .social-login{
     font-size: 12px;
     margin-top: 20px;
+    justify-content: center;
 }
 
 .social-icons{
@@ -127,6 +129,7 @@ input{
 .signup{
     font-size: 12px;
     margin-top: 15px;
+    justify-content: center;
 }
 
 .signup a{
@@ -138,4 +141,6 @@ input{
 .signup a:hover{
     text-decoration: underline;
 }
+
+
 

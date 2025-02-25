@@ -1,6 +1,6 @@
 <script>
     //commented out for now to view css and html (couldnt work if i did not comment out)
-    // import { goto } from "$app/navigation";
+     import { goto } from "$app/navigation";
     // import { AUTH_URL } from "../../../lib/js/api-urls.js";
     import "$lib/css/login.css";  
 
@@ -48,20 +48,22 @@
    
   </script>
   
+  
+
   <!-- HTML for login page-->
-  <div class="login-container">
+  <div class="login-container" >
     <!-- login image -->
     <div class="login-image"></div>
       <!-- login form -->
       <div class="login-form">
         <!-- close button -->
-        <button class="close-button" on:click={() => goto('/')}>x</button>
+        <button class="close-button" on:click={() => goto('/#')}>x</button>
         <h2>Welcome Back!</h2>
         <form on:submit|preventDefault={handleSubmit}>
           <input type="username" bind:value={username} placeholder="Username" required />
           <input type="password" bind:value={password} placeholder="Password" required />
           <p class="forgot-password">
-            Forgot Password? <a href="#/"> Get Help.</a>
+            Forgot Password? <a href="#/"> Get Help</a>
           </p>
           <button class="login-button" type="submit">Login</button>
         </form>
@@ -73,7 +75,8 @@
             </div>
           </div>
           <p class="signup">
-            No Account? <a href="/signup">Get Started.</a>
+            <!-- No Account? <a href="/signup" on:click={() => goto("/signup")}>Sign Up</a> -->
+           No Account? <a href="/signup" rel="external">Sign Up</a>
           </p>
       </div>
   </div>

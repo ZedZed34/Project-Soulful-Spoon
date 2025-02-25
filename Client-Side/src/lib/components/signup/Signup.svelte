@@ -1,10 +1,12 @@
 <script>
     //commented out for now to view css and html (couldnt work if i did not comment out)
     //import { goto } from "$app/navigation";
-    import { user } from "../../../lib/components/user.js";
+    //import { user } from "../../../lib/components/user.js";
     //import { SIGNUP_URL } from "../../../lib/js/api-urls.js";
     import "$lib/css/signup.css";  
 	import { goto } from "$app/navigation";
+  
+
 
   let username = "";
   let firstName = "";
@@ -18,18 +20,37 @@
   let passwordMatchError = false;
   let usernameTakenError = false;
   let emailTakenError = false;
-  let images = ["/src/lib/components/images/pp-cat.png", "/src/lib/components/images/pp-dog.png", "/src/lib/components/images/pp-duck.png","/src/lib/components/images/pp-hamster.png", "/src/lib/components/images/pp-pig.png"];
+  let images = ["/src/lib/components/images/pp-jaguar.png", "/src/lib/components/images/pp-parrot.png", "/src/lib/components/images/pp-panda.png","/src/lib/components/images/pp-turtle.png", "/src/lib/components/images/pp-butterfly.png", "/src/lib/components/images/pp-jacutinga.png"];
   let currentImage = 0;
+  let selectedImage = images[currentImage];
 
   function toggleImage() {
-    currentImage = (currentImage + 1) % images.length; //setting default image
+    // currentImage = (currentImage + 1) % images.length; //setting default image
+    selectedImage = images[(currentImage + 1) % images.length];
+    currentImage = (currentImage + 1) % images.length;
+
+    const fileInput = document.getElementById("profilePicture");
+    if(fileInput){
+      fileInput.value = "";
+    }
+
   }
+
+  function handleFileUpload(event){
+    const file = event.target.files[0];
+    if(file){
+      selectedImage = URL.createObjectURL(file);
+    }
+  }
+
 
   async function handleSignup() {
   error = false;
   passwordMatchError = false;
   usernameTakenError = false;
   emailTakenError = false;
+
+
 
   
 
@@ -90,7 +111,15 @@ body: JSON.stringify({
 
 </script>
 
-<div id="signup-container">
+<svelte:head>
+  <link rel="preload" href="/login">
+  <title>Sign Up</title>
+</svelte:head>
+
+
+
+
+<div id="signup-container" >
   <div class="signup-image"></div>
   <!-- sign up form -->
   <div class="signup-form">
@@ -109,17 +138,21 @@ body: JSON.stringify({
             <p class="error">Username is already taken. Please use a different username.</p>
           {/if}
 
-          <!-- full name -->
+          <!-- first name -->
           <div class="name-field">
             <div>
               <label for="firstName">First Name:</label>
               <input type="text" bind:value={firstName} required />
             </div>
-            <div>
-              <label for="lastName">Last Name:</label>
-              <input type="text" bind:value={lastName} required />
-            </div>
           </div>
+
+           <!-- password -->
+           <label for="password">Password:</label>
+           <input type="password" bind:value={password} required />
+        </div>
+        
+        <!-- right column -->
+        <div class="form-column">
 
           <!-- email -->
           <label for="email">Email:</label>
@@ -127,17 +160,15 @@ body: JSON.stringify({
           {#if emailTakenError}
               <p class="error">Email is already taken. Please use a different email address.</p>
           {/if}
-        </div>
-        <!-- right column -->
-        <div class="form-column">
-          <!-- birthday -->
-          <label for="birthday">Birthday:</label>
-          <input type="date" bind:value={birthday} required />
 
-          <!-- password -->
-          <label for="password">Password:</label>
-          <input type="password" bind:value={password} required />
-
+          <!-- last name -->
+          <div class="name-field">
+            <div>
+              <label for="lastName">Last Name:</label>
+              <input type="text" bind:value={lastName} required />
+            </div>
+          </div>
+        
           <!-- confirm password -->
           <label for="confirmedPassword">Confirm Password:</label>
           <input type="password" bind:value={confirmedPassword} required />
@@ -145,14 +176,31 @@ body: JSON.stringify({
           <p class="error">Password does not match. Re-enter password.</p>
           {/if}
 
+
           <!-- profile picture -->
-          <div class="profile-picture">
+          <!-- <div class="profile-picture">
               <label for="profilePicture">Profile Picture:</label>
               <img src={images[currentImage]} alt="Profile Picture">
               <button type="button" on:click={toggleImage}>Next</button>
-          </div>
+          </div> -->
+
         </div>
+        
       </div>
+
+       <!-- birthday -->
+       <!-- <label for="birthday">Birthday:</label>
+       <input type="date" bind:value={birthday} required /> -->
+
+       <!-- updated profile picture section -->
+       <div class="profile-picture">
+        <label class="profile-picture-label" for="profilePicture">Profile Picture:</label>
+        <div class="profile-picture-image">
+          <img src={selectedImage} alt="Profile">
+          <input type="file" id="profilePicture" accept="image/*" on:change={handleFileUpload}>
+          <button type="button" on:click={toggleImage}>Next</button>
+        </div>
+      </div> 
 
       <!-- signup button -->
       <button id="signup-button" type="submit">Sign Up</button>
@@ -166,9 +214,19 @@ body: JSON.stringify({
       </div>
     </div>
     <!-- login redirect -->
-    <div class="login">
-      <p>Already Have an Account? <a href="/login" on:click={() => goto("/login")}>Login</p>
-    </div>
+     <div class="login">
+      <p>Already Have an Account?
+        <!-- <a href="/login" on:click={() => goto("/login")}>Login</a> -->
+        <!-- <button class="login-button" on:click={() => goto('/login')}>Login</button> -->
+        <a href="/login" rel="external">Login</a>
+
+      </p>
+     </div>
+    
+      <!-- <p class="login">
+        Already Have an Account? <a href="/login">Login</a>
+      </p> -->
+  
   </div>
 </div>
 
