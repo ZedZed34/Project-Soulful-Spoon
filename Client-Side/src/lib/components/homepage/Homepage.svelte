@@ -19,12 +19,15 @@
         {src: ChickpeaSaladSandwich, text: "Chickpea Salad Sandwich"},
         {src: StrawberryYoghurtBites, text: "Strawberry Yoghurt Bites"},
         {src: SteakWithMushroomSauce, text: "Steak With Mushroom auce"},
-        {src: EggSalad, text: "Egg Salad"}
-        
-        
+        {src: EggSalad, text: "Egg Salad"}  
     ];
 </script>
 
+<svelte:head>
+    <script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
+<script src="https://files.bpcontent.cloud/2025/02/25/06/20250225063934-HGA74MAU.js"></script>
+    </svelte:head>
+    
  <!-- Navbar -->
 <nav class="navbar">
     <div class="logo-container">
@@ -33,7 +36,7 @@
     </div>
     <ul class="nav-buttons">
         <li class="dropdown">
-            <a href="#">Recipes</a>
+            <a href="#/">Recipes</a>
             <ul class="dropdown-content">
             <li><a href="/breakfast">Breakfast</a></li>
             <li><a href="/lunch">Lunch</a></li>
@@ -59,6 +62,34 @@
     <h1>Welcome to Soulful Spoon</h1>
 
 </main>
+
+<!-- Filters -->
+ <div class="filter-box">
+    <button class="filter-button">
+        Filter Options ⇩
+    </button>
+
+    <div class="filter-dropdown">
+        <h4>Courses</h4>
+        <ul>
+            <li><input type="radio" name="course" /> <label for="breakfast">Breakfast</label></li>
+            <li><input type="radio" name="course" /> <label for="lunch">Lunch</label></li>
+            <li><input type="radio" name="course" /> <label for="dinner">Dinner</label></li>
+            <li><input type="radio" name="course" /> <label for="bites">Bites</label></li>
+            <li><input type="radio" name="course" /> <label for="highProtein">High Protein</label></li>
+            <li><input type="radio" name="course" /> <label for="dessert">Dessert</label></li>
+            <li><input type="radio" name="course" /> <label for="baking">Baking</label></li>
+        </ul>
+        <h4>Dietary Requirements</h4>
+        <ul>
+            <li><input type="radio" name="diet" /> <label for="vegan">Vegan</label></li>
+            <li><input type="radio" name="course" /> <label for="vegetarian">Vegetarian</label></li>
+            <li><input type="radio" name="course" /> <label for="halal">Halal</label></li>
+            <li><input type="radio" name="course" /> <label for="dairyFree">Dairy Free</label></li>
+            <li><input type="radio" name="course" /> <label for="glutenFree">Gluten Free</label></li>
+        </ul>
+    </div>
+ </div>
 
 <section class="image-layout">
     {#each images as image}

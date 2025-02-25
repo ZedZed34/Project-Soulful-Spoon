@@ -1,6 +1,6 @@
 /**** Navbar Styling ****/
 body{
-    font-family: 'Arial', sans-serif;
+    font-family: sans-serif;
 }
 
 .navbar {
@@ -23,8 +23,7 @@ body{
     height: 50px;
     width: 50px;
     border-radius: 50%;
-    object-fit: cover;
-    border: 1px solid darkolivegreen;
+    object-fit: cover;    
     margin-right: 1rem;
   }
   
@@ -33,57 +32,6 @@ body{
     font-weight: bold;
     color: darkolivegreen;
   }
-
-  .dropdown {
-    position: relative;
-  }
-
-  .dropdown a {
-    text-decoration: none;
-    color: darkolivegreen;
-    padding: 0.5rem;
-    display: inline-block;
-    font-weight: bold;
-  }
-
-  .dropdown-content {
-    position: absolute;
-    background-color: white;
-    left: 0;
-    opacity: 0;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    list-style: none;
-    padding: 0.5rem 0;
-    margin: 0;
-    border-radius: 4px;
-    visibility: hidden;
-    transform: translateY(10px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    top: 100%;
-    z-index: 20;
-    min-width: 200px;
-  }
-
-  .dropdown-content li {
-    padding: 0.5rem 0;
-  }
-
-  .dropdown-content li a {
-    text-decoration: none;
-    color: darkolivegreen;
-    display: block;
-    transition: background-color 0.2s ease;
-  }
-
-  .dropdown-content li a:hover  {
-    color: darkolivegreen;
-  }
-
-  .dropdown:hover .dropdown-content {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  } 
 
   /**** nav buttons ****/
   .nav-buttons {
@@ -155,6 +103,114 @@ body{
     text-align: center;
   }
 
+  .dropdown {
+    position: relative;
+  }
+
+  .dropdown a {
+    text-decoration: none;
+    color: darkolivegreen;
+    padding: 0.5rem;
+    display: inline-block;
+    font-weight: bold;
+  }
+
+  .dropdown-content {
+    position: absolute;
+    background-color: white;
+    left: 0;
+    opacity: 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    list-style: none;
+    padding: 0.5rem 0;
+    margin: 0;
+    border-radius: 4px;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    top: 100%;
+    z-index: 20;
+    min-width: 200px;
+  }
+
+  .dropdown-content li {
+    padding: 0.5rem 0;
+  }
+
+  .dropdown-content li a {
+    text-decoration: none;
+    color: darkolivegreen;
+    display: block;
+    transition: background-color 0.2s ease;
+  }
+
+  .dropdown-content li a:hover  {
+    color: darkolivegreen;
+  }
+
+  .dropdown:hover .dropdown-content {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  } 
+
+  .filter-box {
+    position: relative;
+    display: inline-block;
+    margin: 1rem;
+  }
+
+  .filter-button {
+    background-color: darkolivegreen;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+
+  .filter-button:hover {
+    background-color: navy;
+  }
+
+  .filter-dropdown {
+    display: none;
+    position: absolute;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    z-index: 10;
+    border-radius: 4px;
+    top: 100%;
+    min-width: 250px;
+    white-space: nowrap;
+  }
+
+  .filter-box:hover .filter-dropdown {
+    display: block;
+  }
+
+  .filter-category h4 {
+    margin-bottom: 0.5rem;
+    color: darkolivegreen;
+  }
+
+  .filter-category ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .filter-category li {
+    margin-bottom: 0.5rem;
+  }
+
+  .filter-category input {
+    margin-right: 0.5rem;
+  }
+
   .image-layout {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -210,3 +266,4 @@ body{
     font-size: 1rem;
     font-weight: bold;
   }
+  
