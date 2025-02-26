@@ -6,4 +6,4 @@
     <title>Recipe Page</title>
   </svelte:head>
   
-  <Login/>
+  <RecipePage/>

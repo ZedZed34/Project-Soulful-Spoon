@@ -1,0 +1,57 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background: #d4be91;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+}
+
+.hero {
+    background: url('hero-image.jpg') no-repeat center/cover;
+    text-align: center;
+    padding: 50px 20px;
+    color: #000;
+    font-size: 24px;
+}
+
+.filter-section {
+    background: #5a7d3f;
+    padding: 15px;
+    text-align: center;
+    color: white;
+}
+
+.filter-section select {
+    padding: 5px;
+}
+
+.recipe-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+    padding: 20px;
+}
+
+.recipe-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
