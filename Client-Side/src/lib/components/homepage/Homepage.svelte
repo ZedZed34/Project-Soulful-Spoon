@@ -21,12 +21,32 @@
         {src: SteakWithMushroomSauce, text: "Steak With Mushroom auce"},
         {src: EggSalad, text: "Egg Salad"}  
     ];
+
+    import { onMount } from "svelte";
+
+    onMount(() => {
+    window.botpressWebChat.init({
+        botId: "2025/02/25/06/20250225063934-HGA74MAU",
+        host: "https://cdn.botpress.cloud",
+        clientId: "564aef3c-694d-473d-9e3f-bd4d81475072",
+        messagingUrl: "https://messaging.botpress.cloud",
+        botName: "ChatBot",
+        showBotAvatar: true,
+        showCloseButton: true,
+        disableAnimations: false,
+        stylesheet: "https://cdn.botpress.cloud/webchat/v2.2/style.css",
+        themeName: "prism",
+        showPoweredBy: false,
+        enableTranscriptDownload: true
+    });
+});
+
 </script>
 
-<svelte:head>
-    <script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
-<script src="https://files.bpcontent.cloud/2025/02/25/06/20250225063934-HGA74MAU.js"></script>
-    </svelte:head>
+<div>
+<script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js">
+ </script><script src="https://files.bpcontent.cloud/2025/02/25/06/20250225063934-HGA74MAU.js"></script>
+</div>
     
  <!-- Navbar -->
 <nav class="navbar">
