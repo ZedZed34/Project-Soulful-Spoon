@@ -1,0 +1,124 @@
+body{
+    font-family: sans-serif;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    top: 0;
+    z-index: 10;
+  }
+  
+  .logo-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    object-fit: cover;    
+    margin-right: 1rem;
+  }
+  
+  .site {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: darkolivegreen;
+  }
+
+  /**** nav buttons ****/
+  .nav-buttons {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .nav-buttons li {
+    list-style: none;
+    position: relative;
+  }
+  
+  .nav-buttons a {
+    text-decoration: none;
+    color: darkolivegreen;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    display: inline-block;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-buttons a:hover {
+    color: navy;
+  }
+
+  /* main */
+  main {
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .filter-box {
+    position: relative;
+    display: inline-block;
+    margin: 1rem;
+  }
+
+  .filter-button {
+    background-color: darkolivegreen;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+
+  .filter-button:hover {
+    background-color: navy;
+  }
+
+  .filter-dropdown {
+    display: none;
+    position: absolute;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    z-index: 10;
+    border-radius: 4px;
+    top: 100%;
+    min-width: 250px;
+    white-space: nowrap;
+  }
+
+  .filter-box:hover .filter-dropdown {
+    display: block;
+  }
+
+  .filter-category h4 {
+    margin-bottom: 0.5rem;
+    color: darkolivegreen;
+  }
+
+  .filter-category ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .filter-category li {
+    margin-bottom: 0.5rem;
+  }
+
+  .filter-category input {
+    margin-right: 0.5rem;
+  }
