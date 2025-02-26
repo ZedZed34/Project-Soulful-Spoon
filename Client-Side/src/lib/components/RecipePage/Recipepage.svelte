@@ -2,7 +2,40 @@
     import "$lib/css/recipepage.css";
 </script>
 
-<body>
+
+<!-- Navbar -->
+<nav class="navbar">
+    <div class="logo-container">
+        <img src={logo} alt="Soulful Spoon Logo" class="logo" />
+        <span class="site">Soulful Spoon</span>
+    </div>
+    <ul class="nav-buttons">
+        <li class="dropdown">
+            <a href="#/">Recipes</a>
+            <ul class="dropdown-content">
+            <li><a href="/breakfast">Breakfast</a></li>
+            <li><a href="/lunch">Lunch</a></li>
+            <li><a href="/dinner">Dinner</a></li>
+            <li><a href="/desserts">Desserts</a></li>
+            <li><a href="/snacks">Snacks</a></li>
+            <li><a href="/snacks">Snacks</a></li>
+            <li><a href="/quick-easy">Quick and Easy</a></li>
+            <li><a href="/airfryer">Airfryer</a></li>
+            </ul>
+        </li>
+        <li><a href="/Tips&tricks">Tips & Tricks</a></li>
+        <li><a href="/About us">About us</a></li>
+    </ul>
+
+    <div class="action-buttons">
+    <button class="add-button" title="Add New">+</button>
+        <img src={profileicon} alt="Profile" class="profile-icon" />
+    </div>
+</nav>
+
+
+
+<!-- <body>
     <header>
         <nav>
             <div class="logo"> 
@@ -30,7 +63,7 @@
             <option>Vegetarian</option>
             <option>Vegan</option>
             <option>Gluten Free</option>
-            <option>Protein Powder Recipes</option>
+            <option>Protein Powder Recipes</option> -->
         </select>
     </section>
     
