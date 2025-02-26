@@ -16,6 +16,7 @@
         const result = await loginWithGoogle();
         user = result.user;
         console.log("Google Login Sucess:", user);
+        goto("/", { replaceState: true });
       } catch (error){
           console.log("Google Login Failed:", error);
       }
@@ -99,7 +100,7 @@
           </div>
           {:else}
           <div class="social-login">
-            <p>Or Sign Up With:</p>
+            <p>Or Log In With:</p>
             <div class="social-icons">
               <button on:click={googleLogin}>
                 <img src="src/lib/components/images/google-icon.png" alt="Google" />
