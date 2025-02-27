@@ -1,14 +1,20 @@
 <script>
-    import '$lib/css/tips-tricks.css'; //import homepage styles
+    import '$lib/css/tips&tricks.css'; //import homepage styles
     import logo from '$lib/components/images/Logo.png'; 
     import profileicon from '$lib/components/images/profileicon.jpg'
 </script>
 
+<div>
+    <script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
+    <script src="https://files.bpcontent.cloud/2025/02/25/06/20250225063934-HGA74MAU.js"></script>
+</div>
 
 <!-- Navbar -->
 <nav class="navbar">
     <div class="logo-container">
+    <a href="/#">
         <img src={logo} alt="Soulful Spoon Logo" class="logo" />
+    </a>
         <span class="site">Soulful Spoon</span>
     </div>
     <ul class="nav-buttons">
@@ -35,13 +41,8 @@
     </div>
 </nav>
 
-<main>
-    <h1>Welcome to Soulful Spoon</h1>
-
-</main>
-
 <!-- Filters -->
- <div class="filter-box">
+<div class="filter-box">
     <button class="filter-button">
         Filter Options ⇩
     </button>
