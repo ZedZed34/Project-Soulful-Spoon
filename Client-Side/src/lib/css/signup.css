@@ -196,11 +196,11 @@ label{
 }
 
 /* social login section */
+/* social login section */
 .social-login{
     font-size: 12px;
     margin-top: 20px;
     justify-content: center;
-
 }
 
 .social-icons{
@@ -219,6 +219,7 @@ label{
     width: 30px;
     cursor: pointer;
 }
+
 
 /* sign up section */
 .login{

@@ -31,20 +31,22 @@
     try{
       const result = await loginWithGoogle();
       user = result.user;
-      
+      goto("/", { replaceState: true });
+
+      const uniqueUsername = user.displayName.replace(" ", "_") + "_" + Math.floor(Math.random() * 10000);
       //send google user data to backend
       await fetch(SIGNUP_URL, {
         method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ 
-          username: user.displayName, //needs to be unique (check server.js)
+          username: uniqueUsername, 
           email: user.email,
           profilePicture: user.photoURL})
         });
     
       console.log("Google Login Sucess:", user);
-      goto("/", { replaceState: true });
+      // goto("/", { replaceState: true });
     } catch (error){
         console.log("Google Login Failed:", error);
     }
@@ -249,7 +251,7 @@
       </div>
     {:else}
     <div class="social-login">
-      <p>Or Sign Up With:</p>
+      <p>Or Log In With:</p>
       <div class="social-icons">
         <button on:click={googleLogin}>
           <img src="src/lib/components/images/google-icon.png" alt="Google" />

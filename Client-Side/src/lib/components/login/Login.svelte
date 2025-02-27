@@ -81,7 +81,7 @@
       <!-- login form -->
       <div class="login-form">
         <!-- close button -->
-        <button class="close-button" on:click={() => goto('/#')}>x</button>
+        <button class="close-button" on:click={() => goto('/')}>x</button>
         <h2>Welcome Back!</h2>
         <form on:submit|preventDefault={handleSubmit}>
           <input type="username" bind:value={username} placeholder="Username" required />
