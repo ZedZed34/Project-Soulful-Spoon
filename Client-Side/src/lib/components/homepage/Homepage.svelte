@@ -52,7 +52,7 @@
             </ul>
         </li>
         <li><a href="/Tips&tricks">Tips & Tricks</a></li>
-        <li><a href="/About us">About us</a></li>
+        <li><a href="/Aboutus">About us</a></li>
     </ul>
 
     <div class="action-buttons">

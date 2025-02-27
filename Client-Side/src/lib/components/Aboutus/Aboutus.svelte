@@ -19,7 +19,7 @@
     </div>
     <ul class="nav-buttons">
         <li class="dropdown">
-            <a href="#/">Recipes</a>
+            <a href="/">Recipes</a>
             <ul class="dropdown-content">
             <li><a href="/breakfast">Breakfast</a></li>
             <li><a href="/lunch">Lunch</a></li>
@@ -32,7 +32,7 @@
             </ul>
         </li>
         <li><a href="/Tips&tricks">Tips & Tricks</a></li>
-        <li><a href="/About us">About us</a></li>
+        <li><a href="/Aboutus">About us</a></li>
     </ul>
 
     <div class="action-buttons">
