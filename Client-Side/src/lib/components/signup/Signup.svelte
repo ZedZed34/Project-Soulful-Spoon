@@ -31,7 +31,8 @@
     try{
       const result = await loginWithGoogle();
       user = result.user;
-      goto("/", { replaceState: true });
+     // goto("/", { replaceState: true });
+     window.location.href = "/"; //had to change to this to ensure the page reloads completely
 
       const uniqueUsername = user.displayName.replace(" ", "_") + "_" + Math.floor(Math.random() * 10000);
       //send google user data to backend
@@ -122,6 +123,7 @@
       console.log("User Signed Up Successfully:", userData);
       // user.login({ username: userData.username, email: userData.email, password: userData.password, confirmedPassword: userData.confirmedPassword });
       goto("/", { replaceState: true });
+      
     }   
     else {
       const data = await response.json();
@@ -160,7 +162,8 @@
   <div class="signup-image"></div>
   <!-- sign up form -->
   <div class="signup-form">
-    <button class="close-button" on:click={() => goto('/')}>x</button>
+    <!-- <button class="close-button" on:click={() => goto('/')}>x</button> -->
+    <button class="close-button" on:click={() => window.location.href = "/"}>x</button>
     <h2>Create Account</h2>
     <form on:submit|preventDefault={handleSignup}>
       
