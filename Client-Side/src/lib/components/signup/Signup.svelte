@@ -1,29 +1,72 @@
 <script>
-    //commented out for now to view css and html (couldnt work if i did not comment out)
-    //import { goto } from "$app/navigation";
-    //import { user } from "../../../lib/components/user.js";
-    //import { SIGNUP_URL } from "../../../lib/js/api-urls.js";
-    import "$lib/css/signup.css";  
+  //commented out for now to view css and html (couldnt work if i did not comment out)
+  //import { user } from "../../../lib/components/user.js";
+  //import { SIGNUP_URL } from "../../../lib/js/api-urls.js";
+  import "$lib/css/signup.css";  
 	import { goto } from "$app/navigation";
-  
+  import {loginWithGoogle, logout, auth} from "$lib/firebase";
+  import {onMount} from "svelte";
 
-
+  let user = null;
   let username = "";
   let firstName = "";
   let lastName = "";
   let email ="";
-  let birthday ="";
+  // let birthday ="";
   let password = "";
   let confirmedPassword = "";
   let profilePicture = "";
+
   let error = false;
   let passwordMatchError = false;
   let usernameTakenError = false;
   let emailTakenError = false;
+
   let images = ["/src/lib/components/images/pp-jaguar.png", "/src/lib/components/images/pp-parrot.png", "/src/lib/components/images/pp-panda.png","/src/lib/components/images/pp-turtle.png", "/src/lib/components/images/pp-butterfly.png", "/src/lib/components/images/pp-jacutinga.png"];
+  
   let currentImage = 0;
   let selectedImage = images[currentImage];
 
+  async function googleLogin(){
+    try{
+      const result = await loginWithGoogle();
+      user = result.user;
+      
+      //send google user data to backend
+      await fetch(SIGNUP_URL, {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ 
+          username: user.displayName, //needs to be unique (check server.js)
+          email: user.email,
+          profilePicture: user.photoURL})
+        });
+    
+      console.log("Google Login Sucess:", user);
+      goto("/", { replaceState: true });
+    } catch (error){
+        console.log("Google Login Failed:", error);
+    }
+  }
+
+  function handleLogout(){
+    logout();
+    user = null;
+    console.log("User is logged out");
+  }
+
+  onMount(() => {
+    auth.onAuthStateChanged((u) => {
+      if(u){
+        user = u; //contains displayName, email, photoURL, uid, emailVerified
+        console.log("User is logged in", u);
+      }
+      // user.u;
+    });
+  });
+
+  // profile picture function
   function toggleImage() {
     // currentImage = (currentImage + 1) % images.length; //setting default image
     selectedImage = images[(currentImage + 1) % images.length];
@@ -33,9 +76,9 @@
     if(fileInput){
       fileInput.value = "";
     }
-
   }
 
+  // profile picture - file upload
   function handleFileUpload(event){
     const file = event.target.files[0];
     if(file){
@@ -43,76 +86,68 @@
     }
   }
 
-
   async function handleSignup() {
-  error = false;
-  passwordMatchError = false;
-  usernameTakenError = false;
-  emailTakenError = false;
+    error = false;
+    passwordMatchError = false;
+    usernameTakenError = false;
+    emailTakenError = false;
 
+    // Validate that birthday is chosen
+    // if (!birthday) {
+    //   error = true;
+    //   return;
+    // }
 
+    const response = await fetch(SIGNUP_URL, {
+    method: "POST",
+    credentials: "include",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ 
+      username,
+      firstName,
+      lastName,
+      email,
+      password,
+      confirmedPassword,
+      // birthday,
+      profilePicture: selectedImage, })
+    });
 
-  
-
-  // Validate that birthday is chosen
-  if (!birthday) {
-    error = true;
-    return;
-  }
-
-const response = await fetch(SIGNUP_URL, {
-method: "POST",
-credentials: "include",
-headers: { "Content-Type": "application/json" },
-body: JSON.stringify({ 
-  username,
-  firstName,
-  lastName,
-  email,
-  password,
-  confirmedPassword,
-  birthday,
-  profilePicture: images[currentImage], })
-  });
-
-  if (response.ok) {
-            // Signup successful
-            const userData = await response.json();
-            user.login({ username: userData.username, email: userData.email, password: userData.password, confirmedPassword: userData.confirmedPassword });
-            goto("/", { replaceState: true });
-        } 
+    if (response.ok) {
+      // Signup successful
+      const userData = await response.json();
+      user = userData; //store user after signup
+      console.log("User Signed Up Successfully:", userData);
+      // user.login({ username: userData.username, email: userData.email, password: userData.password, confirmedPassword: userData.confirmedPassword });
+      goto("/", { replaceState: true });
+    }   
+    else {
+      const data = await response.json();
+      console.log(data.error);
+      if (response.status === 400) {
         
-        else {
-          const data = await response.json();
-          console.log(data.error);
-        if (response.status === 400) {
-         
-            if (data.error === 'username_taken') {
-                usernameTakenError = true;
-            } 
-            if (data.error === 'email_taken') {
-                emailTakenError = true;
-            }
-            if (password !== confirmedPassword) {
-              passwordMatchError = true;
-            }
-          }
-          else {
-            // Handle other errors (e.g., server errors)
-            console.log(data.error);
-            console.error("Signup failed:", response.statusText);
-            // Display a generic error message to the user
-            
+        if (data.error === 'username_taken') {
+            usernameTakenError = true;
+        } 
+        if (data.error === 'email_taken') {
+            emailTakenError = true;
         }
-       
-
-}
+        if (password !== confirmedPassword) {
+          passwordMatchError = true;
+        }
+      }
+      else {
+        // Handle other errors (e.g., server errors)
+        console.log(data.error);
+        console.error("Signup failed:", response.statusText);
+        // Display a generic error message to the user  
+      }
+    }
   }
-
 </script>
 
 <svelte:head>
-  <link rel="preload" href="/login">
+  <!-- <link rel="preload" href="/login"> -->
   <title>Sign Up</title>
 </svelte:head>
 
@@ -205,14 +240,25 @@ body: JSON.stringify({
       <!-- signup button -->
       <button id="signup-button" type="submit">Sign Up</button>
     </form>
-  
+
+    {#if user}
+      <div class="user-info">
+        <img src={user.photoURL} alt="Profile">
+        <p>Welcome, {user.displayName}!</p>
+        <button on:click={handleLogout}>Logout</button>
+      </div>
+    {:else}
     <div class="social-login">
       <p>Or Sign Up With:</p>
       <div class="social-icons">
-        <img src="src/lib/components/images/google-icon.png" alt="Google" />
-        <img src="src/lib/components/images/facebook-icon.png" alt="Facebook" />
+        <button on:click={googleLogin}>
+          <img src="src/lib/components/images/google-icon.png" alt="Google" />
+        </button>
+        <!-- <img src="src/lib/components/images/facebook-icon.png" alt="Facebook" /> -->
       </div>
     </div>
+    {/if}
+
     <!-- login redirect -->
      <div class="login">
       <p>Already Have an Account?

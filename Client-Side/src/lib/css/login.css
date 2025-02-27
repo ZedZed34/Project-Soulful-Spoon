@@ -120,6 +120,11 @@ input{
     justify-content: center;
 }
 
+.social-icons button{
+    background: none;
+    border: none;
+}
+
 .social-icons img{
     width: 30px;
     cursor: pointer;
