@@ -94,10 +94,13 @@
 <section class="image-layout">
     {#each images as image}
     <div class="imagetext">
-        <img src={image.src} alt={image.text} />
-        <div class="hover-text">
-            <p>{image.text}</p>
-        </div>
+        <!-- added to link each recipe to its individual page -->
+        <a href="/recipes/{image.text.toLowerCase().replace(/\s+/g, '-')}">
+            <img src={image.src} alt={image.text} />
+            <div class="hover-text">
+                <p>{image.text}</p>
+            </div>
+        </a>
     </div>
     {/each}
 </section>

@@ -1,0 +1,14 @@
+[
+
+    {
+        "id": "salmon-quinoa-bowl",
+        "article_title": "Salmon Quinoa Bowl",
+        "article_content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras fringilla tellus mauris. Integer congue eros ex, ut condimentum ipsum egestas quis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In interdum condimentum turpis, sit amet posuere ex pharetra in. Duis sollicitudin nibh lobortis fringilla pharetra. Vestibulum mollis ligula ut diam iaculis, vel pellentesque metus tristique. Donec egestas massa lacus, a accumsan lacus semper sed. Integer imperdiet turpis ac dapibus cursus. Donec ac molestie est.",
+        "username": "chef_sarah", 
+        "likes": 12,
+        "dislikes": 2,
+        "date_published": "2025-02-28",
+        "image_path": "/src/lib/components/images/SalmonQuinoaBowl.jpg"
+    }
+
+]
