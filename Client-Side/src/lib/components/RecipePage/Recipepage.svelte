@@ -1,5 +1,9 @@
 <script>
     import "$lib/css/recipepage.css";
+    import logo from '$lib/components/images/Logo.png'; 
+    import profileicon from '$lib/components/images/profileicon.jpg';
+    import Breakfast from '$lib/components/images/Breakfast.jpg';
+
 </script>
 
 
@@ -18,7 +22,6 @@
             <li><a href="/dinner">Dinner</a></li>
             <li><a href="/desserts">Desserts</a></li>
             <li><a href="/snacks">Snacks</a></li>
-            <li><a href="/snacks">Snacks</a></li>
             <li><a href="/quick-easy">Quick and Easy</a></li>
             <li><a href="/airfryer">Airfryer</a></li>
             </ul>
@@ -35,44 +38,78 @@
 
 
 
-<!-- <body>
-    <header>
-        <nav>
-            <div class="logo"> 
-                <img src="logo.png" alt="Soulful Spoon Logo">
+<div class="main">
+    <div class="men_text">
+        <h1> Recipes all that you <span> need </span> <br>at your fingertip</h1>
+    </div>
+</div>
+
+
+
+<p class="paragraph">
+    Welcome to your Ultimate Recipe Hub!
+    Rise and Dine with scrumptious breakfasts, power up your afternoons with lipsmacking lunches,
+    and end your day with dinners that hit the spot! Got the munchies? Snack attacks are covered too!
+    Whether you're craving something light, hearty, sweet or savory, we have cooked up a feast of Recipes
+    to keep your taste buds dancing. Dig in and let's get cooking! 🍳🥗🍕🍰
+</p>
+
+<body>
+    <div class="container">
+        <div class="slider-wrapper">
+            <div class='card-list'>
+                <div class='card-item'>
+                   <img src={Breakfast} alt="Breakfast" class="breakfast"> 
+                    <h2 class="user-name">Breakfast </h2>
+                    <p class="user-profession">Software Developer</p>
+                    <button class="message-button">Message</button>
+                </div>
             </div>
-            <ul>
-                <li><a href="#/">Recipes</a></li>
-                <li><a href="#/">Trending Recipes</a></li>
-                <li><a href="#/">Tips & Tricks</a></li>
-                <li><a href="#/">About Us</a></li>
-            </ul>
-        </nav>
-    </header>
-    
-    <section class="hero">
-        <h1>Recipes</h1>
-        <p><em>Wholesome, Easy, delicious for Everyone!</em></p>
-    </section>
-    
-    <section class="filter-section">
-        <label for="filter">Filter to your choice &#x25BC;</label>
-        <select id="filter">
-            <option>None</option>
-            <option>Halal</option>
-            <option>Vegetarian</option>
-            <option>Vegan</option>
-            <option>Gluten Free</option>
-            <option>Protein Powder Recipes</option> -->
-        </select>
-    </section>
-    
-    <!-- <section class="recipe-grid">
-        <div class="recipe-item"><img src="recipe1.jpg" alt="Recipe 1"></div>
-        <div class="recipe-item"><img src="recipe2.jpg" alt="Recipe 2"></div>
-        <div class="recipe-item"><img src="recipe3.jpg" alt="Recipe 3"></div>
-        <div class="recipe-item"><img src="recipe4.jpg" alt="Recipe 4"></div>
-        <div class="recipe-item"><img src="recipe5.jpg" alt="Recipe 5"></div>
-        <div class="recipe-item"><img src="recipe6.jpg" alt="Recipe 6"></div>
-    </section> -->
+        </div>
+    </div>
 </body>
+
+
+<!-- <div class="main_image">
+    <img src={Breakfast}>
+</div> -->
+<!-- // <section class="image-layout">
+//     {#each images as image}
+//     <div class="imagetext">
+//         <img src={image.src} alt={image.text} />
+//         <div class="hover-text">
+//             <p>{image.text}</p>
+//         </div>
+//     </div>
+//     {/each}
+// </section> -->
+
+
+ <!-- <body>
+    
+//     <section class="hero">
+//         <h1>Recipes</h1>
+//         <p><em>Wholesome, Easy, delicious for Everyone!</em></p>
+//     </section>
+    
+//     <section class="filter-section">
+//         <label for="filter">Filter to your choice &#x25BC;</label>
+//         <select id="filter">
+//             <option>None</option>
+//             <option>Halal</option>
+//             <option>Vegetarian</option>
+//             <option>Vegan</option>
+//             <option>Gluten Free</option>
+//             <option>Protein Powder Recipes</option> -->
+         <!-- </select>
+//     </section>
+    
+//     <section class="recipe-grid">
+//         <div class="recipe-item"><img src="recipe1.jpg" alt="Recipe 1"></div>
+//         <div class="recipe-item"><img src="recipe2.jpg" alt="Recipe 2"></div>
+//         <div class="recipe-item"><img src="recipe3.jpg" alt="Recipe 3"></div>
+//         <div class="recipe-item"><img src="recipe4.jpg" alt="Recipe 4"></div>
+//         <div class="recipe-item"><img src="recipe5.jpg" alt="Recipe 5"></div>
+//         <div class="recipe-item"><img src="recipe6.jpg" alt="Recipe 6"></div>
+//     </section>
+// </body> -->
