@@ -39,7 +39,7 @@
 
 
 <div class="main">
-    <div class="men_text">
+    <div class="men-text">
         <h1> Recipes all that you <span> need </span> <br>at your fingertip</h1>
     </div>
 </div>
@@ -54,12 +54,12 @@
     to keep your taste buds dancing. Dig in and let's get cooking! 🍳🥗🍕🍰
 </p>
 
-<body>
+<!-- <body>
     <div class="container">
         <div class="slider-wrapper">
             <div class='card-list'>
                 <div class='card-item'>
-                   <img src={Breakfast} alt="Breakfast" class="breakfast"> 
+                   <img src={Breakfast} alt="User Image" class="user-image"> 
                     <h2 class="user-name">Breakfast </h2>
                     <p class="user-profession">Software Developer</p>
                     <button class="message-button">Message</button>
@@ -67,7 +67,7 @@
             </div>
         </div>
     </div>
-</body>
+</body> -->
 
 
 <!-- <div class="main_image">
