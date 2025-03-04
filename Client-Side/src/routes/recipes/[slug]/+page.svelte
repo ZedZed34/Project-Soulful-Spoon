@@ -1,5 +1,5 @@
 <script>
-    import RecipeDetail from "$lib/components/Articles/ArticleDetail.svelte";
+    import ArticleDetail from "$lib/components/Articles/ArticleDetail.svelte";
     export let data;
 </script>
 
@@ -8,7 +8,8 @@
   </svelte:head>
 
 {#if data?.recipe}
-<RecipeDetail
+<ArticleDetail
+    id={data.recipe.id}
     article_title={data.recipe.article_title}
     article_content={data.recipe.article_content}
     username={data.recipe.username}

@@ -95,7 +95,7 @@
     {#each images as image}
     <div class="imagetext">
         <!-- added to link each recipe to its individual page -->
-        <a href="/recipes/{image.text.toLowerCase().replace(/\s+/g, '-')}">
+        <a href="/recipes/{image.text.toLowerCase().replace(/\s+/g, '-')}" rel="external">
             <img src={image.src} alt={image.text} />
             <div class="hover-text">
                 <p>{image.text}</p>

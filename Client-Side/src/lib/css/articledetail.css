@@ -1,25 +1,292 @@
+body{
+    font-family: sans-serif;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    top: 0;
+    z-index: 10;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    object-fit: cover;    
+    margin-right: 1rem;
+}
+
+.site {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: darkolivegreen;
+}
+
+/**** nav buttons ****/
+.nav-buttons {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-buttons li {
+    list-style: none;
+    position: relative;
+}
+
+.nav-buttons a {
+    text-decoration: none;
+    color: darkolivegreen;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    display: inline-block;
+    transition: color 0.3s ease;
+}
+
+.nav-buttons a:hover {
+    color: navy;
+}
+
+.action-buttons {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Add Button */
+.add-button {
+    background-color: darkolivegreen;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 1.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-button:hover {
+    background-color: navy;
+}
+
+.profile-icon {
+    height: 55px;
+    width: 55px;
+    object-fit: cover;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    border-radius: 50%;
+}
+
+.profile-icon:hover {
+    transform: scale(1.1);
+}
+
+/* main */
+main {
+    padding: 1rem;
+    text-align: center;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown a {
+    text-decoration: none;
+    color: darkolivegreen;
+    padding: 0.5rem;
+    display: inline-block;
+    font-weight: bold;
+}
+
+.dropdown-content {
+    position: absolute;
+    background-color: white;
+    left: 0;
+    opacity: 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    list-style: none;
+    padding: 0.5rem 0;
+    margin: 0;
+    border-radius: 4px;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    top: 100%;
+    z-index: 20;
+    min-width: 200px;
+}
+
+.dropdown-content li {
+    padding: 0.5rem 0;
+}
+
+.dropdown-content li a {
+    text-decoration: none;
+    color: darkolivegreen;
+    display: block;
+    transition: background-color 0.2s ease;
+}
+
+.dropdown-content li a:hover  {
+    color: darkolivegreen;
+}
+
+.dropdown:hover .dropdown-content {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+} 
+
 #recipe-container{
-    max-width: 800px;
+    max-width: 750px;
     border-radius: 8px;
     box-shadow:  0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    margin: auto;
-    background: #f9f9f9;
+    margin-top: 20px;
+    margin-left: 15px;
+    /* margin: auto; */
+    background: #ecfdea54;
 }
 
-img{
+.recipe-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.recipe-meta{
+    /* display: flex; */
+    gap: 15px;
+    /* font-size: 14px; */
+    color: darkolivegreen;
+}
+
+
+.recipe-image{
     max-width: 100%;
+    /* max-height: 40%; */
     border-radius: 8px;
     margin-bottom: 15px;
 }
 
 .reaction-buttons{
-    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+    /* margin-top: 10px; */
 }
 
 .reaction-buttons button{
-    padding: 8px 12px;
+    border: none;
+    background: none;
+    display: flex;
+    align-items: center;
+    padding: 5px 5px;
     font-size: 16px;
-    margin-right: 10px;
+    border-radius: 6px;
+    /* margin-right: 10px; */
     cursor: pointer;
+    transition: background 0.2s;
+}
+/* 
+.icon{
+    width: 24px;
+    height: 24px;
+    margin-right: 5px;
+} */
+
+.reaction-buttons button:hover{
+    color: white;
+    background: darkolivegreen;
+}
+
+.reaction-buttons .userReacted{
+    color: white;
+    background: navy;
+    font-weight: bold;
+}
+
+@media print{
+    .navbar, .reaction-buttons, .print-button{
+        display: none;
+    }
+}
+
+.share-container{
+    margin-left: -30px;
+    position: relative;
+    display: inline-block;
+}
+
+.share-button,
+.print-button{
+    padding: 5px 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: navy;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;  
+}
+
+.share-options{
+    position: absolute;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: white;
+    top: 40px;
+    right: 0;
+    border-radius: 8px;
+    box-shadow:  0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.share-options button{
+    border: none;
+    padding: 8px;
+    font-size: 12px;
+    /* display: flex;  */
+    /* align-items: center; */
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.copy-link button{
+    margin-top: 8px;
+    background-color: darkolivegreen;
+    color: white;
+}
+
+.copy-link button:hover{
+    background-color: navy;
+}
+
+.whatsapp{
+    background-color:#25D366;
+    color: white;
+}
+
+.facebook{
+    background-color: #1877F2;
+    color: white;
+}
+
+.twitter{
+    background-color: black;
+    color: white;
 }
