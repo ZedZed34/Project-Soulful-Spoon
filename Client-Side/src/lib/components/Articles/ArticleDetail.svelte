@@ -154,15 +154,17 @@
         localStorage.setItem(`comments-${id}`, JSON.stringify(comments));
     }
 
-    function addReply(commentID, replyText){
+    function addReply(commentID, replyText, replyingTo = null){
         if(replyText.trim() === ""){
             return;
         };
 
+        let formattedReplyText = replyingTo ? `@${replyingTo} ${replyText}` : replyText;
+
         const replyObject = {
             id: Date.now(),
             username: "Current User", 
-            text: replyText,
+            text: formattedReplyText,
             date: new Date().toLocaleString(),
             profilePic: profileicon, 
         };
@@ -177,6 +179,19 @@
 
         localStorage.setItem(`comments-${id}`, JSON.stringify(comments));
 
+    }
+
+    function deleteReply(commentID, replyID){
+        comments = comments.map(comment => {
+            if (comment.id === commentID){
+                return{
+                    ...comment, 
+                    replies: comment.replies.filter(reply => reply.id != replyID)
+                };
+            }
+            return comment;
+        });
+        localStorage.setItem(`comments-${id}`, JSON.stringify(comments));
     }
 
 </script>
@@ -260,7 +275,7 @@
 </div>
 
 <section class = "comments-section">
-    <h2 class="comment-title">{comments.length} Comments</h2>
+    <h2 class="comment-title">Comments</h2>
 
     {#if isAuthenticated}
         <div class="comment-box">
@@ -276,10 +291,10 @@
         <li class="comment">
             <img src={comment.profilePic} alt="Profile Picture" class="profile-picture"/>
             <div class="comment-content">
-                <stong class="comment-username">{comment.username}</stong>
+                <strong class="comment-username">{comment.username}</strong>
                 <p class="comment-text">{comment.text}</p>
                 <small class="comment-date">{comment.date}</small>
-                <button class="reply-button" on:click={() => addReply(comment.id, prompt("Enter Your Reply: "))}>Reply</button>
+                <button class="reply-button" on:click={() => addReply(comment.id, prompt(`Replying to @${comment.username}: `))}>Reply</button>
                 {#if comment.username === "Current User"}
                     <button class="delete-button" on:click={() => deleteComment(comment.id)}>🗑️</button>
                 {/if}
@@ -288,9 +303,13 @@
                     <div class="reply">
                         <img src={reply.profilePic} alt="Profile Picture" class="reply-profile-picture"/>
                         <div class="reply-content">
-                            <stong class="comment-username">{reply.username}</stong>
+                            <strong class="comment-username">{reply.username}</strong>
                             <p class="comment-text">{reply.text}</p>
                             <small class="comment-date">{reply.date}</small> 
+                            <button class="reply-button" on:click={() => addReply(comment.id, prompt(`Replying to @${reply.username}: `), reply.username)}>Reply</button>
+                            {#if reply.username === "Current User"}
+                                <button class="delete-button" on:click={() => deleteReply(comment.id, reply.id)}>🗑️</button>
+                            {/if}
                         </div>
                     </div>
                 {/each}
