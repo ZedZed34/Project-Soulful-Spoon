@@ -57,7 +57,16 @@
 
     <div class="action-buttons">
     <button class="add-button" title="Add New">+</button>
-        <img src={profileicon} alt="Profile" class="profile-icon" />
+
+    <!-- profile dropdown login.signup -->
+     <div class="profile-dropdown">
+        <img src={profileicon} alt="Profile" class="profile-icon"/>
+        
+        <ul class="dropdown-menu">
+            <li><a href="/Login">Login</a></li>
+            <li><a href="/Signup">Sign Up</a></li>
+        </ul>
+     </div>
     </div>
 </nav>
 

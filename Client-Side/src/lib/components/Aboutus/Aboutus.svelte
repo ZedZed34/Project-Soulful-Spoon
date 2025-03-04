@@ -1,5 +1,5 @@
 <script>
-    import '$lib/css/aboutus.css'; //import homepage styles
+    import '$lib/css/aboutus.css'; 
     import logo from '$lib/components/images/Logo.png'; 
     import profileicon from '$lib/components/images/profileicon.jpg'
 </script>
@@ -41,30 +41,16 @@
     </div>
 </nav>
 
-<!-- Filters -->
-<div class="filter-box">
-    <button class="filter-button">
-        Filter Options ⇩
-    </button>
+ <h1>About Soulful Spoon</h1>
+ <p>Welcome to Soulful Spoon! We are a team dedicated to making healthy eating accessible, enjoyable, and inclusive</p>
 
-    <div class="filter-dropdown">
-        <h4>Courses</h4>
-        <ul>
-            <li><input type="radio" name="course" /> <label for="breakfast">Breakfast</label></li>
-            <li><input type="radio" name="course" /> <label for="lunch">Lunch</label></li>
-            <li><input type="radio" name="course" /> <label for="dinner">Dinner</label></li>
-            <li><input type="radio" name="course" /> <label for="bites">Bites</label></li>
-            <li><input type="radio" name="course" /> <label for="highProtein">High Protein</label></li>
-            <li><input type="radio" name="course" /> <label for="dessert">Dessert</label></li>
-            <li><input type="radio" name="course" /> <label for="baking">Baking</label></li>
-        </ul>
-        <h4>Dietary Requirements</h4>
-        <ul>
-            <li><input type="radio" name="diet" /> <label for="vegan">Vegan</label></li>
-            <li><input type="radio" name="course" /> <label for="vegetarian">Vegetarian</label></li>
-            <li><input type="radio" name="course" /> <label for="halal">Halal</label></li>
-            <li><input type="radio" name="course" /> <label for="dairyFree">Dairy Free</label></li>
-            <li><input type="radio" name="course" /> <label for="glutenFree">Gluten Free</label></li>
-        </ul>
-    </div>
- </div>
+ <h2>Our Mission</h2>
+ <p>We aim to promote healthier food choices by providing easy-to-follow, nutritious recipes. Soulful Spoon is a community-driven platform that empowers users to share thier own recipes, discover new flavours, and make informed food decisions based on thier lifestyle and dietary needs. </p>
+
+ <h2>Why Soulful Spoon</h2>
+ <ul>
+    <li>🌱 **Promoting Healthier Eating** - Helping people shift away from ultra-processed food and embrace home-cooked, nutritious meals.</li>
+    <li>🥗 **Diverse & Inclusive** - Recipes for various dietary preferences including **halal, vegetarian, vegan and gluten-free** options.</li>
+    <li>💡 **Educational Content** - Articles, tips, and nutritional insights to make informed food choices.</li>
+    <li>👨‍👩‍👧‍👦 **Community-Driven** - A space where users can share thier recipes, review recipes and connect with like-minded individuals.</li>
+</ul>
