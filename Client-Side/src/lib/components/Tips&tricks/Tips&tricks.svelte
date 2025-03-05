@@ -9,6 +9,7 @@
     <script src="https://files.bpcontent.cloud/2025/02/25/06/20250225063934-HGA74MAU.js"></script>
 </div>
 
+
 <!-- Navbar -->
 <nav class="navbar">
     <div class="logo-container">
@@ -68,3 +69,13 @@
         </ul>
     </div>
  </div>
+
+ <section class="video-container">
+    <h4>Cooking Tips & Tricks</h4>
+    <div class="video-wrapper">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/BHcyuzXRqLs?si=Bbc8AiykeNZJ1lWd" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+        </iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/H_erG7HSK0A?si=bk8lmV6AdBVNW8f1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+        </iframe>
+    </div>
+ </section>

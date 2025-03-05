@@ -208,3 +208,27 @@ body{
 .filter-category input {
   margin-right: 0.5rem;
 }
+
+/* video */
+
+.video-container {
+  text-align: center;
+  padding: 2rem;
+}
+
+.video-container h4 {
+  color: darkolivegreen;
+  margin-bottom: 1.5rem;
+}
+
+.video-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.video-wrapper iframe {
+  border-radius: 8px;
+  max-width: 100%;
+}

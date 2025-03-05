@@ -56,7 +56,9 @@
     </ul>
 
     <div class="action-buttons">
+        <a href="/Articles">
     <button class="add-button" title="Add New">+</button>
+</a>
 
     <!-- profile dropdown login.signup -->
      <div class="profile-dropdown">
