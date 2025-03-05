@@ -32,7 +32,7 @@
  <!-- Navbar -->
 <nav class="navbar">
     <div class="logo-container">
-    <a href="/#">
+    <a href="/">
         <img src={logo} alt="Soulful Spoon Logo" class="logo" />
     </a>
         <span class="site">Soulful Spoon</span>
@@ -63,8 +63,8 @@
         <img src={profileicon} alt="Profile" class="profile-icon"/>
         
         <ul class="dropdown-menu">
-            <li><a href="/Login">Login</a></li>
-            <li><a href="/Signup">Sign Up</a></li>
+            <li><a href="/login" rel="external">Login</a></li>
+            <li><a href="/signup"rel="external">Sign Up</a></li>
         </ul>
      </div>
     </div>

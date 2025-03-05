@@ -301,7 +301,7 @@ body{
   visibility: hidden;
   transform: translateY(10px);
   transition: opacity 0.3s ease, transform 0.3s ease;
-  pointer-events: none;
+
 }
 
 .profile-dropdown:hover .dropdown-menu, .dropdown-menu:hover {
