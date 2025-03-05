@@ -238,7 +238,7 @@ main {
 }
 
 @media print{
-    .navbar, .reaction-buttons, .print-button, .share-button, .comments-section{
+    .navbar, .reaction-buttons, .print-button, .share-button, .share-container, .comments-section, .sidebar{
         display: none;
     }
 }

@@ -9,7 +9,7 @@
     export let article_title = "Unknown Title";
     export let article_content = "No Content Available";
     export let username = "Anonymous";
-    export let likes = 0 ;
+    export let likes = 0;
     export let dislikes = 0;
     export let date_published = "Unknown Date";
     export let image_path = "";
@@ -43,15 +43,43 @@
         currentURL = window.location.href;
         //using local storage first instead of backend
         if(typeof window !== "undefined"){
-            //retrieve stored likes, dislikes, and user reaction
-            let storedLikes = localStorage.getItem(`likes-${id}`);
-            let storedDislikes = localStorage.getItem(`dislikes-${id}`);
-            userReaction = localStorage.getItem(`reaction-${id}`) || null; //if user liked, disliked or null
+            try{
+                const response = await fetch("/recipes.json");
+                if(!response.ok) throw new Error("Failed to fetch recipes.");
+                const data = await response.json();
+                const currentRecipe = data.find(recipe => recipe.id === id);
 
-            //use stored values if available
-            likes = storedLikes ? parseInt(storedLikes, 10) : 0;
-            dislikes = storedDislikes  ? parseInt(storedDislikes, 10) : 0;
+                if(currentRecipe){
+                    likes = currentRecipe.likes;
+                    dislikes = currentRecipe.dislikes
+                }
 
+                let storedLikes = localStorage.getItem(`likes-${id}`);
+                let storedDislikes = localStorage.getItem(`dislikes-${id}`);
+                let storedReaction = localStorage.getItem(`reaction-${id}`);
+
+                likes = storedLikes ? parseInt(storedLikes, 10) : likes;
+                dislikes = storedDislikes  ? parseInt(storedDislikes, 10) : dislikes;
+                userReaction = storedReaction || null;
+
+                mostLikedRecipes = data.map(recipe => {
+                    let storedLikes = localStorage.getItem(`likes-${recipe.id}`);
+                    return{
+                        ...recipe, 
+                        likes: storedLikes ? parseInt(storedLikes, 10): recipe.likes
+                    };
+                })
+                .sort((a, b) => b.likes - a.likes)
+                .slice(0, 3)
+
+                latestRecipes = data   
+                .sort((a,b) => new Date(b.date_published) - new Date(a.date_published)) //sort by newest first
+                .slice(0, 3); //get latest recipe
+            }
+            catch(error){
+                console.error("Error fetching recipes:", error);
+            }
+           
             //load existing comments from local storage
             const storedComments = localStorage.getItem(`comments-${id}`);
             comments = storedComments ? JSON.parse(storedComments) : [];
@@ -67,26 +95,7 @@
             }
 
             document.addEventListener("click", handleClickOutside);
-        }  
-
-        //fetching latest 3 recipes from database (recipes.json)
-        try{
-            const response = await fetch("/recipes.json");
-            if(!response.ok) throw new Error ("Failed to fetch recipes.")
-
-            const data = await response.json();
-            latestRecipes = data   
-                .sort((a,b) => new Date(b.date_published) - new Date(a.date_published)) //sort by newest first
-                .slice(0, 3); //get latest recipe
-
-            mostLikedRecipes = data
-                .sort((a, b) => b.likes - a.likes)
-                .slice(0, 3);
-        }
-        catch(error){
-            console.error("Error fetching lates recipes:", error);
-        }
-        
+        }   
     });
 
     $: isAuthenticated = loggedInUser !== "Anonymous";
@@ -135,6 +144,8 @@
 
         localStorage.setItem(`likes-${id}`, likes.toString());
         localStorage.setItem(`dislikes-${id}`, dislikes.toString());
+
+        updateMostLikedRecipes();
     }
 
     function printRecipe(){
@@ -264,6 +275,27 @@
             : "😞 You Have Unsubscribed";
 
         //setTimeout(() => successMessage = "", 3000);
+    }
+
+    function navigateToRecipe(recipeID){
+        window.location.href = `/recipes/${recipeID}`;
+    }
+
+    function updateMostLikedRecipes(){
+        if(typeof window !== "undefined"){
+            fetch("/recipes.json")
+            .then(response => response.json())
+            .then(data => {
+                mostLikedRecipes = data.map(recipe => {
+                    let storedLikes = localStorage.getItem(`likes-${recipe.id}`);
+                    let updatedLikes = storedLikes ? parseInt(storedLikes, 10) : recipe.likes;
+                    localStorage.setItem(`likes-${recipe.id}`, updatedLikes.toString());
+                    return {...recipe, likes: updatedLikes};
+                })
+                .sort((a, b) => b.likes - a.likes)
+                .slice(0, 3);
+            })
+        }
     }
 
 </script>
@@ -435,13 +467,12 @@
         <h2 class="latest-recipes-title"> 🔔 Latest Recipes</h2>
         <div class="latest-recipes-container">
             {#each latestRecipes as recipe}
-            <div class="latest-recipe">
-                <a href={`/recipes/${recipe.id}`}>
+            <div class="latest-recipe" on:click={() => navigateToRecipe(recipe.id)}>
+                <!-- <a href={`/recipes/${recipe.id}`}> -->
                     <div class="latest-recipe-overlay">
                         <img src={recipe.image_path} alt={recipe.article_title} class="latest-recipe-image" />
                         <h3 class="latest-recipe-name">{recipe.article_title}: {recipe.date_published}</h3>
-                    </div>
-                </a>
+                    </div> 
             </div>
             {/each}
         </div>
@@ -450,13 +481,11 @@
         <h2 class="liked-recipes-title"> ❤️ Most Liked Recipes </h2>
         <div class="liked-recipes-container">
             {#each mostLikedRecipes as recipe}
-            <div class="liked-recipe">
-                <a href={`/recipes/${recipe.id}`}>
+            <div class="liked-recipe" on:click={() => navigateToRecipe(recipe.id)}>
                     <div class="liked-recipe-overlay">
                         <img src={recipe.image_path} alt={recipe.article_title} class="liked-recipe-image" />
                         <h3 class="liked-recipe-name">{recipe.article_title}: ❤️{recipe.likes} Likes</h3>
                     </div>
-                </a>
             </div>
             {/each}
         </div>

@@ -16,9 +16,9 @@
         "article_title": "Prawn Spagetti",
         "article_content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras fringilla tellus mauris. Integer congue eros ex, ut condimentum ipsum egestas quis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In interdum condimentum turpis, sit amet posuere ex pharetra in. Duis sollicitudin nibh lobortis fringilla pharetra. Vestibulum mollis ligula ut diam iaculis, vel pellentesque metus tristique. Donec egestas massa lacus, a accumsan lacus semper sed. Integer imperdiet turpis ac dapibus cursus. Donec ac molestie est.",
         "username": "Alex", 
-        "likes": 0,
-        "dislikes": 0,
-        "date_published": "2025-03-01",
+        "likes": 10,
+        "dislikes": 10,
+        "date_published": "2025-06-01",
         "image_path": "/src/lib/components/images/PrawnSpagetti.jpg"
     }, 
 
@@ -28,8 +28,8 @@
         "article_content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras fringilla tellus mauris. Integer congue eros ex, ut condimentum ipsum egestas quis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In interdum condimentum turpis, sit amet posuere ex pharetra in. Duis sollicitudin nibh lobortis fringilla pharetra. Vestibulum mollis ligula ut diam iaculis, vel pellentesque metus tristique. Donec egestas massa lacus, a accumsan lacus semper sed. Integer imperdiet turpis ac dapibus cursus. Donec ac molestie est.",
         "username": "Ben", 
         "likes": 80,
-        "dislikes": 0,
-        "date_published": "2025-03-05",
+        "dislikes": 10,
+        "date_published": "2025-04-05",
         "image_path": "/src/lib/components/images/BananaOatmealPancakes.jpg"
     },
 
@@ -40,7 +40,7 @@
         "username": "John", 
         "likes": 10,
         "dislikes": 0,
-        "date_published": "2025-03-10",
+        "date_published": "2025-03-30",
         "image_path": "/src/lib/components/images/StickyGingerSesameChicken.jpg"
     }
 
