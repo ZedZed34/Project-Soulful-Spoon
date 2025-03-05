@@ -18,9 +18,19 @@
     let showShareMenu = false;
     let currentURL = "";
 
-    let isAuthenticated = true; //change later on
+    let isAuthenticated = false; // this is to track if a user is logged in
+    let loggedInUser = "Anonymous"; //no user
+
     let newComment = "";
     let comments = [];
+
+    let replyingTo = { commentID: null, replyID: null}
+    let replyText = "";
+    let replyingToUsername = null;
+
+    let visibleComments = 7;
+    let commentsExpanded = false;
+    let visibileReplies = {};
 
     onMount(() => {
         currentURL = window.location.href;
@@ -38,6 +48,13 @@
             //load existing comments from local storage
             const storedComments = localStorage.getItem(`comments-${id}`);
             comments = storedComments ? JSON.parse(storedComments) : [];
+
+            let storedUser = localStorage.getItem("loggedInUser");
+
+            if(storedUser){
+                loggedInUser = storedUser;
+                isAuthenticated = true; //set to true if user is logged in
+            }
 
             document.addEventListener("click", handleClickOutside);
         } 
@@ -154,12 +171,12 @@
         localStorage.setItem(`comments-${id}`, JSON.stringify(comments));
     }
 
-    function addReply(commentID, replyText, replyingTo = null){
+    function addReply(commentID){
         if(replyText.trim() === ""){
             return;
         };
 
-        let formattedReplyText = replyingTo ? `@${replyingTo} ${replyText}` : replyText;
+        let formattedReplyText = replyingTo.replyID ? `@${replyingToUsername} ${replyText}` : replyText;
 
         const replyObject = {
             id: Date.now(),
@@ -179,6 +196,10 @@
 
         localStorage.setItem(`comments-${id}`, JSON.stringify(comments));
 
+        replyingTo = { commentID: null, replyID: null};
+        replyText = "";
+        replyingToUsername = null;
+
     }
 
     function deleteReply(commentID, replyID){
@@ -192,6 +213,15 @@
             return comment;
         });
         localStorage.setItem(`comments-${id}`, JSON.stringify(comments));
+    }
+
+    function toggleComments(){
+        commentsExpanded = !commentsExpanded;
+        visibleComments = commentsExpanded ? comments.length : 7;
+    }
+
+    function toggleReplies(commentID){
+        visibileReplies[commentID] = !visibileReplies[commentID];
     }
 
 </script>
@@ -270,8 +300,6 @@
     <!-- content -->
     <h2>Recipe Details</h2>
     <p>{@html article_content}</p>
-
-    <!-- <button class="close-button" on:click={() => window.location.href = "/"}>Back to Recipes</button> -->
 </div>
 
 <section class = "comments-section">
@@ -287,34 +315,72 @@
     {/if}
 
     <ul class="comments-list">
-        {#each comments as comment (comment.id)}
+        {#each comments.slice(0, visibleComments) as comment (comment.id)}
         <li class="comment">
             <img src={comment.profilePic} alt="Profile Picture" class="profile-picture"/>
             <div class="comment-content">
                 <strong class="comment-username">{comment.username}</strong>
                 <p class="comment-text">{comment.text}</p>
                 <small class="comment-date">{comment.date}</small>
-                <button class="reply-button" on:click={() => addReply(comment.id, prompt(`Replying to @${comment.username}: `))}>Reply</button>
-                {#if comment.username === "Current User"}
-                    <button class="delete-button" on:click={() => deleteComment(comment.id)}>🗑️</button>
+                <!-- <button class="reply-button" on:click={() => addReply(comment.id, prompt(`Replying to @${comment.username}: `))}>Reply</button> -->
+               {#if isAuthenticated}
+                <button class="reply-button" on:click={() => {
+                        replyingTo = { commentID: comment.id, replyID: null };
+                        replyingToUsername = null;
+                    }}>Reply</button>
+                    {#if comment.username === loggedInUser}
+                        <button class="delete-button" on:click={() => deleteComment(comment.id)}>🗑️</button>
+                    {/if}
+                    {#if replyingTo.commentID === comment.id && replyingTo.replyID === null}
+                        <div class="reply-box">
+                            <textarea bind:value={replyText} placeholder="Write Your Reply" rows="2"></textarea>
+                            <button on:click={() => addReply(comment.id)}>Post Reply</button>
+                            <button class="cancel-reply" on:click={() => {replyingTo = {commentID: null, replyID: null}; replyText = ""}}>x</button>
+                        </div>
+                    {/if}
                 {/if}
 
-                {#each comment.replies as reply (reply.id)}
+                <!-- replies -->
+                {#each comment.replies.slice(0, visibileReplies[comment.id] ? comment.replies.length : 2) as reply (reply.id)}
                     <div class="reply">
                         <img src={reply.profilePic} alt="Profile Picture" class="reply-profile-picture"/>
                         <div class="reply-content">
                             <strong class="comment-username">{reply.username}</strong>
                             <p class="comment-text">{reply.text}</p>
                             <small class="comment-date">{reply.date}</small> 
-                            <button class="reply-button" on:click={() => addReply(comment.id, prompt(`Replying to @${reply.username}: `), reply.username)}>Reply</button>
-                            {#if reply.username === "Current User"}
-                                <button class="delete-button" on:click={() => deleteReply(comment.id, reply.id)}>🗑️</button>
+                            <!-- <button class="reply-button" on:click={() => addReply(comment.id, prompt(`Replying to @${reply.username}: `), reply.username)}>Reply</button> -->
+                            {#if isAuthenticated}
+                                <button class="reply-button" on:click={() => {
+                                    replyingTo = { commentID: comment.id, replyID: reply.id};
+                                    replyingToUsername = reply.username;
+                                }}>Reply</button>    
+                                {#if reply.username === loggedInUser}
+                                    <button class="delete-button" on:click={() => deleteReply(comment.id, reply.id)}>🗑️</button>
+                                {/if}
+                                {#if replyingTo.commentID === comment.id && replyingTo.replyID === reply.id}
+                                <div class="reply-box">
+                                    <textarea bind:value={replyText} placeholder=  "Replying to @{replyingToUsername}" rows="2"></textarea>
+                                    <button on:click={() => addReply(comment.id)}>Post Reply</button>
+                                    <button class="cancel-reply" on:click={() => {replyingTo = {commentID: null, replyID: null}; replyText = ""}}>x</button>
+                                </div>
+                                {/if}
                             {/if}
                         </div>
                     </div>
                 {/each}
+
+                {#if comment.replies.length > 2}
+                    <button class="view-more-replies" on:click={() => toggleReplies(comment.id)}>
+                        {visibileReplies[comment.id] ? "Hide Replies" : `View More Replies (${comment.replies.length -2})`}
+                    </button>
+                {/if}
             </div>
         </li>
         {/each}
     </ul>
+    {#if comments.length > 7}
+        <button class="view-more-comments" on:click={toggleComments}>
+            {commentsExpanded ? "Hide Comments" : `View More Comments (${comments.length - visibleComments})`}
+        </button>
+    {/if}   
 </section>

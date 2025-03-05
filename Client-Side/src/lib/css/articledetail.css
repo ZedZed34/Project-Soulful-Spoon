@@ -427,3 +427,57 @@ button:disabled:hover{
     
 }
 
+.reply-box{
+   display: flex;
+   /* flex-direction: column; */
+   gap: 10px;
+   margin-top: 20px; 
+}
+
+.reply-box textarea{
+    width: 73%;
+    padding: 8px;
+}
+
+.reply-box button{
+    margin-top: 10px;
+    height: 30px;
+    border: none;
+    cursor: pointer;
+    background: none;
+}
+
+.reply-box button:hover{
+    background-color: darkolivegreen;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.reply-box .cancel-reply:hover{
+    color: white;
+    background: black;
+}
+
+.view-more-replies{
+    margin-top: 15px;
+    margin-left: 100px;
+    border: none;
+    padding: 5px 8px;
+    background: darkolivegreen;
+    color: white;
+}
+
+.view-more-comments{
+    margin-top: 5px;
+    border: none;
+    padding: 5px 8px;
+    background: darkolivegreen;
+    color: white;
+}
+
+
+.view-more-replies:hover, 
+.view-more-comments:hover{
+    background: navy;
+}
