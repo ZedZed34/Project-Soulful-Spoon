@@ -3,7 +3,63 @@
     import logo from '$lib/components/images/Logo.png'; 
     import profileicon from '$lib/components/images/profileicon.jpg';
     import Breakfast from '$lib/components/images/Breakfast.jpg';
+    import Lunch from '$lib/components/images/Lunch.jpg';
+    import Dinner from '$lib/components/images/Dinner.jpg';
+    import Desserts from '$lib/components/images/Desserts.jpg';
+    import Snacks from '$lib/components/images/Snacks.jpg';
+    import Quickeasy from '$lib/components/images/Breakfast.jpg';
+    import Airfryer from '$lib/components/images/Airfryer.png';
 
+    // importing the javascript to recipe.js
+    import { onMount } from "svelte";
+    import smoothScroll from "$lib/components/RecipePage/recipe.js"; 
+
+    // allow smooth scrolling
+    onMount(() => {
+        smoothScroll();
+    });
+        // Sample images for different recipe sections
+        const breakfastImages = [
+        { src: {Breakfast}, text: "Pancakes with Maple Syrup" },
+        { src: {Breakfast}, text: "Avocado Toast with Poached Egg" },
+        { src: {Breakfast}, text: "Greek Yogurt & Granola Bowl" },
+        { src: {Breakfast}, text: "Oatmeal with Fruits & Nuts" }]
+
+        const lunchImages = [
+        { src: {Lunch}, text: "Grilled Chicken Caesar Salad" },
+        { src: {Lunch}, text: "Spaghetti Aglio e Olio" },
+        { src: {Lunch}, text: "Teriyaki Salmon Rice Bowl" },
+        { src: {Lunch}, text: "Vegetable Stir-Fry with Tofu" }]
+
+        const dinnerImages = [
+        { src: {Dinner}, text: "Butter Chicken with Garlic Naan" },
+        { src: {Dinner}, text: "Beef Stroganoff with Mashed Potatoes" },
+        { src: {Dinner}, text: "Lemon Herb Grilled Fish with Quinoa" },
+        { src: {Dinner}, text: "Vegetable Curry with Basmati Rice" }]
+
+        const dessertsImages = [
+        { src: {Desserts}, text: "Chocolate Protein Lava Cake" },
+        { src: {Desserts}, text: "Classic Dark Tiramisu" },
+        { src: {Desserts}, text: "Vegan Strawberry Cheesecake" },
+        { src: {Desserts}, text: "Mango Sticky Rice" }]
+
+        const snacksImages = [
+        { src: {Snacks}, text: "Nachos with Guacamole & Salsa" },
+        { src: {Snacks}, text: "Cheese & Garlic Breadsticks" },
+        { src: {Snacks}, text: "Crispy Popcorn Chicken" },
+        { src: {Snacks}, text: "Hummus with Pita Chips" }]
+
+        const quickeasyImages = [
+        { src: {Quickeasy}, text: "Egg & Cheese Sandwich" },
+        { src: {Quickeasy}, text: "One-Pan Garlic Shrimp Pasta" },
+        { src: {Quickeasy}, text: "Microwave Mug Cake" },
+        { src: {Quickeasy}, text: "Banana Peanut Butter Smoothie" }]
+
+        const airfryerImages = [
+        { src: {Airfryer}, text: "Crispy Air Fryer French Fries" },
+        { src: {Airfryer}, text: "Buffalo Chicken Wings" },
+        { src: {Airfryer}, text: "Air Fryer Mozzarella Sticks" },
+        { src: {Airfryer}, text: "Cajun-Spiced Sweet Potato Wedges" }]
 </script>
 
 
@@ -38,78 +94,109 @@
 
 
 
-<div class="main">
-    <div class="men-text">
-        <h1> Recipes all that you <span> need </span> <br>at your fingertip</h1>
-    </div>
-</div>
-
-
-
-<p class="paragraph">
-    Welcome to your Ultimate Recipe Hub!
-    Rise and Dine with scrumptious breakfasts, power up your afternoons with lipsmacking lunches,
-    and end your day with dinners that hit the spot! Got the munchies? Snack attacks are covered too!
-    Whether you're craving something light, hearty, sweet or savory, we have cooked up a feast of Recipes
-    to keep your taste buds dancing. Dig in and let's get cooking! 🍳🥗🍕🍰
-</p>
-
-<!-- <body>
-    <div class="container">
-        <div class="slider-wrapper">
-            <div class='card-list'>
-                <div class='card-item'>
-                   <img src={Breakfast} alt="User Image" class="user-image"> 
-                    <h2 class="user-name">Breakfast </h2>
-                    <p class="user-profession">Software Developer</p>
-                    <button class="message-button">Message</button>
+<!-- Recipe Sections -->
+<section id="breakfast" class="recipe-section">
+    <h2>Breakfast Recipes</h2>
+    <p>Start your day with the best breakfast options.</p>
+    <div class="recipe-grid">
+        {#each breakfastImages as img}
+            <div class="container">
+                <img src={Breakfast} alt={img.text} class="image">
+                <div class="overlay">
+                    <div class="text">{img.text}</div>
                 </div>
             </div>
-        </div>
+        {/each}
     </div>
-</body> -->
+</section>
 
+<section id="lunch" class="recipe-section">
+    <h2>Lunch Recipes</h2>
+    <p>Power through the day with our tasty lunch ideas.</p>
+    <div class="recipe-grid">
+        {#each lunchImages as img}
+            <div class="container">
+                <img src={Lunch} alt={img.text} class="image">
+                <div class="overlay">
+                    <div class="text">{img.text}</div>
+                </div>
+            </div>
+        {/each}
+    </div>
+</section>
 
-<!-- <div class="main_image">
-    <img src={Breakfast}>
-</div> -->
-<!-- // <section class="image-layout">
-//     {#each images as image}
-//     <div class="imagetext">
-//         <img src={image.src} alt={image.text} />
-//         <div class="hover-text">
-//             <p>{image.text}</p>
-//         </div>
-//     </div>
-//     {/each}
-// </section> -->
+<section id="dinner" class="recipe-section">
+    <h2>Dinner Recipes</h2>
+    <p>End your day with a fulfilling meal.</p>
+    <div class="recipe-grid">
+        {#each dinnerImages as img}
+            <div class="container">
+                <img src={Dinner} alt={img.text} class="image">
+                <div class="overlay">
+                    <div class="text">{img.text}</div>
+                </div>
+            </div>
+        {/each}
+    </div>
+</section>
 
+<section id="desserts" class="recipe-section">
+    <h2>Dessert Recipes</h2>
+    <p>Indulge in sweet treats with our dessert collection.</p>
+    <div class="recipe-grid">
+        {#each dessertsImages as img}
+            <div class="container">
+                <img src={Desserts} alt={img.text} class="image">
+                <div class="overlay">
+                    <div class="text">{img.text}</div>
+                </div>
+            </div>
+        {/each}
+    </div>
+</section>
 
- <!-- <body>
-    
-//     <section class="hero">
-//         <h1>Recipes</h1>
-//         <p><em>Wholesome, Easy, delicious for Everyone!</em></p>
-//     </section>
-    
-//     <section class="filter-section">
-//         <label for="filter">Filter to your choice &#x25BC;</label>
-//         <select id="filter">
-//             <option>None</option>
-//             <option>Halal</option>
-//             <option>Vegetarian</option>
-//             <option>Vegan</option>
-//             <option>Gluten Free</option>
-//             <option>Protein Powder Recipes</option> -->
-         <!-- </select>
-//     </section>
-    
-//     <section class="recipe-grid">
-//         <div class="recipe-item"><img src="recipe1.jpg" alt="Recipe 1"></div>
-//         <div class="recipe-item"><img src="recipe2.jpg" alt="Recipe 2"></div>
-//         <div class="recipe-item"><img src="recipe3.jpg" alt="Recipe 3"></div>
-//         <div class="recipe-item"><img src="recipe4.jpg" alt="Recipe 4"></div>
-//         <div class="recipe-item"><img src="recipe5.jpg" alt="Recipe 5"></div>
-//         <div class="recipe-item"><img src="recipe6.jpg" alt="Recipe 6"></div>
-//     </section>
-// </body> -->
+<section id="snacks" class="recipe-section">
+    <h2>Snack Recipes</h2>
+    <p>Quick and easy snacks to keep your energy levels high.</p>
+    <div class="recipe-grid">
+        {#each snacksImages as img}
+            <div class="container">
+                <img src={Snacks} alt={img.text} class="image">
+                <div class="overlay">
+                    <div class="text">{img.text}</div>
+                </div>
+            </div>
+        {/each}
+    </div>
+</section>
+
+<section id="quick-easy" class="recipe-section">
+    <h2>Quick & Easy Recipes</h2>
+    <p>Fast, simple, and delicious recipes for busy days.</p>
+    <div class="recipe-grid">
+        {#each quickeasyImages as img}
+            <div class="container">
+                <img src={Quickeasy} alt={img.text} class="image">
+                <div class="overlay">
+                    <div class="text">{img.text}</div>
+                </div>
+            </div>
+        {/each}
+    </div>
+</section>
+
+<section id="airfryer" class="recipe-section">
+    <h2>Air Fryer Recipes</h2>
+    <p>Healthy and crispy dishes made easy with an air fryer.</p>
+    <div class="recipe-grid">
+        {#each airfryerImages as img}
+            <div class="container">
+                <img src={Airfryer} alt={img.text} class="image">
+                <div class="overlay">
+                    <div class="text">{img.text}</div>
+                </div>
+            </div>
+        {/each}
+    </div>
+</section>
+
