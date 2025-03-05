@@ -33,6 +33,7 @@
     let visibileReplies = {};
 
     let latestRecipes = [];
+    let mostLikedRecipes = [];
 
     onMount(async() => {
         currentURL = window.location.href;
@@ -67,6 +68,9 @@
                 .sort((a,b) => new Date(b.date_published) - new Date(a.date_published)) //sort by newest first
                 .slice(0, 3); //get latest recipe
 
+            mostLikedRecipes = data
+                .sort((a, b) => b.likes - a.likes)
+                .slice(0, 3);
         }
         catch(error){
             console.error("Error fetching lates recipes:", error);
@@ -401,19 +405,37 @@
         </section>
     </div>
 
-    <aside class="latest-recipes">
-        <h2 class="latest-recipes-title">Latest Recipes</h2>
+<aside class="sidebar">
+    <div class="latest-recipes">
+        <h2 class="latest-recipes-title"> 🔔 Latest Recipes</h2>
         <div class="latest-recipes-container">
             {#each latestRecipes as recipe}
             <div class="latest-recipe">
                 <a href={`/recipes/${recipe.id}`}>
                     <div class="latest-recipe-overlay">
                         <img src={recipe.image_path} alt={recipe.article_title} class="latest-recipe-image" />
-                        <h3 class="latest-recipe-name">{recipe.article_title}</h3>
+                        <h3 class="latest-recipe-name">{recipe.article_title}: {recipe.date_published}</h3>
                     </div>
                 </a>
             </div>
             {/each}
         </div>
-    </aside>
+    </div>
+    <div class="liked-recipes">
+        <h2 class="liked-recipes-title"> ❤️ Most Liked Recipes </h2>
+        <div class="liked-recipes-container">
+            {#each mostLikedRecipes as recipe}
+            <div class="liked-recipe">
+                <a href={`/recipes/${recipe.id}`}>
+                    <div class="liked-recipe-overlay">
+                        <img src={recipe.image_path} alt={recipe.article_title} class="liked-recipe-image" />
+                        <h3 class="liked-recipe-name">{recipe.article_title}: ❤️{recipe.likes} Likes</h3>
+                    </div>
+                </a>
+            </div>
+            {/each}
+        </div>
+    </div>
+    
+</aside>
 </div>

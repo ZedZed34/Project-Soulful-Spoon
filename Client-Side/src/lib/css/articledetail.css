@@ -504,23 +504,31 @@ button:disabled:hover{
     background: navy;
 }
 
-.latest-recipes{
+.sidebar{
     width: 380px;
     margin-top: 20px;
     padding: 10px;
-    background: #fcfbfb;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* background: #fcfbfb; */
+    /* border-radius: 8px; */
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
 }
 
 .latest-recipes-title{
     border-bottom: 2px solid #ddd;
     font-size: 18px;
-    text-align: center;
-    
+    text-align: center;  
+    color: rgb(255, 170, 0);
 }
 
-.latest-recipes.container{
+.liked-recipes-title{
+    border-bottom: 2px solid #ddd;
+    font-size: 18px;
+    text-align: center;
+    color: rgb(247, 104, 104);
+}
+
+.latest-recipes.container,
+.liked-recipes-container{
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -533,13 +541,16 @@ button:disabled:hover{
     margin-bottom: 20px;
 }
 
-/* .latest-recipe a{
-    text-decoration: none;
-    color: black;
-    display: block;
-} */
+.liked-recipe{
+    border-radius: 8px;
+    overflow: hidden;
+    background: #f9f9f9;
+    margin-bottom: 5px;
+}
 
-.latest-recipe-image{
+
+.latest-recipe-image,
+.liked-recipe-image{
     width: 100%;
     /* display: block; */
     height: 200px;
@@ -548,11 +559,13 @@ button:disabled:hover{
     transition: transform 0.3 ease;
 }
 
-.latest-recipe-image:hover{
+.latest-recipe-image:hover,
+.liked-recipe-image:hover{
     transform: scale(1.05);
 }
 
-.latest-recipe-overlay{
+.latest-recipe-overlay, 
+.liked-recipe-overlay{
     position: relative;
     margin-bottom: -15px;
     width: 100%;
@@ -560,7 +573,8 @@ button:disabled:hover{
     align-items: flex-end;
 }
 
-.latest-recipe-name{
+.latest-recipe-name,
+.liked-recipe-name{
     position: absolute;
     bottom: 0;
     left: 0;
@@ -576,6 +590,7 @@ button:disabled:hover{
     transition: background 0.3s ease;
 }
 
-.latest-recipe-name:hover{
+.latest-recipe-name:hover,
+.liked-recipe-name:hover{
     background: rgba(0, 0, 0, 0.8);
 }
