@@ -35,6 +35,10 @@
     let latestRecipes = [];
     let mostLikedRecipes = [];
 
+    let isSubscribed = false;
+    let successMessage = "";
+    let loggedInUserEmail = "";
+
     onMount(async() => {
         currentURL = window.location.href;
         //using local storage first instead of backend
@@ -53,7 +57,14 @@
             comments = storedComments ? JSON.parse(storedComments) : [];
 
             let storedUser = localStorage.getItem("loggedInUser");
+            let storedEmail = localStorage.getItem("loggedInUserEmail")
             loggedInUser = storedUser ? storedUser : "Anonymous";
+            loggedInUserEmail = storedEmail ? storedEmail : null;
+
+            if(loggedInUserEmail){
+                let storedSubscription = JSON.parse(localStorage.getItem(`newsletter-${loggedInUserEmail}`));
+                isSubscribed = storedSubscription ?? false;
+            }
 
             document.addEventListener("click", handleClickOutside);
         }  
@@ -75,6 +86,7 @@
         catch(error){
             console.error("Error fetching lates recipes:", error);
         }
+        
     });
 
     $: isAuthenticated = loggedInUser !== "Anonymous";
@@ -239,6 +251,19 @@
 
     function toggleReplies(commentID){
         visibileReplies[commentID] = !visibileReplies[commentID];
+    }
+
+    function toggleSubscription(event){
+        if(!loggedInUserEmail) return;
+
+        isSubscribed = event.target.checked;
+        localStorage.setItem(`newsletter-${loggedInUserEmail}`, JSON.stringify(isSubscribed));
+
+        successMessage = isSubscribed
+            ? "🎉 You Have Subscribed!"
+            : "😞 You Have Unsubscribed";
+
+        //setTimeout(() => successMessage = "", 3000);
     }
 
 </script>
@@ -436,6 +461,22 @@
             {/each}
         </div>
     </div>
-    
+    <section class="newsletter">
+        <h2> ✉️ Stay Updated</h2>
+        <p class="newsletter-description">Subscribe to receive new recipes and cooking tips!</p>
+        {#if isAuthenticated}
+            <label>
+              <input type="checkbox" bind:checked={isSubscribed} on:change={toggleSubscription} />
+              <p class="newsletter-message">I want to recieve updates at <strong>{loggedInUserEmail}</strong></p>
+            </label>
+
+            {#if successMessage}
+                <p class="success-message">{successMessage}</p>
+            {/if}
+
+        {:else}
+            <p class="newsletter-login-prompt">Please Log In To Subscribe.</p>
+        {/if}
+    </section>
 </aside>
 </div>
