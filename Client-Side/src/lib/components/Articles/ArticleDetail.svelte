@@ -50,17 +50,13 @@
             comments = storedComments ? JSON.parse(storedComments) : [];
 
             let storedUser = localStorage.getItem("loggedInUser");
-
-            if(storedUser){
-                loggedInUser = storedUser;
-                isAuthenticated = true; //set to true if user is logged in
-            }
+            loggedInUser = storedUser ? storedUser : "Anonymous";
 
             document.addEventListener("click", handleClickOutside);
-        } 
-
-       
+        }  
     });
+
+    $: isAuthenticated = loggedInUser !== "Anonymous";
 
     onDestroy(() => {
         if(typeof window !== "undefined"){
@@ -154,7 +150,7 @@
 
         const commentObject= {
             id: Date.now(),
-            username: "Current User", 
+            username: loggedInUser, 
             text: newComment,
             date: new Date().toLocaleString(),
             profilePic: profileicon, 
@@ -180,7 +176,7 @@
 
         const replyObject = {
             id: Date.now(),
-            username: "Current User", 
+            username: loggedInUser, 
             text: formattedReplyText,
             date: new Date().toLocaleString(),
             profilePic: profileicon, 
