@@ -152,6 +152,22 @@ main {
     transform: translateY(0);
 } 
 
+.page-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    max-width: 1200px;
+    /* margin: auto; */
+    
+}
+
+.content{
+    flex-grow: 1;
+    max-width: 750px;
+}
+
+
 #recipe-container{
     max-width: 750px;
     border-radius: 8px;
@@ -163,7 +179,7 @@ main {
     background: #ecfdea54;
 }
 
-.recipe-header{
+.recipe-header h1{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -188,6 +204,7 @@ main {
     display: flex;
     gap: 10px;
     /* margin-top: 10px; */
+    margin-bottom: 15px;
 }
 
 .reaction-buttons button{
@@ -221,13 +238,13 @@ main {
 }
 
 @media print{
-    .navbar, .reaction-buttons, .print-button{
+    .navbar, .reaction-buttons, .print-button, .share-button, .comments-section{
         display: none;
     }
 }
 
 .share-container{
-    margin-left: -30px;
+    /* margin-left: -30px; */
     position: relative;
     display: inline-block;
 }
@@ -237,10 +254,15 @@ main {
     padding: 5px 5px;
     border: none;
     border-radius: 5px;
-    background-color: navy;
-    color: white;
+    background: #baf5b354; 
+    color: rgb(0, 0, 0);
     cursor: pointer;
-    font-size: 14px;  
+    font-size: 14px; 
+}
+
+.share-button:hover,
+.print-button:hover{
+    background: #5dec4e54; 
 }
 
 .share-options{
@@ -480,4 +502,80 @@ button:disabled:hover{
 .view-more-replies:hover, 
 .view-more-comments:hover{
     background: navy;
+}
+
+.latest-recipes{
+    width: 380px;
+    margin-top: 20px;
+    padding: 10px;
+    background: #fcfbfb;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.latest-recipes-title{
+    border-bottom: 2px solid #ddd;
+    font-size: 18px;
+    text-align: center;
+    
+}
+
+.latest-recipes.container{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.latest-recipe{
+    border-radius: 8px;
+    overflow: hidden;
+    background: #f9f9f9;
+    margin-bottom: 20px;
+}
+
+/* .latest-recipe a{
+    text-decoration: none;
+    color: black;
+    display: block;
+} */
+
+.latest-recipe-image{
+    width: 100%;
+    /* display: block; */
+    height: 200px;
+    border-radius: 8px;
+    object-fit: cover;
+    transition: transform 0.3 ease;
+}
+
+.latest-recipe-image:hover{
+    transform: scale(1.05);
+}
+
+.latest-recipe-overlay{
+    position: relative;
+    margin-bottom: -15px;
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+}
+
+.latest-recipe-name{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.latest-recipe-name:hover{
+    background: rgba(0, 0, 0, 0.8);
 }

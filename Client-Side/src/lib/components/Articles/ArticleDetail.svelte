@@ -32,7 +32,9 @@
     let commentsExpanded = false;
     let visibileReplies = {};
 
-    onMount(() => {
+    let latestRecipes = [];
+
+    onMount(async() => {
         currentURL = window.location.href;
         //using local storage first instead of backend
         if(typeof window !== "undefined"){
@@ -54,6 +56,21 @@
 
             document.addEventListener("click", handleClickOutside);
         }  
+
+        //fetching latest 3 recipes from database (recipes.json)
+        try{
+            const response = await fetch("/recipes.json");
+            if(!response.ok) throw new Error ("Failed to fetch recipes.")
+
+            const data = await response.json();
+            latestRecipes = data   
+                .sort((a,b) => new Date(b.date_published) - new Date(a.date_published)) //sort by newest first
+                .slice(0, 3); //get latest recipe
+
+        }
+        catch(error){
+            console.error("Error fetching lates recipes:", error);
+        }
     });
 
     $: isAuthenticated = loggedInUser !== "Anonymous";
@@ -252,131 +269,151 @@
     </div>
 </nav>
 
-<div id="recipe-container">
-    <div class="recipe-header">
-        <h1>{article_title}</h1>
-        
-        <div class="reaction-buttons">
-            <button 
-                on:click|preventDefault={() => updateReaction("like")}
-                class:userReacted={userReaction === "like"}
-            >👍 {likes || 0}</button>
-            <button 
-                on:click|preventDefault={() => updateReaction("dislike")}
-                class:userReacted={userReaction === "dislike"}
-            >👎 {dislikes || 0}</button>
-        </div>
-        <button class="print-button" on:click={() => printRecipe()}>🖨️ Print Recipe</button>
-
-        <div class="share-container">
-            <button class="share-button" on:click={toggleShareOptions} >🔗 Share Recipe</button>
-            {#if showShareMenu}
-                <div class="share-options">
-                    <button class="whatsapp" on:click={() => shareOn("whatsapp")}> WhatsApp </button>
-                    <button class="facebook" on:click={() => shareOn("facebook")}> Facebook </button>
-                    <button class="twitter" on:click={() => shareOn("twitter")}> Twitter </button>
-                    <div class="copy-link">
-                        <input type="text" value={currentURL} readonly />
-                        <button on:click={copyLink}> Copy</button>
-                    </div>
+<div class="page-container">
+    <div class="content">
+        <div id="recipe-container">
+            <div class="recipe-header">
+                <h1>{article_title}</h1>
+                
+                <div class="reaction-buttons">
+                    <button 
+                        on:click|preventDefault={() => updateReaction("like")}
+                        class:userReacted={userReaction === "like"}
+                    >👍 {likes || 0}</button>
+                    <button 
+                        on:click|preventDefault={() => updateReaction("dislike")}
+                        class:userReacted={userReaction === "dislike"}
+                    >👎 {dislikes || 0}</button>
                 </div>
-            {/if}
-        </div> 
-    </div>
-    <div class="recipe-meta">
-        <p><strong>By:</strong> {username}</p>
-        <p><strong>Published:</strong> {date_published}</p>
-    </div>
-    
-    <!-- image -->
-    {#if image_path}
-         <img src="{image_path}" alt="{article_title}" class="recipe-image"/>
-    {/if}
+                <button class="print-button" on:click={() => printRecipe()}>🖨️ Print Recipe</button>
 
-    <!-- content -->
-    <h2>Recipe Details</h2>
-    <p>{@html article_content}</p>
-</div>
-
-<section class = "comments-section">
-    <h2 class="comment-title">Comments</h2>
-
-    {#if isAuthenticated}
-        <div class="comment-box">
-            <textarea bind:value={newComment} placeholder="Write a Comment" rows="3"></textarea>
-            <button on:click={addComment} disabled={newComment.trim() === ""}>Post Comment</button>
-        </div>
-    {:else}
-        <p class="login-prompt">Sign In to Comment.</p>
-    {/if}
-
-    <ul class="comments-list">
-        {#each comments.slice(0, visibleComments) as comment (comment.id)}
-        <li class="comment">
-            <img src={comment.profilePic} alt="Profile Picture" class="profile-picture"/>
-            <div class="comment-content">
-                <strong class="comment-username">{comment.username}</strong>
-                <p class="comment-text">{comment.text}</p>
-                <small class="comment-date">{comment.date}</small>
-                <!-- <button class="reply-button" on:click={() => addReply(comment.id, prompt(`Replying to @${comment.username}: `))}>Reply</button> -->
-               {#if isAuthenticated}
-                <button class="reply-button" on:click={() => {
-                        replyingTo = { commentID: comment.id, replyID: null };
-                        replyingToUsername = null;
-                    }}>Reply</button>
-                    {#if comment.username === loggedInUser}
-                        <button class="delete-button" on:click={() => deleteComment(comment.id)}>🗑️</button>
-                    {/if}
-                    {#if replyingTo.commentID === comment.id && replyingTo.replyID === null}
-                        <div class="reply-box">
-                            <textarea bind:value={replyText} placeholder="Write Your Reply" rows="2"></textarea>
-                            <button on:click={() => addReply(comment.id)}>Post Reply</button>
-                            <button class="cancel-reply" on:click={() => {replyingTo = {commentID: null, replyID: null}; replyText = ""}}>x</button>
+                <div class="share-container">
+                    <button class="share-button" on:click={toggleShareOptions} >🔗 Share Recipe</button>
+                    {#if showShareMenu}
+                        <div class="share-options">
+                            <button class="whatsapp" on:click={() => shareOn("whatsapp")}> WhatsApp </button>
+                            <button class="facebook" on:click={() => shareOn("facebook")}> Facebook </button>
+                            <button class="twitter" on:click={() => shareOn("twitter")}> Twitter </button>
+                            <div class="copy-link">
+                                <input type="text" value={currentURL} readonly />
+                                <button on:click={copyLink}> Copy</button>
+                            </div>
                         </div>
                     {/if}
-                {/if}
+                </div> 
+            </div>
+            <div class="recipe-meta">
+                <p><strong>By:</strong> {username}</p>
+                <p><strong>Published:</strong> {date_published}</p>
+            </div>
+            
+            <!-- image -->
+            {#if image_path}
+                <img src="{image_path}" alt="{article_title}" class="recipe-image"/>
+            {/if}
 
-                <!-- replies -->
-                {#each comment.replies.slice(0, visibileReplies[comment.id] ? comment.replies.length : 2) as reply (reply.id)}
-                    <div class="reply">
-                        <img src={reply.profilePic} alt="Profile Picture" class="reply-profile-picture"/>
-                        <div class="reply-content">
-                            <strong class="comment-username">{reply.username}</strong>
-                            <p class="comment-text">{reply.text}</p>
-                            <small class="comment-date">{reply.date}</small> 
-                            <!-- <button class="reply-button" on:click={() => addReply(comment.id, prompt(`Replying to @${reply.username}: `), reply.username)}>Reply</button> -->
-                            {#if isAuthenticated}
-                                <button class="reply-button" on:click={() => {
-                                    replyingTo = { commentID: comment.id, replyID: reply.id};
-                                    replyingToUsername = reply.username;
-                                }}>Reply</button>    
-                                {#if reply.username === loggedInUser}
-                                    <button class="delete-button" on:click={() => deleteReply(comment.id, reply.id)}>🗑️</button>
-                                {/if}
-                                {#if replyingTo.commentID === comment.id && replyingTo.replyID === reply.id}
+            <!-- content -->
+            <h2>Recipe Details</h2>
+            <p>{@html article_content}</p>
+        </div>
+
+        <section class = "comments-section">
+            <h2 class="comment-title">Comments</h2>
+
+            {#if isAuthenticated}
+                <div class="comment-box">
+                    <textarea bind:value={newComment} placeholder="Write a Comment" rows="3"></textarea>
+                    <button on:click={addComment} disabled={newComment.trim() === ""}>Post Comment</button>
+                </div>
+            {:else}
+                <p class="login-prompt">Sign In to Comment.</p>
+            {/if}
+
+            <ul class="comments-list">
+                {#each comments.slice(0, visibleComments) as comment (comment.id)}
+                <li class="comment">
+                    <img src={comment.profilePic} alt="Profile Picture" class="profile-picture"/>
+                    <div class="comment-content">
+                        <strong class="comment-username">{comment.username}</strong>
+                        <p class="comment-text">{comment.text}</p>
+                        <small class="comment-date">{comment.date}</small>
+                        <!-- <button class="reply-button" on:click={() => addReply(comment.id, prompt(`Replying to @${comment.username}: `))}>Reply</button> -->
+                    {#if isAuthenticated}
+                        <button class="reply-button" on:click={() => {
+                                replyingTo = { commentID: comment.id, replyID: null };
+                                replyingToUsername = null;
+                            }}>Reply</button>
+                            {#if comment.username === loggedInUser}
+                                <button class="delete-button" on:click={() => deleteComment(comment.id)}>🗑️</button>
+                            {/if}
+                            {#if replyingTo.commentID === comment.id && replyingTo.replyID === null}
                                 <div class="reply-box">
-                                    <textarea bind:value={replyText} placeholder=  "Replying to @{replyingToUsername}" rows="2"></textarea>
+                                    <textarea bind:value={replyText} placeholder="Write Your Reply" rows="2"></textarea>
                                     <button on:click={() => addReply(comment.id)}>Post Reply</button>
                                     <button class="cancel-reply" on:click={() => {replyingTo = {commentID: null, replyID: null}; replyText = ""}}>x</button>
                                 </div>
-                                {/if}
                             {/if}
-                        </div>
-                    </div>
-                {/each}
+                        {/if}
 
-                {#if comment.replies.length > 2}
-                    <button class="view-more-replies" on:click={() => toggleReplies(comment.id)}>
-                        {visibileReplies[comment.id] ? "Hide Replies" : `View More Replies (${comment.replies.length -2})`}
-                    </button>
-                {/if}
+                        <!-- replies -->
+                        {#each comment.replies.slice(0, visibileReplies[comment.id] ? comment.replies.length : 2) as reply (reply.id)}
+                            <div class="reply">
+                                <img src={reply.profilePic} alt="Profile Picture" class="reply-profile-picture"/>
+                                <div class="reply-content">
+                                    <strong class="comment-username">{reply.username}</strong>
+                                    <p class="comment-text">{reply.text}</p>
+                                    <small class="comment-date">{reply.date}</small> 
+                                    <!-- <button class="reply-button" on:click={() => addReply(comment.id, prompt(`Replying to @${reply.username}: `), reply.username)}>Reply</button> -->
+                                    {#if isAuthenticated}
+                                        <button class="reply-button" on:click={() => {
+                                            replyingTo = { commentID: comment.id, replyID: reply.id};
+                                            replyingToUsername = reply.username;
+                                        }}>Reply</button>    
+                                        {#if reply.username === loggedInUser}
+                                            <button class="delete-button" on:click={() => deleteReply(comment.id, reply.id)}>🗑️</button>
+                                        {/if}
+                                        {#if replyingTo.commentID === comment.id && replyingTo.replyID === reply.id}
+                                        <div class="reply-box">
+                                            <textarea bind:value={replyText} placeholder=  "Replying to @{replyingToUsername}" rows="2"></textarea>
+                                            <button on:click={() => addReply(comment.id)}>Post Reply</button>
+                                            <button class="cancel-reply" on:click={() => {replyingTo = {commentID: null, replyID: null}; replyText = ""}}>x</button>
+                                        </div>
+                                        {/if}
+                                    {/if}
+                                </div>
+                            </div>
+                        {/each}
+
+                        {#if comment.replies.length > 2}
+                            <button class="view-more-replies" on:click={() => toggleReplies(comment.id)}>
+                                {visibileReplies[comment.id] ? "Hide Replies" : `View More Replies (${comment.replies.length -2})`}
+                            </button>
+                        {/if}
+                    </div>
+                </li>
+                {/each}
+            </ul>
+            {#if comments.length > 7}
+                <button class="view-more-comments" on:click={toggleComments}>
+                    {commentsExpanded ? "Hide Comments" : `View More Comments (${comments.length - visibleComments})`}
+                </button>
+            {/if}   
+        </section>
+    </div>
+
+    <aside class="latest-recipes">
+        <h2 class="latest-recipes-title">Latest Recipes</h2>
+        <div class="latest-recipes-container">
+            {#each latestRecipes as recipe}
+            <div class="latest-recipe">
+                <a href={`/recipes/${recipe.id}`}>
+                    <div class="latest-recipe-overlay">
+                        <img src={recipe.image_path} alt={recipe.article_title} class="latest-recipe-image" />
+                        <h3 class="latest-recipe-name">{recipe.article_title}</h3>
+                    </div>
+                </a>
             </div>
-        </li>
-        {/each}
-    </ul>
-    {#if comments.length > 7}
-        <button class="view-more-comments" on:click={toggleComments}>
-            {commentsExpanded ? "Hide Comments" : `View More Comments (${comments.length - visibleComments})`}
-        </button>
-    {/if}   
-</section>
+            {/each}
+        </div>
+    </aside>
+</div>
