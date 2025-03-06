@@ -18,6 +18,9 @@
     let selectedCourse = [];
     let selectedDiet = [];
 
+    let courseOptions = ["Breakfast", "Lunch", "Dinner", "Snack", "Dessert"]
+    let dietOptions = ["Vegan", "Halal", "Gluten-Free", "Keto", "Vegetarian"]
+
 
     // let error = false;
     let success = false;
@@ -45,7 +48,24 @@
         }
       }
 
+      function toggleCourse(course){
+        if(selectedCourse.includes(course)){
+            selectedCourse = selectedCourse.filter(c => c !== course);
+        }
+        else{
+            selectedCourse = [...selectedCourse, course];
+        }
+      }
       
+      function toggleDiet(diet){
+        if(selectedDiet.includes(diet)){
+            selectedDiet = selectedDiet.filter(d => d !== diet);
+        }
+        else{
+            selectedDiet = [...selectedDiet, diet];
+        }
+      }
+
 
 </script>
 
@@ -91,19 +111,25 @@
                 <label>Title</label>
                 <input type="text" bind:value={article_title} placeholder="Enter Recipe Title" required />
                 <label>Course</label>
-                <select required>
-                    <option value="">Choose Course</option>
-                    <option>Breakfast</option>
-                    <option>Lunch</option>
-                    <option>Dinner</option>
-                </select>
+                <div class="course-selection">
+                    {#each courseOptions as course}
+                        <button
+                            type="button"
+                            class="course-button {selectedCourse.includes(course) ? 'selected' : ''}"
+                            onclick={() => toggleCourse(course)}> {course}
+                        </button>
+                    {/each}
+                </div>
                 <label>Diet</label>
-                <select required>
-                    <option value="">Choose Diet</option>
-                    <option>Vegan</option>
-                    <option>Halal</option>
-                    <option>Gluten-Free</option>
-                </select>
+                <div class="diet-selection">
+                    {#each dietOptions as diet}
+                        <button
+                            type="button"
+                            class="diet-button {selectedDiet.includes(diet) ? 'selected' : ''}"
+                            onclick={() => toggleDiet(diet)}> {diet}
+                        </button>
+                    {/each}
+                </div>
                 <label>Recipe Content</label>
                 <Editor   id="article_content" 
                 apiKey="47j9ca2i2bj3u4tecumr45esqktc9oooh23le1byo4z4lzqt" bind:value={article_content} />

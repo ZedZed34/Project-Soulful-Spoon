@@ -226,19 +226,6 @@ input{
     background: #fff;
 }
 
-select{
-    width: 104%;
-    padding: 10px;
-    border-radius: 5px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    background: #fff;
-}
-/* .file-upload{
-    margin-top: 15px;
-    margin-bottom: 15px;
-} */
-
 .tox-tinymce{
     width: 104%;
 }
@@ -269,4 +256,29 @@ select{
     font-size: 16px;
     margin-top: 15px;
     color: rgb(2, 67, 2);
+}
+
+.course-selection, .diet-selection{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.course-button, .diet-button{
+    padding: 10px 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    color: white;
+    background: darkolivegreen;
+    border: none;
+    transition: 0.3s ease;
+}
+
+.course-button:hover, .diet-button:hover{
+    background: rgb(41, 52, 22);
+}
+
+.selected{
+    background: navy !important;
 }
