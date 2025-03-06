@@ -13,6 +13,7 @@
     import {onMount} from "svelte";
 
     let searchQuery = "";
+    let filteredImages = [];
     let selectedCourse = "";
     let selectedDiet = "";
 
@@ -23,6 +24,7 @@
             image.diet.some(d => d.toLowerCase().includes(searchQuery.toLowerCase()))
         );
     }
+
 
 
     let images = [
@@ -92,27 +94,12 @@
 </nav>
 
 <!-- search bar -->
- <div class="search-container">
-    <input
-        type="text"
-        bind:value={searchQuery}
-        on:input={handleSearch}
-        placeholder="Search recipes..."
-        class="search-input"
-        />
-        <button class="search-button">🔍</button>
- </div>
+ <div class="search-filter-container">
 
- <main>
-    <h1>Welcome to Soulful Spoon</h1>
-
-</main>
-
-<!-- Filters -->
+    <!-- Filters -->
 <div class="filter-box">
     <button class="filter-button">
-        Filter Options ⇩
-    </button>
+        Filter Options ⇩</button>
 
     <div class="filter-dropdown">
         <h4>Courses</h4>
@@ -128,13 +115,29 @@
         <h4>Dietary Requirements</h4>
         <ul>
             <li><input type="radio" name="diet" bind:group={selectedDiet}/> <label for="vegan">Vegan</label></li>
-            <li><input type="radio" name="course" bind:group={selectedDiet}/> <label for="vegetarian">Vegetarian</label></li>
-            <li><input type="radio" name="course" bind:group={selectedDiet}/> <label for="halal">Halal</label></li>
-            <li><input type="radio" name="course" bind:group={selectedDiet}/> <label for="dairyFree">Dairy Free</label></li>
-            <li><input type="radio" name="course" bind:group={selectedDiet}/> <label for="glutenFree">Gluten Free</label></li>
+            <li><input type="radio" name="diet" bind:group={selectedDiet}/> <label for="vegetarian">Vegetarian</label></li>
+            <li><input type="radio" name="diet" bind:group={selectedDiet}/> <label for="halal">Halal</label></li>
+            <li><input type="radio" name="diet" bind:group={selectedDiet}/> <label for="dairyFree">Dairy Free</label></li>
+            <li><input type="radio" name="diet" bind:group={selectedDiet}/> <label for="glutenFree">Gluten Free</label></li>
         </ul>
     </div>
  </div>
+    <div class="search-container">
+    <input
+        type="text"
+        bind:value={searchQuery}
+        on:input={handleSearch}
+        placeholder="Search recipes..."
+        class="search-input"
+        />
+        <button class="search-button">🔍</button>
+ </div>
+ </div>
+
+ <main>
+    <h1>Welcome to Soulful Spoon</h1>
+
+</main>
 
  <!-- recipes result after search -->
   <section class="image-layout">
@@ -146,8 +149,4 @@
         </div>
     </div>
     {/each}
-  </section>
-
-
-  
-<!-- Footer -->
+</section>
