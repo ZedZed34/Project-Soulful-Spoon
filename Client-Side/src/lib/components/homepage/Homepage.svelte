@@ -32,14 +32,14 @@
 
 
     let images = [
-        {src: SalmonQuinoaBowl, text: "Salmon Quinoa Bowl", course:["lunch"], diet: ["halal","gluten-free"], link:"https://www.eatingwell.com/recipe/7886983/jerk-spiced-salmon-quinoa-bowl-with-mango-vinaigrette/"},
-        {src: PrawnSpagetti, text: "Prawn Spagetti", course:["dinner"], diet: ["halal", "high-protein"], link:"https://www.bbcgoodfood.com/recipes/collection/healthy-prawn-recipes"},
-        {src: BananaOatmealPancakes, text: "Banana Oatmeal Pancakes", course:["breakfast"], diet: ["halal", "high-protein", "vegetarian", "dairy-free"], link:"https://meaningfuleats.com/banana-egg-almond-butter-pancakes-grain-free-dairy-free/" },
-        {src: StickyGingerSesameChicken, text: "Sticky Ginger Sesame Chicken", course:["lunch", "dinner"], diet: ["halal", "high-protein"], link:"https://everydaydishes.com/high-protein/sheet-pan-sticky-ginger-sesame-chicken/"},
-        {src: ChickpeaSaladSandwich, text: "Chickpea Salad Sandwich", course:["dinner", "lunch"], diet: ["halal","vegan", "dairy-free"], link:"https://www.eatingwell.com/recipe/7923367/chickpea-salad-sandwich/"},
-        {src: StrawberryYoghurtBites, text: "Strawberry Yoghurt Bites", course:["bites"], diet:["halal", "vegetarian"], link:"https://www.eatingwell.com/recipe/259080/strawberry-chocolate-greek-yogurt-bark/"},
-        {src: SteakWithMushroomSauce, text: "Steak With Mushroom Sauce", course: ["dinner", "lunch"], diet: ["high-protein", "halal"], link:"https://www.eatingwell.com/recipe/266579/skillet-steak-with-mushroom-sauce/"},
-        {src: EggSalad, text: "Egg Salad", course: ["breakfast"], diet: ["diary-free", "gluten-free", "halal"], link:"https://www.themediterraneandish.com/healthy-egg-salad-mediterranean/"}  
+        {src: SalmonQuinoaBowl, text: "Salmon Quinoa Bowl", course:["lunch"], diet: ["halal","gluten-free"]},
+        {src: PrawnSpagetti, text: "Prawn Spagetti", course:["dinner"], diet: ["halal", "high-protein"]},
+        {src: BananaOatmealPancakes, text: "Banana Oatmeal Pancakes", course:["breakfast"], diet: ["halal", "high-protein", "vegetarian", "dairy-free"]},
+        {src: StickyGingerSesameChicken, text: "Sticky Ginger Sesame Chicken", course:["lunch", "dinner"], diet: ["halal", "high-protein"]},
+        {src: ChickpeaSaladSandwich, text: "Chickpea Salad Sandwich", course:["dinner", "lunch"], diet: ["halal","vegan", "dairy-free"]},
+        {src: StrawberryYoghurtBites, text: "Strawberry Yoghurt Bites", course:["bites"], diet:["halal", "vegetarian"]},
+        {src: SteakWithMushroomSauce, text: "Steak With Mushroom Sauce", course: ["dinner", "lunch"], diet: ["high-protein", "halal"]},
+        {src: EggSalad, text: "Egg Salad", course: ["breakfast"], diet: ["diary-free", "gluten-free", "halal"]}  
     ];
 
     onMount(()=> {
@@ -143,12 +143,12 @@
 
 </main>
 
-<!-- recipes result after search -->
-<section class="image-layout">
+ <!-- recipes result after search -->
+  <section class="image-layout">
     {#each filteredImages as image}
     <div class="imagetext">
         <!-- added to link each recipe to its individual page -->
-        <a href="{image.link}" target="_blank" rel="noopener noreferrer">
+        <a href="/recipe/{image.text.toLowerCase().replace(/\s+/g, '-')}" rel="external">
             <img src={image.src} alt={image.text} />
             <div class="hover-text">
                 <p>{image.text}</p>
@@ -157,6 +157,7 @@
     </div>
     {/each}
 </section>
+
 
 
 <!-- Footer -->
