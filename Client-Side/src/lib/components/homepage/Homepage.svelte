@@ -10,18 +10,35 @@
     import StrawberryYoghurtBites from '$lib/components/images/StrawberryYoghurtBites.jpg';
     import SteakWithMushroomSauce from '$lib/components/images/SteakWithMushroomSauce.jpg';
     import EggSalad from '$lib/components/images/EggSalad.jpg';
+    import {onMount} from "svelte";
+
+    let searchQuery = "";
+    let selectedCourse = "";
+    let selectedDiet = "";
+
+    function handleSearch() {
+        filteredImages = images.filter(image =>
+            image.text.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            image.course.some(c => c.toLowerCase().includes(searchQuery.toLowerCase())) ||
+            image.diet.some(d => d.toLowerCase().includes(searchQuery.toLowerCase()))
+        );
+    }
+
 
     let images = [
-        {src: SalmonQuinoaBowl, text: "Salmon Quinoa Bowl"},
-        {src: PrawnSpagetti, text: "Prawn Spagetti"},
-        {src: BananaOatmealPancakes, text: "Banana Oatmeal Pancakes"},
-        {src: StickyGingerSesameChicken, text: "Sticky Ginger Sesame Chicken"},
-        {src: ChickpeaSaladSandwich, text: "Chickpea Salad Sandwich"},
-        {src: StrawberryYoghurtBites, text: "Strawberry Yoghurt Bites"},
-        {src: SteakWithMushroomSauce, text: "Steak With Mushroom auce"},
-        {src: EggSalad, text: "Egg Salad"}  
+        {src: SalmonQuinoaBowl, text: "Salmon Quinoa Bowl", course:["lunch"], diet: ["gluten-free"]},
+        {src: PrawnSpagetti, text: "Prawn Spagetti", course:["dinner"], diet: ["halal", "high-protein"]},
+        {src: BananaOatmealPancakes, text: "Banana Oatmeal Pancakes", course:["breakfast"], diet: ["halal", "high-protein", "vegetarian", "dairy-free"] },
+        {src: StickyGingerSesameChicken, text: "Sticky Ginger Sesame Chicken", course:["lunch", "dinner"], diet: ["halal", "high-protein"]},
+        {src: ChickpeaSaladSandwich, text: "Chickpea Salad Sandwich", course:["dinner", "lunch"], diet: ["vegan", "dairy-free"]},
+        {src: StrawberryYoghurtBites, text: "Strawberry Yoghurt Bites", course:["bites"], diet:["halal", "vegetarian"]},
+        {src: SteakWithMushroomSauce, text: "Steak With Mushroom Sauce", course: ["dinner", "lunch"], diet: ["high-protein", "halal"]},
+        {src: EggSalad, text: "Egg Salad", course: ["breakfast"], diet: ["diary-free", "gluten-free", "halal"]}  
     ];
-    
+
+    onMount(()=> {
+        filteredImages = images;
+    });
 </script>
 
 <div>
@@ -60,6 +77,8 @@
     <button class="add-button" title="Add New">+</button>
 </a>
 
+
+
     <!-- profile dropdown login.signup -->
      <div class="profile-dropdown">
         <img src={profileicon} alt="Profile" class="profile-icon"/>
@@ -72,13 +91,25 @@
     </div>
 </nav>
 
-<main>
+<!-- search bar -->
+ <div class="search-container">
+    <input
+        type="text"
+        bind:value={searchQuery}
+        on:input={handleSearch}
+        placeholder="Search recipes..."
+        class="search-input"
+        />
+        <button class="search-button">🔍</button>
+ </div>
+
+ <main>
     <h1>Welcome to Soulful Spoon</h1>
 
 </main>
 
 <!-- Filters -->
- <div class="filter-box">
+<div class="filter-box">
     <button class="filter-button">
         Filter Options ⇩
     </button>
@@ -86,27 +117,28 @@
     <div class="filter-dropdown">
         <h4>Courses</h4>
         <ul>
-            <li><input type="radio" name="course" /> <label for="breakfast">Breakfast</label></li>
-            <li><input type="radio" name="course" /> <label for="lunch">Lunch</label></li>
-            <li><input type="radio" name="course" /> <label for="dinner">Dinner</label></li>
-            <li><input type="radio" name="course" /> <label for="bites">Bites</label></li>
-            <li><input type="radio" name="course" /> <label for="highProtein">High Protein</label></li>
-            <li><input type="radio" name="course" /> <label for="dessert">Dessert</label></li>
-            <li><input type="radio" name="course" /> <label for="baking">Baking</label></li>
+            <li><input type="radio" name="course" bind:group={selectedCourse}/> <label for="breakfast">Breakfast</label></li>
+            <li><input type="radio" name="course" bind:group={selectedCourse} /> <label for="lunch">Lunch</label></li>
+            <li><input type="radio" name="course" bind:group={selectedCourse}/> <label for="dinner">Dinner</label></li>
+            <li><input type="radio" name="course" bind:group={selectedCourse}/> <label for="bites">Bites</label></li>
+            <li><input type="radio" name="course" bind:group={selectedCourse}/> <label for="highProtein">High Protein</label></li>
+            <li><input type="radio" name="course" bind:group={selectedCourse}/> <label for="dessert">Dessert</label></li>
+            <li><input type="radio" name="course" bind:group={selectedCourse}/> <label for="baking">Baking</label></li>
         </ul>
         <h4>Dietary Requirements</h4>
         <ul>
-            <li><input type="radio" name="diet" /> <label for="vegan">Vegan</label></li>
-            <li><input type="radio" name="course" /> <label for="vegetarian">Vegetarian</label></li>
-            <li><input type="radio" name="course" /> <label for="halal">Halal</label></li>
-            <li><input type="radio" name="course" /> <label for="dairyFree">Dairy Free</label></li>
-            <li><input type="radio" name="course" /> <label for="glutenFree">Gluten Free</label></li>
+            <li><input type="radio" name="diet" bind:group={selectedDiet}/> <label for="vegan">Vegan</label></li>
+            <li><input type="radio" name="course" bind:group={selectedDiet}/> <label for="vegetarian">Vegetarian</label></li>
+            <li><input type="radio" name="course" bind:group={selectedDiet}/> <label for="halal">Halal</label></li>
+            <li><input type="radio" name="course" bind:group={selectedDiet}/> <label for="dairyFree">Dairy Free</label></li>
+            <li><input type="radio" name="course" bind:group={selectedDiet}/> <label for="glutenFree">Gluten Free</label></li>
         </ul>
     </div>
  </div>
 
-<section class="image-layout">
-    {#each images as image}
+ <!-- recipes result after search -->
+  <section class="image-layout">
+    {#each filteredImages as image}
     <div class="imagetext">
         <img src={image.src} alt={image.text} />
         <div class="hover-text">
@@ -114,4 +146,8 @@
         </div>
     </div>
     {/each}
-</section>
+  </section>
+
+
+  
+<!-- Footer -->
