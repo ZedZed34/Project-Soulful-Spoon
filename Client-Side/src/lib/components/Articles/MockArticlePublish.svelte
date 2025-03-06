@@ -61,7 +61,6 @@
         selectedCourse = [];
         selectedDiet = [];
         article_content = "";
-        image_path = "";
         console.log("Article Created:", {article_title, username});
     }
 
