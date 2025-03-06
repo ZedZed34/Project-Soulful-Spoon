@@ -11,6 +11,8 @@
     import SteakWithMushroomSauce from '$lib/components/images/SteakWithMushroomSauce.jpg';
     import EggSalad from '$lib/components/images/EggSalad.jpg';
 
+    import { onMount } from 'svelte'; //added
+
     let images = [
         {src: SalmonQuinoaBowl, text: "Salmon Quinoa Bowl"},
         {src: PrawnSpagetti, text: "Prawn Spagetti"},
@@ -19,8 +21,24 @@
         {src: ChickpeaSaladSandwich, text: "Chickpea Salad Sandwich"},
         {src: StrawberryYoghurtBites, text: "Strawberry Yoghurt Bites"},
         {src: SteakWithMushroomSauce, text: "Steak With Mushroom auce"},
-        {src: EggSalad, text: "Egg Salad"}  
+        {src: EggSalad, text: "Egg Salad"}
     ];
+
+    //added by Harshikaa to show user-published and default recipes. have to replace with backend database
+    onMount(() => {
+        if(typeof localStorage !== "undefined"){
+            let savedRecipes = JSON.parse(localStorage.getItem("recipes")) || [];
+
+            images = [
+                ...images, 
+                ...savedRecipes.map(recipe => ({
+                src: recipe.image_path || "/src/lib/components/images/publish-article.jpg",
+                text: recipe.title
+            }))
+            ];
+        }
+    });
+
 </script>
 
 <svelte:head>
@@ -53,7 +71,8 @@
     </ul>
 
     <div class="action-buttons">
-    <button class="add-button" title="Add New">+</button>
+    <!-- lined to publish article page (change to actual one) -->
+    <button class="add-button" title="Add New" on:click={() => window.location.href='/mockarticlepublish'}>+</button>
         <img src={profileicon} alt="Profile" class="profile-icon" />
     </div>
 </nav>
