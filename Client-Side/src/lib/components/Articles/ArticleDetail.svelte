@@ -44,6 +44,8 @@
         //using local storage first instead of backend
         if(typeof window !== "undefined"){
             try{
+             
+
                 const response = await fetch("/recipes.json");
                 if(!response.ok) throw new Error("Failed to fetch recipes.");
                 const data = await response.json();

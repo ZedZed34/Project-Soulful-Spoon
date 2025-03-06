@@ -31,7 +31,10 @@
     }
 
 
+    import { onMount } from 'svelte'; //added
+
     let images = [
+<<<<<<< HEAD
         {src: SalmonQuinoaBowl, text: "Salmon Quinoa Bowl", course:["lunch"], diet: ["halal","gluten-free"]},
         {src: PrawnSpagetti, text: "Prawn Spagetti", course:["dinner"], diet: ["halal", "high-protein"]},
         {src: BananaOatmealPancakes, text: "Banana Oatmeal Pancakes", course:["breakfast"], diet: ["halal", "high-protein", "vegetarian", "dairy-free"]},
@@ -45,6 +48,33 @@
     onMount(()=> {
         filteredImages = images;
     });
+=======
+        {src: SalmonQuinoaBowl, text: "Salmon Quinoa Bowl"},
+        {src: PrawnSpagetti, text: "Prawn Spagetti"},
+        {src: BananaOatmealPancakes, text: "Banana Oatmeal Pancakes"},
+        {src: StickyGingerSesameChicken, text: "Sticky Ginger Sesame Chicken"},
+        {src: ChickpeaSaladSandwich, text: "Chickpea Salad Sandwich"},
+        {src: StrawberryYoghurtBites, text: "Strawberry Yoghurt Bites"},
+        {src: SteakWithMushroomSauce, text: "Steak With Mushroom auce"},
+        {src: EggSalad, text: "Egg Salad"}
+    ];
+
+    //added by Harshikaa to show user-published and default recipes. have to replace with backend database
+    onMount(() => {
+        if(typeof localStorage !== "undefined"){
+            let savedRecipes = JSON.parse(localStorage.getItem("recipes")) || [];
+
+            images = [
+                ...images, 
+                ...savedRecipes.map(recipe => ({
+                src: recipe.image_path || "/src/lib/components/images/publish-article.jpg",
+                text: recipe.title
+            }))
+            ];
+        }
+    });
+
+>>>>>>> Harshikaa
 </script>
 
 <div>
@@ -79,6 +109,7 @@
     </ul>
 
     <div class="action-buttons">
+<<<<<<< HEAD
         <a href="/Articles">
     <button class="add-button" title="Add New">+</button>
 </a>
@@ -94,6 +125,11 @@
             <li><a href="/signup"rel="external">Sign Up</a></li>
         </ul>
      </div>
+=======
+    <!-- lined to publish article page (change to actual one) -->
+    <button class="add-button" title="Add New" on:click={() => window.location.href='/mockarticlepublish'}>+</button>
+        <img src={profileicon} alt="Profile" class="profile-icon" />
+>>>>>>> Harshikaa
     </div>
 </nav>
 

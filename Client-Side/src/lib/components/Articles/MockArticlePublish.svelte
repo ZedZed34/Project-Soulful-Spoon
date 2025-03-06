@@ -5,6 +5,7 @@
     import profileicon from '$lib/components/images/profileicon.jpg'
 
     import Editor from '@tinymce/tinymce-svelte';
+	import { user } from "../user";
 
   
     let article_title = "";
@@ -26,18 +27,40 @@
     let success = false;
 
     let showLoginPopup = false;
-    let ifAuthenticated = true;
+    let ifAuthenticated = true; //change 
     
     if (!ifAuthenticated){
         showLoginPopup = true;
     }
 
+    //added
     function createArticle(event){
         event.preventDefault();
         if(!ifAuthenticated){
             return;
         }
+
+        let newRecipe = {
+            title: article_title,
+            content: article_content,
+            username: username, 
+            date_published: date_published, 
+            image_path: image_path,
+            courses: selectedCourse,
+            diets: selectedDiet
+        };
+
+        let recipes = JSON.parse(localStorage.getItem("recipes")) || [];
+
+        recipes.push(newRecipe);
+
+        localStorage.setItem("recipes", JSON.stringify(recipes))
+
         success = true;
+        article_title = "";
+        selectedCourse = [];
+        selectedDiet = [];
+        article_content = "";
         console.log("Article Created:", {article_title, username});
     }
 
