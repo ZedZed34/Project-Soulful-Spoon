@@ -47,10 +47,17 @@
     });
 </script>
 
+<<<<<<< HEAD
 <div>
     <script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
     <script src="https://files.bpcontent.cloud/2025/02/25/06/20250225063934-HGA74MAU.js"></script>
 </div>
+=======
+<svelte:head>
+     <script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
+<script src="https://files.bpcontent.cloud/2025/02/25/06/20250225063934-HGA74MAU.js"></script>
+    </svelte:head>
+>>>>>>> Harshikaa
     
  <!-- Navbar -->
 <nav class="navbar">
@@ -147,10 +154,13 @@
   <section class="image-layout">
     {#each filteredImages as image}
     <div class="imagetext">
-        <img src={image.src} alt={image.text} />
-        <div class="hover-text">
-            <p>{image.text}</p>
-        </div>
+        <!-- added to link each recipe to its individual page -->
+        <a href="/recipes/{image.text.toLowerCase().replace(/\s+/g, '-')}" rel="external">
+            <img src={image.src} alt={image.text} />
+            <div class="hover-text">
+                <p>{image.text}</p>
+            </div>
+        </a>
     </div>
     {/each}
 </section>

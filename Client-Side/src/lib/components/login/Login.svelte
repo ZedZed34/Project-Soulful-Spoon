@@ -16,7 +16,9 @@
         const result = await loginWithGoogle();
         user = result.user;
         console.log("Google Login Sucess:", user);
-        goto("/", { replaceState: true });
+        // goto("/", { replaceState: true });
+        window.location.href = "/"; //had to change to this to ensure the page reloads completely
+
       } catch (error){
           console.log("Google Login Failed:", error);
       }
@@ -25,11 +27,16 @@
     function handleLogout(){
       logout();
       user = null;
+      console.log("User is logged out");
     }
 
     onMount(() => {
       auth.onAuthStateChanged((u) => {
-        user.u;
+        if(u){
+          user = u; //contains displayName, email, photoURL, uid, emailVerified
+          console.log("User is logged in", u);
+        }
+        // user.u;
       });
     });
   
@@ -81,7 +88,8 @@
       <!-- login form -->
       <div class="login-form">
         <!-- close button -->
-        <button class="close-button" on:click={() => goto('/#')}>x</button>
+        <!-- <button class="close-button" on:click={() => goto('/')}>x</button> -->
+        <button class="close-button" on:click={() => window.location.href = "/"}>x</button>
         <h2>Welcome Back!</h2>
         <form on:submit|preventDefault={handleSubmit}>
           <input type="username" bind:value={username} placeholder="Username" required />

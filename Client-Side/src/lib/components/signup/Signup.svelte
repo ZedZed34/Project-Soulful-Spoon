@@ -1,7 +1,7 @@
 <script>
   //commented out for now to view css and html (couldnt work if i did not comment out)
   //import { user } from "../../../lib/components/user.js";
-  //import { SIGNUP_URL } from "../../../lib/js/api-urls.js";
+  import { SIGNUP_URL } from "../../../lib/js/api-urls.js";
   import "$lib/css/signup.css";  
 	import { goto } from "$app/navigation";
   import {loginWithGoogle, logout, auth} from "$lib/firebase";
@@ -31,20 +31,23 @@
     try{
       const result = await loginWithGoogle();
       user = result.user;
-      
+     // goto("/", { replaceState: true });
+     window.location.href = "/"; //had to change to this to ensure the page reloads completely
+
+      const uniqueUsername = user.displayName.replace(" ", "_") + "_" + Math.floor(Math.random() * 10000);
       //send google user data to backend
       await fetch(SIGNUP_URL, {
         method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ 
-          username: user.displayName, //needs to be unique (check server.js)
+          username: uniqueUsername, 
           email: user.email,
           profilePicture: user.photoURL})
         });
     
       console.log("Google Login Sucess:", user);
-      goto("/", { replaceState: true });
+      // goto("/", { replaceState: true });
     } catch (error){
         console.log("Google Login Failed:", error);
     }
@@ -120,6 +123,7 @@
       console.log("User Signed Up Successfully:", userData);
       // user.login({ username: userData.username, email: userData.email, password: userData.password, confirmedPassword: userData.confirmedPassword });
       goto("/", { replaceState: true });
+      
     }   
     else {
       const data = await response.json();
@@ -158,7 +162,8 @@
   <div class="signup-image"></div>
   <!-- sign up form -->
   <div class="signup-form">
-    <button class="close-button" on:click={() => goto('/')}>x</button>
+    <!-- <button class="close-button" on:click={() => goto('/')}>x</button> -->
+    <button class="close-button" on:click={() => window.location.href = "/"}>x</button>
     <h2>Create Account</h2>
     <form on:submit|preventDefault={handleSignup}>
       
@@ -249,7 +254,7 @@
       </div>
     {:else}
     <div class="social-login">
-      <p>Or Sign Up With:</p>
+      <p>Or Log In With:</p>
       <div class="social-icons">
         <button on:click={googleLogin}>
           <img src="src/lib/components/images/google-icon.png" alt="Google" />
