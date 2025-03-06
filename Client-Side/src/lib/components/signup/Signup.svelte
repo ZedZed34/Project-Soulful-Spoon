@@ -1,7 +1,7 @@
 <script>
   //commented out for now to view css and html (couldnt work if i did not comment out)
   //import { user } from "../../../lib/components/user.js";
-  //import { SIGNUP_URL } from "../../../lib/js/api-urls.js";
+  import { SIGNUP_URL } from "../../../lib/js/api-urls.js";
   import "$lib/css/signup.css";  
 	import { goto } from "$app/navigation";
   import {loginWithGoogle, logout, auth} from "$lib/firebase";
