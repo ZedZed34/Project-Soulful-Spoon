@@ -10,8 +10,8 @@
     let article_title = "";
     let article_content = "";
     let username = "Tester";
-    // let likes = 0;
-    // let dislikes = 0;
+    let likes = 0;
+    let dislikes = 0;
     let date_published = new Date().toISOString();
     let image_path = "src/lib/components/images/publish-article.jpg"
 
@@ -24,15 +24,19 @@
 
     // let error = false;
     let success = false;
-    // let uploadedImage = "src/lib/components/images/publish-article.jpg"
-    // let showModal = false;
 
-    // function toggleModal(){
-    //     showModal = !showModal
-    // }
+    let showLoginPopup = false;
+    let ifAuthenticated = true;
+    
+    if (!ifAuthenticated){
+        showLoginPopup = true;
+    }
 
     function createArticle(event){
         event.preventDefault();
+        if(!ifAuthenticated){
+            return;
+        }
         success = true;
         console.log("Article Created:", {article_title, username});
     }
@@ -99,7 +103,15 @@
     </div>
 </nav>
 
-<div class="article-page">
+{#if showLoginPopup}
+    <div class="popup">
+        <div class="popup-content">
+            <p>Please Log In to Publish Your Recipe.</p>
+            <button onclick={() => window.location.href = '/login'}>Login</button>
+        </div>
+    </div>
+{/if}
+<div class="article-page {showLoginPopup ? 'blur-background' : ''}">
     <div class="publish-container">
         <div class="image-container">
             <img src={image_path} alt="Recipe Image">  
@@ -130,12 +142,14 @@
                         </button>
                     {/each}
                 </div>
-                <label>Recipe Content</label>
-                <Editor   id="article_content" 
-                apiKey="47j9ca2i2bj3u4tecumr45esqktc9oooh23le1byo4z4lzqt" bind:value={article_content} />
+                {#if !showLoginPopup}
+                    <label>Recipe Content</label>
+                    <Editor   id="article_content" 
+                    apiKey="47j9ca2i2bj3u4tecumr45esqktc9oooh23le1byo4z4lzqt" bind:value={article_content} />
+                {/if}
                 <label class="file-upload">
                     Upload Image
-                    <input type="file" id="content-image" name="content-image" accept="image/*" onchange={handleFileChange}/>
+                    <input type="file" id="content-image" name="content-image" accept="image/*" onchange={handleFileChange} />
                 </label>
                 <button type="submit" class="upload-button">Publish Recipe</button>
                 {#if success}
