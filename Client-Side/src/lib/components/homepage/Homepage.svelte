@@ -30,35 +30,6 @@
         );
     }
 
-
-    
-
-    //  let images = [
-    //     {src: SalmonQuinoaBowl, text: "Salmon Quinoa Bowl"},
-    //     {src: PrawnSpagetti, text: "Prawn Spagetti"},
-    //     {src: BananaOatmealPancakes, text: "Banana Oatmeal Pancakes"},
-    //     {src: StickyGingerSesameChicken, text: "Sticky Ginger Sesame Chicken"},
-    //     {src: ChickpeaSaladSandwich, text: "Chickpea Salad Sandwich"},
-    //     {src: StrawberryYoghurtBites, text: "Strawberry Yoghurt Bites"},
-    //     {src: SteakWithMushroomSauce, text: "Steak With Mushroom auce"},
-    //     {src: EggSalad, text: "Egg Salad"}
-    // ];
-
-    //added by Harshikaa to show user-published and default recipes. have to replace with backend database
-    // onMount(() => {
-    //     if(typeof localStorage !== "undefined"){
-    //         let savedRecipes = JSON.parse(localStorage.getItem("recipes")) || [];
-
-    //         images = [
-    //             ...images, 
-    //             ...savedRecipes.map(recipe => ({
-    //             src: recipe.image_path || "/src/lib/components/images/publish-article.jpg",
-    //             text: recipe.title
-    //         }))
-    //         ];
-    //     }
-    // });
-
     let images = [
         {src: SalmonQuinoaBowl, text: "Salmon Quinoa Bowl", course:["lunch"], diet: ["halal","gluten-free"]},
         {src: PrawnSpagetti, text: "Prawn Spagetti", course:["dinner"], diet: ["halal", "high-protein"]},
@@ -73,16 +44,7 @@
     onMount(()=> {
         filteredImages = images;
     });
-    //     {src: SalmonQuinoaBowl, text: "Salmon Quinoa Bowl"},
-    //     {src: PrawnSpagetti, text: "Prawn Spagetti"},
-    //     {src: BananaOatmealPancakes, text: "Banana Oatmeal Pancakes"},
-    //     {src: StickyGingerSesameChicken, text: "Sticky Ginger Sesame Chicken"},
-    //     {src: ChickpeaSaladSandwich, text: "Chickpea Salad Sandwich"},
-    //     {src: StrawberryYoghurtBites, text: "Strawberry Yoghurt Bites"},
-    //     {src: SteakWithMushroomSauce, text: "Steak With Mushroom auce"},
-    //     {src: EggSalad, text: "Egg Salad"}
-    // ];
-
+   
     //added by Harshikaa to show user-published and default recipes. have to replace with backend database
     onMount(() => {
         if(typeof localStorage !== "undefined"){
@@ -214,8 +176,6 @@
     </div>
     {/each}
 </section>
-
-
 
 <!-- Footer -->
  <footer class="footer">
