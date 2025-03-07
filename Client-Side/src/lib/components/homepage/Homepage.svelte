@@ -51,12 +51,14 @@
  <!-- Navbar -->
 <nav class="navbar">
     <div class="logo-container">
-        <img src={logo} alt="Soulful Spoon Logo" class="logo" />
+        <a href="/#">
+            <img src={logo} alt="Soulful Spoon Logo" class="logo" />
+        </a>
         <span class="site">Soulful Spoon</span>
     </div>
     <ul class="nav-buttons">
         <li class="dropdown">
-            <a href="#/">Recipes</a>
+            <a href="/recipes">Recipes</a>
             <ul class="dropdown-content">
             <li><a href="/breakfast">Breakfast</a></li>
             <li><a href="/lunch">Lunch</a></li>
