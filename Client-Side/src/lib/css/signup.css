@@ -10,6 +10,12 @@ body{
 
 }
 
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> Ishita
 /* signup container */
 #signup-container{
     display: flex;
@@ -196,11 +202,18 @@ label{
 }
 
 /* social login section */
+<<<<<<< HEAD
 /* social login section */
+=======
+>>>>>>> Ishita
 .social-login{
     font-size: 12px;
     margin-top: 20px;
     justify-content: center;
+<<<<<<< HEAD
+=======
+
+>>>>>>> Ishita
 }
 
 .social-icons{
@@ -210,17 +223,23 @@ label{
     justify-content: center;
 }
 
+<<<<<<< HEAD
 .social-icons button{
     background: none;
     border: none;
 }
 
+=======
+>>>>>>> Ishita
 .social-icons img{
     width: 30px;
     cursor: pointer;
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> Ishita
 /* sign up section */
 .login{
     font-size: 12px;

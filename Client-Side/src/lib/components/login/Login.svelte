@@ -3,10 +3,14 @@
      import { goto } from "$app/navigation";
     // import { AUTH_URL } from "../../../lib/js/api-urls.js";
     import "$lib/css/login.css";  
+<<<<<<< HEAD
     import {loginWithGoogle, logout, auth} from "$lib/firebase";
     import {onMount} from "svelte";
 
     let user = null;
+=======
+
+>>>>>>> Ishita
     let username = "";
     let password = "";
     let error = false;
@@ -88,8 +92,12 @@
       <!-- login form -->
       <div class="login-form">
         <!-- close button -->
+<<<<<<< HEAD
         <!-- <button class="close-button" on:click={() => goto('/')}>x</button> -->
         <button class="close-button" on:click={() => window.location.href = "/"}>x</button>
+=======
+        <button class="close-button" on:click={() => goto('/#')}>x</button>
+>>>>>>> Ishita
         <h2>Welcome Back!</h2>
         <form on:submit|preventDefault={handleSubmit}>
           <input type="username" bind:value={username} placeholder="Username" required />
@@ -99,6 +107,7 @@
           </p>
           <button class="login-button" type="submit">Login</button>
         </form>
+<<<<<<< HEAD
 
           {#if user}
           <div class="user-info">
@@ -118,6 +127,15 @@
           </div>
           {/if}
 
+=======
+          <div class="social-login">
+            <p>Or Sign In With:</p>
+            <div class="social-icons">
+              <img src="src/lib/components/images/google-icon.png" alt="Google" />
+              <img src="src/lib/components/images/facebook-icon.png" alt="Facebook" />
+            </div>
+          </div>
+>>>>>>> Ishita
           <p class="signup">
             <!-- No Account? <a href="/signup" on:click={() => goto("/signup")}>Sign Up</a> -->
            No Account? <a href="/signup" rel="external">Sign Up</a>

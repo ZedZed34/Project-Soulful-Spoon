@@ -1,4 +1,5 @@
 <script>
+<<<<<<< HEAD
   //commented out for now to view css and html (couldnt work if i did not comment out)
   //import { user } from "../../../lib/components/user.js";
   import { SIGNUP_URL } from "../../../lib/js/api-urls.js";
@@ -8,6 +9,17 @@
   import {onMount} from "svelte";
 
   let user = null;
+=======
+    //commented out for now to view css and html (couldnt work if i did not comment out)
+    //import { goto } from "$app/navigation";
+    //import { user } from "../../../lib/components/user.js";
+    //import { SIGNUP_URL } from "../../../lib/js/api-urls.js";
+    import "$lib/css/signup.css";  
+	import { goto } from "$app/navigation";
+  
+
+
+>>>>>>> Ishita
   let username = "";
   let firstName = "";
   let lastName = "";
@@ -21,6 +33,12 @@
   let passwordMatchError = false;
   let usernameTakenError = false;
   let emailTakenError = false;
+<<<<<<< HEAD
+=======
+  let images = ["/src/lib/components/images/pp-jaguar.png", "/src/lib/components/images/pp-parrot.png", "/src/lib/components/images/pp-panda.png","/src/lib/components/images/pp-turtle.png", "/src/lib/components/images/pp-butterfly.png", "/src/lib/components/images/pp-jacutinga.png"];
+  let currentImage = 0;
+  let selectedImage = images[currentImage];
+>>>>>>> Ishita
 
   let images = ["/src/lib/components/images/pp-jaguar.png", "/src/lib/components/images/pp-parrot.png", "/src/lib/components/images/pp-panda.png","/src/lib/components/images/pp-turtle.png", "/src/lib/components/images/pp-butterfly.png", "/src/lib/components/images/pp-jacutinga.png"];
   
@@ -79,6 +97,7 @@
     if(fileInput){
       fileInput.value = "";
     }
+<<<<<<< HEAD
   }
 
   // profile picture - file upload
@@ -87,7 +106,18 @@
     if(file){
       selectedImage = URL.createObjectURL(file);
     }
+=======
+
+>>>>>>> Ishita
   }
+
+  function handleFileUpload(event){
+    const file = event.target.files[0];
+    if(file){
+      selectedImage = URL.createObjectURL(file);
+    }
+  }
+
 
   async function handleSignup() {
     error = false;
@@ -95,11 +125,17 @@
     usernameTakenError = false;
     emailTakenError = false;
 
+<<<<<<< HEAD
     // Validate that birthday is chosen
     // if (!birthday) {
     //   error = true;
     //   return;
     // }
+=======
+
+
+  
+>>>>>>> Ishita
 
     const response = await fetch(SIGNUP_URL, {
     method: "POST",
@@ -151,7 +187,11 @@
 </script>
 
 <svelte:head>
+<<<<<<< HEAD
   <!-- <link rel="preload" href="/login"> -->
+=======
+  <link rel="preload" href="/login">
+>>>>>>> Ishita
   <title>Sign Up</title>
 </svelte:head>
 
@@ -162,8 +202,12 @@
   <div class="signup-image"></div>
   <!-- sign up form -->
   <div class="signup-form">
+<<<<<<< HEAD
     <!-- <button class="close-button" on:click={() => goto('/')}>x</button> -->
     <button class="close-button" on:click={() => window.location.href = "/"}>x</button>
+=======
+    <button class="close-button" on:click={() => goto('/')}>x</button>
+>>>>>>> Ishita
     <h2>Create Account</h2>
     <form on:submit|preventDefault={handleSignup}>
       
@@ -245,6 +289,7 @@
       <!-- signup button -->
       <button id="signup-button" type="submit">Sign Up</button>
     </form>
+<<<<<<< HEAD
 
     {#if user}
       <div class="user-info">
@@ -264,6 +309,16 @@
     </div>
     {/if}
 
+=======
+  
+    <div class="social-login">
+      <p>Or Sign Up With:</p>
+      <div class="social-icons">
+        <img src="src/lib/components/images/google-icon.png" alt="Google" />
+        <img src="src/lib/components/images/facebook-icon.png" alt="Facebook" />
+      </div>
+    </div>
+>>>>>>> Ishita
     <!-- login redirect -->
      <div class="login">
       <p>Already Have an Account?

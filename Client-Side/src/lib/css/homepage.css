@@ -1,9 +1,14 @@
 /**** Navbar Styling ****/
+<<<<<<< HEAD
 html, body{
     font-family: sans-serif;
     height: 100;
     display: flex;
     flex-direction: column;
+=======
+body{
+    font-family: sans-serif;
+>>>>>>> Ishita
 }
 
 .navbar {
@@ -17,7 +22,10 @@ html, body{
     z-index: 10;
   }
   
+<<<<<<< HEAD
   /* logo souful spoon */
+=======
+>>>>>>> Ishita
   .logo-container {
     display: flex;
     align-items: center;
@@ -37,6 +45,7 @@ html, body{
     color: darkolivegreen;
   }
 
+<<<<<<< HEAD
   /* search bar */
 .search-container {
   display: flex;
@@ -69,12 +78,17 @@ html, body{
   margin-top: 10px;
 }
 
+=======
+>>>>>>> Ishita
   /**** nav buttons ****/
   .nav-buttons {
     list-style: none;
     display: flex;
     align-items: center;
+<<<<<<< HEAD
     font-weight: normal;
+=======
+>>>>>>> Ishita
     gap: 2rem;
     margin: 0;
     padding: 0;
@@ -88,7 +102,11 @@ html, body{
   .nav-buttons a {
     text-decoration: none;
     color: darkolivegreen;
+<<<<<<< HEAD
     font-weight: normal;
+=======
+    font-weight: 500;
+>>>>>>> Ishita
     padding: 0.5rem 1rem;
     display: inline-block;
     transition: color 0.3s ease;
@@ -134,15 +152,22 @@ html, body{
     transform: scale(1.1);
   }
    
+<<<<<<< HEAD
   /* main title */
+=======
+  /* main */
+>>>>>>> Ishita
   main {
     padding: 1rem;
     text-align: center;
   }
 
+<<<<<<< HEAD
 
 /* dropdown box for recipes */
 
+=======
+>>>>>>> Ishita
   .dropdown {
     position: relative;
   }
@@ -194,6 +219,7 @@ html, body{
     transform: translateY(0);
   } 
 
+<<<<<<< HEAD
   /* filter button styling */
   .search-filter-container {
     display: flex;
@@ -203,6 +229,12 @@ html, body{
   }
   .filter-box {
     position: relative;
+=======
+  .filter-box {
+    position: relative;
+    display: inline-block;
+    margin: 1rem;
+>>>>>>> Ishita
   }
 
   .filter-button {
@@ -214,7 +246,10 @@ html, body{
     cursor: pointer;
     border-radius: 4px;
     transition: background-color 0.3s ease;
+<<<<<<< HEAD
     align-items: center;
+=======
+>>>>>>> Ishita
   }
 
   .filter-button:hover {
@@ -272,8 +307,11 @@ html, body{
     transition: transform 0.3s ease;
   }
 
+<<<<<<< HEAD
   /* images styles and hover and pop text */
 
+=======
+>>>>>>> Ishita
   .imagetext img {
     width: 100%;
     height: 250px;
@@ -314,6 +352,7 @@ html, body{
     font-size: 1rem;
     font-weight: bold;
   }
+<<<<<<< HEAD
   
   /* profile dropdown */
 .profile-dropdown {
@@ -453,3 +492,6 @@ html, body{
   transform: scale(1.1);
   opacity: 0.8;
 }
+=======
+  
+>>>>>>> Ishita
