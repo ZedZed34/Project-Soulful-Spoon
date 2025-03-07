@@ -305,7 +305,7 @@ body{
 }
 
 .contact-item a:hover {
-  color: darkolivegreen;
+  color: white;
 }
 
 /* contact form */
@@ -339,3 +339,4 @@ body{
 
 .contact-form button:hover {
   background-color: white;
+}

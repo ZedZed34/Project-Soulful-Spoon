@@ -67,4 +67,10 @@ CREATE TABLE IF NOT EXISTS recipes (
     link TEXT NOT NULL
 );
 
-
+CREATE TABLE IF NOT EXISTS messages (
+     id INTEGER PRIMARY KEY AUTOINCREMENT,
+     name TEXT NOT NULL,
+     email TEXT NOT NULL,
+     message TEXT not NULL,
+     date_sent TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

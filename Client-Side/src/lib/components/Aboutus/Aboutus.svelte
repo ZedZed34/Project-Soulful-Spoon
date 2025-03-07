@@ -2,6 +2,34 @@
     import '$lib/css/aboutus.css'; 
     import logo from '$lib/components/images/Logo.png'; 
     import profileicon from '$lib/components/images/profileicon.jpg'
+	import { isSignInWithEmailLink } from 'firebase/auth';
+	import Page from '../../../routes/+page.svelte';
+
+    let name = "";
+    let email = "";
+    let message = "";
+    let successMessage = "";
+    let errorMessage = "";
+
+    async function sendMessage(event) {
+        event.preventDefault();
+
+        const respone = await fetch("http://localhost:5173/api/messages/send-message", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({name, email, message})
+        });
+
+        const data = await respone.json();
+        if(respone.ok) {
+            successMessage = "Message sent successfully!";
+            name = email = message = "";
+        } else {
+            errorMessage = data.error || "Failed to send message,";
+        }
+    }
 </script>
 
 <div>
@@ -86,11 +114,17 @@
     </div>
     <div class="contact-form">
         <h3> 💬 Send Us a Message</h3>
-        <form>
-            <input type="text" placeholder="Your Name" required />
-            <input type="email" placeholder="Your Email" required />
-            <textarea placeholder="Your Message" rows="5" required />
+            <form on:submit={sendMessage}>
+            <input type="text" bind:value={name} placeholder="Your Name" required />
+            <input type="email" bind:value={email} placeholder="Your Email" required />
+            <textarea bind:value={message} placeholder="Your Message" rows="5" required></textarea>
             <button type="submit">Send Message</button>
+            {#if successMessage}
+            <p class="success-massage">{successMessage}</p>
+            {/if}
+            {#if errorMessage}
+            <p class="error-message">{errorMessage}</p>
+            {/if}
         </form>
     </div>
 </section>

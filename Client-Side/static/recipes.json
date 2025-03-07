@@ -3,7 +3,7 @@
     {
         "id": "salmon-quinoa-bowl",
         "article_title": "Salmon Quinoa Bowl",
-        "article_content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras fringilla tellus mauris. Integer congue eros ex, ut condimentum ipsum egestas quis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In interdum condimentum turpis, sit amet posuere ex pharetra in. Duis sollicitudin nibh lobortis fringilla pharetra. Vestibulum mollis ligula ut diam iaculis, vel pellentesque metus tristique. Donec egestas massa lacus, a accumsan lacus semper sed. Integer imperdiet turpis ac dapibus cursus. Donec ac molestie est.",
+        "article_content": "A vibrant, healthy quinoa bowl with spiced jerk salmon, fresh vegetables, and a tangy mango vinaigrette.",
         "username": "Sarah", 
         "likes": 20,
         "dislikes": 0,
@@ -14,7 +14,7 @@
     {
         "id": "prawn-spagetti",
         "article_title": "Prawn Spagetti",
-        "article_content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras fringilla tellus mauris. Integer congue eros ex, ut condimentum ipsum egestas quis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In interdum condimentum turpis, sit amet posuere ex pharetra in. Duis sollicitudin nibh lobortis fringilla pharetra. Vestibulum mollis ligula ut diam iaculis, vel pellentesque metus tristique. Donec egestas massa lacus, a accumsan lacus semper sed. Integer imperdiet turpis ac dapibus cursus. Donec ac molestie est.",
+        "article_content": "A delicious, nutritious prawn spaghetti dish with rich tomato sauce and fresh herbs for an easy seafood meal.",
         "username": "Alex", 
         "likes": 10,
         "dislikes": 10,
@@ -25,10 +25,10 @@
     {
         "id": "banana-oatmeal-pancakes",
         "article_title": "Banana Oatmeal Pancakes",
-        "article_content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras fringilla tellus mauris. Integer congue eros ex, ut condimentum ipsum egestas quis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In interdum condimentum turpis, sit amet posuere ex pharetra in. Duis sollicitudin nibh lobortis fringilla pharetra. Vestibulum mollis ligula ut diam iaculis, vel pellentesque metus tristique. Donec egestas massa lacus, a accumsan lacus semper sed. Integer imperdiet turpis ac dapibus cursus. Donec ac molestie est.",
+        "article_content": "Grain-free and dairy-free pancakes made with ripe bananas, eggs, and almond butter for a healthy breakfast option.",
         "username": "Ben", 
         "likes": 80,
-        "dislikes": 10,
+        "dislikes": 5,
         "date_published": "2025-04-05",
         "image_path": "/src/lib/components/images/BananaOatmealPancakes.jpg"
     },
@@ -36,12 +36,11 @@
     {
         "id": "sticky-ginger-sesame-chicken",
         "article_title": "Sticky Ginger Sesame Chicken",
-        "article_content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras fringilla tellus mauris. Integer congue eros ex, ut condimentum ipsum egestas quis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In interdum condimentum turpis, sit amet posuere ex pharetra in. Duis sollicitudin nibh lobortis fringilla pharetra. Vestibulum mollis ligula ut diam iaculis, vel pellentesque metus tristique. Donec egestas massa lacus, a accumsan lacus semper sed. Integer imperdiet turpis ac dapibus cursus. Donec ac molestie est.",
+        "article_content": "A quick and flavourful sheet pan chicken dish with a sticky ginger sesame sause and roasted vegetables.",
         "username": "John", 
         "likes": 10,
         "dislikes": 0,
         "date_published": "2025-03-30",
         "image_path": "/src/lib/components/images/StickyGingerSesameChicken.jpg"
     }
-
 ]
