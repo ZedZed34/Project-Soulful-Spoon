@@ -126,8 +126,7 @@
 
     <div class="action-buttons">
     <!-- lined to publish article page (change to actual one) -->
-    <button class="add-button" title="Add New" on:click={() => window.location.href='/Articlepublish'}>+</button>
-        <img src={profileicon} alt="Profile" class="profile-icon" />
+    <button class="add-button" title="Add New" on:click={() => window.location.href='/mockarticlepublish'}>+</button>
 
  <!-- profile dropdown login.signup -->
  <div class="profile-dropdown">
