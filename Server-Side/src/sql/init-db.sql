@@ -59,4 +59,12 @@ CREATE TABLE likes (
 
 -- Insert initial values
 
+-- FOR RECIPES PAGE AFTER CLICKING IMAGE
+CREATE TABLE IF NOT EXISTS recipes (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL,
+    image_path TEXT NOT NULL,
+    link TEXT NOT NULL
+);
+
 
