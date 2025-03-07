@@ -35,12 +35,6 @@
         <li><a href="/Aboutus">About us</a></li>
     </ul>
 
-    <!-- <div class="action-buttons">
-    <button class="add-button" title="Add New">+</button>
-        <img src={profileicon} alt="Profile" class="profile-icon" />
-    </div>
-</nav> -->
-
 <div class="action-buttons">
     <!-- lined to publish article page (change to actual one) -->
     <button class="add-button" title="Add New" on:click={() => window.location.href='/mockarticlepublish'}>+</button>
@@ -57,7 +51,8 @@
 </div>
 </nav>
 
- <h1>About Soulful Spoon</h1>
+<section class="about-section">
+ <h2>About Soulful Spoon</h2>
  <p>Welcome to Soulful Spoon! We are a team dedicated to making healthy eating accessible, enjoyable, and inclusive</p>
 
  <h2>Our Mission</h2>
@@ -70,3 +65,32 @@
     <li>💡 **Educational Content** - Articles, tips, and nutritional insights to make informed food choices.</li>
     <li>👨‍👩‍👧‍👦 **Community-Driven** - A space where users can share thier recipes, review recipes and connect with like-minded individuals.</li>
 </ul>
+</section>
+
+<section class="contact-section">
+    <div class="contact-container">
+        <h2>📩 Get in Touch</h2>
+        <p>Have questions, suggestions, or just want to say hello? We'd look to hear from you! 
+            Feel free to reach us to us using the contact details below.
+        </p>
+        <div class="contact-info">
+            <div class="contact-item">
+                <h2>📧 Email Us</h2>
+                <p><a href="mailto:soulfulspoon89@gmail.com">soulfulspoon89@gmail.com</a></p>
+            </div>
+            <div class="contact-item">
+                <h3>📍Our Location</h3>
+                <p>Singapore</p>
+            </div>
+        </div>
+    </div>
+    <div class="contact-form">
+        <h3> 💬 Send Us a Message</h3>
+        <form>
+            <input type="text" placeholder="Your Name" required />
+            <input type="email" placeholder="Your Email" required />
+            <textarea placeholder="Your Message" rows="5" required />
+            <button type="submit">Send Message</button>
+        </form>
+    </div>
+</section>
