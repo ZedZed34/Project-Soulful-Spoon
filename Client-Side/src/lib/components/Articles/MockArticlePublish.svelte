@@ -27,7 +27,7 @@
     let success = false;
 
     let showLoginPopup = false;
-    let ifAuthenticated = true; //change 
+    let ifAuthenticated = false; //change 
     
     if (!ifAuthenticated){
         showLoginPopup = true;
