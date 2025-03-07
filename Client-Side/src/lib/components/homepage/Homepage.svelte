@@ -129,7 +129,7 @@
             </ul>
         </li>
         <li><a href="/Tips&tricks">Tips & Tricks</a></li>
-        <li><a href="/About us">About us</a></li>
+        <li><a href="/Aboutus">About us</a></li>
     </ul>
 
     <div class="action-buttons">
@@ -143,6 +143,7 @@
     <ul class="dropdown-menu">
         {#if isAuthenticated}
         <li><a href="Articlepublish">Articlepublish</a></li>
+        <li><a href="/profile">Profile</a></li>
         <li><a href="/#" on:click={handleSignOut}>Sign Out</a></li>
         {:else}
         <li><a href="/login" rel="external">Login</a></li>
@@ -152,8 +153,6 @@
  </div>
 </div>
 </nav>
-
-
 
 <!-- search bar -->
 <div class="search-filter-container">

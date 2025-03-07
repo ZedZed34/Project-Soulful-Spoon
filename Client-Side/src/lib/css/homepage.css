@@ -17,7 +17,6 @@ html, body{
     z-index: 10;
   }
   
-  /* logo souful spoon */
   .logo-container {
     display: flex;
     align-items: center;
@@ -142,57 +141,40 @@ html, body{
 
 
 /* dropdown box for recipes */
+.dropdown {
+  position: relative;
+}
 
-  .dropdown {
-    position: relative;
-  }
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: navy;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  list-style: none;
+  padding: 1rem;
+  border-radius: 4px;
+  top: 100%;
+  z-index: 20;
+  min-width: 200px;
+}
 
-  .dropdown a {
-    text-decoration: none;
-    color: darkolivegreen;
-    padding: 0.5rem;
-    display: inline-block;
-    font-weight: bold;
-  }
+.dropdown-content li {
+  padding: 0.5rem 0;
+}
 
-  .dropdown-content {
-    position: absolute;
-    background-color: white;
-    left: 0;
-    opacity: 0;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    list-style: none;
-    padding: 0.5rem 0;
-    margin: 0;
-    border-radius: 4px;
-    visibility: hidden;
-    transform: translateY(10px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    top: 100%;
-    z-index: 20;
-    min-width: 200px;
-  }
+.dropdown-content li a {
+  text-decoration: none;
+  color: darkolivegreen;
+  display: block;
+}
 
-  .dropdown-content li {
-    padding: 0.5rem 0;
-  }
+.dropdown-content li a:hover  {
+  color: navy;
+}
 
-  .dropdown-content li a {
-    text-decoration: none;
-    color: darkolivegreen;
-    display: block;
-    transition: background-color 0.2s ease;
-  }
-
-  .dropdown-content li a:hover  {
-    color: darkolivegreen;
-  }
-
-  .dropdown:hover .dropdown-content {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  } 
+.dropdown:hover .dropdown-content {
+  display:block;
+} 
 
   /* filter button styling */
   .search-filter-container {
