@@ -1,6 +1,6 @@
 
 <script>
-     import '$lib/css/homepage.css'; //import homepage styles
+    import '$lib/css/homepage.css'; //import homepage styles
     import logo from '$lib/components/images/Logo.png'; 
     import profileicon from '$lib/components/images/profileicon.jpg'
     import SalmonQuinoaBowl from '$lib/components/images/SalmonQuinoaBowl.jpg';
@@ -31,7 +31,11 @@
         selectedCourse = "";
         selectedDiet = "";
         filteredImages = images;
+
+    document.querySelectorAll('input[name="course"]'),forEach((el) => el.checked = false);
+    document.querySelectorAll('input[name="diet"]'),forEach((el) => el.checked = false);
     }
+    
     
     onMount (() => {
         auth.onAuthStateChanged((u) => {
@@ -181,6 +185,8 @@
             <li><input type="radio" name="diet" bind:group={selectedDiet}  value="dairyfree" on:change={handleSearch}/> <label for="dairyFree">Dairy Free</label></li>
             <li><input type="radio" name="diet" bind:group={selectedDiet}  value="glutenfree" on:change={handleSearch}/> <label for="glutenFree">Gluten Free</label></li>
         </ul>
+        <!-- clear button -->
+         <button class="clear-button" on:click={clearFilters}>Clear All</button>
     </div>
  </div>
     <div class="search-container">

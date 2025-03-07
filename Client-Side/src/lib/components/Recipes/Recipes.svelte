@@ -37,6 +37,10 @@
     import CheeseSticks from '$lib/components/images/cheesesticks.jpg';
     import SweetPotatoWedges from '$lib/components/images/potatowedges.jpg';
     import BananaSmoothie from '$lib/components/images/BananaSmoothie.jpg';
+    import facebooklogo from '$lib/components/images/facebooklogo.png';
+    import instalogo from '$lib/components/images/instalogo.png';
+    import xlogo from '$lib/components/images/xlogo.png';
+    import whatsapplogo from '$lib/components/images/whatsapplogo.png';
 
 
     // importing the javascript to recipe.js
@@ -118,7 +122,7 @@
             </ul>
         </li>
         <li><a href="/Tips&tricks">Tips & Tricks</a></li>
-        <li><a href="/About us">About us</a></li>
+        <li><a href="/About us">Aboutus</a></li>
     </ul>
 
     <!-- <div class="action-buttons">
@@ -251,3 +255,40 @@
     </div>
 </section>
 
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-container">
+        <!-- logo and about us  -->
+         <div class="footer-column">
+            <img src={logo} alt="Soulful Spoon Logo" class="footer-logo">
+            <p class="footer-about">Discover delicious recipes, tips and tricks for a healthier lifestyle.</p>
+         </div>
+         <!-- links for quick acess -->
+          <div class="footer-column">
+            <h4>Quick Links</h4>
+            <ul class="footer-links">
+                <li><a href="/Recipepage">Recipes</a></li>
+                <li><a href="/Tips&tricks">Tips & Tricks</a></li>
+                <li><a href="/About us">Aboutus</a></li>
+            </ul>
+          </div>
+          <!-- social media -->
+           <div class="footer-column">
+            <h4>Follow us!</h4>
+            <div class="social-icons">
+                <a href="/#" class="social-link">
+                    <img src={facebooklogo} alt="Facebook">
+                </a>
+                <a href="/#" class="social-link">
+                    <img src={instalogo} alt="Instagram">
+                </a>
+                <a href="/#" class="social-link">
+                    <img src={xlogo} alt="X">
+                </a>
+                <a href="/#" class="social-link">
+                    <img src={whatsapplogo} alt="Whatsapp">
+                </a>
+            </div>
+        </div>
+    </div>
+ </footer>
