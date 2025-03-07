@@ -74,6 +74,8 @@
     </div>
  </div>
 
+ <h4>Kitchen</h4>
+
  <section class="video-container">
     <h4>Cooking Tips & Tricks</h4>
     <div class="video-wrapper">
