@@ -1,5 +1,4 @@
 <script>
-<<<<<<< HEAD
     import '$lib/css/tips&tricks.css'; //import homepage styles
     import logo from '$lib/components/images/Logo.png'; 
     import profileicon from '$lib/components/images/profileicon.jpg'
@@ -14,24 +13,13 @@
     <script src="https://files.bpcontent.cloud/2025/02/25/06/20250225063934-HGA74MAU.js"></script>
 </div>
 
-=======
-    import '$lib/css/tips-tricks.css'; //import homepage styles
-    import logo from '$lib/components/images/Logo.png'; 
-    import profileicon from '$lib/components/images/profileicon.jpg'
-</script>
-
->>>>>>> Ishita
 
 <!-- Navbar -->
 <nav class="navbar">
     <div class="logo-container">
-<<<<<<< HEAD
     <a href="/#">
         <img src={logo} alt="Soulful Spoon Logo" class="logo" />
     </a>
-=======
-        <img src={logo} alt="Soulful Spoon Logo" class="logo" />
->>>>>>> Ishita
         <span class="site">Soulful Spoon</span>
     </div>
     <ul class="nav-buttons">
@@ -49,11 +37,7 @@
             </ul>
         </li>
         <li><a href="/Tips&tricks">Tips & Tricks</a></li>
-<<<<<<< HEAD
         <li><a href="/Aboutus">About us</a></li>
-=======
-        <li><a href="/About us">About us</a></li>
->>>>>>> Ishita
     </ul>
 
     <div class="action-buttons">
@@ -62,18 +46,8 @@
     </div>
 </nav>
 
-<<<<<<< HEAD
 <!-- Filters -->
 <div class="filter-box">
-=======
-<main>
-    <h1>Welcome to Soulful Spoon</h1>
-
-</main>
-
-<!-- Filters -->
- <div class="filter-box">
->>>>>>> Ishita
     <button class="filter-button">
         Filter Options ⇩
     </button>
@@ -98,7 +72,6 @@
             <li><input type="radio" name="course" /> <label for="glutenFree">Gluten Free</label></li>
         </ul>
     </div>
-<<<<<<< HEAD
  </div>
 
  <h4>Kitchen</h4>
@@ -149,6 +122,3 @@
         </div>
     </div>
  </footer>
-=======
- </div>
->>>>>>> Ishita

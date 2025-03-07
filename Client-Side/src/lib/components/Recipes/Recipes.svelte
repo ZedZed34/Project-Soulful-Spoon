@@ -99,7 +99,9 @@
 <!-- Navbar -->
 <nav class="navbar">
     <div class="logo-container">
-        <img src={logo} alt="Soulful Spoon Logo" class="logo" />
+        <a href="/">
+            <img src={logo} alt="Soulful Spoon Logo" class="logo" />
+        </a>
         <span class="site">Soulful Spoon</span>
     </div>
     <ul class="nav-buttons">

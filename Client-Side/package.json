@@ -30,12 +30,8 @@
 		"vite": "^6.0.0"
 	},
 	"dependencies": {
-<<<<<<< HEAD
 		"@botpress/webchat": "2.3",
 		"@tinymce/tinymce-svelte": "^3.0.0",
 		"firebase": "^11.3.1"
-=======
-		"@botpress/webchat": "2.3"
->>>>>>> Ishita
 	}
 }

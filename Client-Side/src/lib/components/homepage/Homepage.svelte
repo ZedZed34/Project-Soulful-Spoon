@@ -116,7 +116,7 @@
     </div>
     <ul class="nav-buttons">
         <li class="dropdown">
-            <a href="#/">Recipes</a>
+            <a href="/recipes">Recipes</a>
             <ul class="dropdown-content">
             <li><a href="/breakfast">Breakfast</a></li>
             <li><a href="/lunch">Lunch</a></li>

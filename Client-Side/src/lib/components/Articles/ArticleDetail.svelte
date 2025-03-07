@@ -423,7 +423,6 @@
                         <!-- replies -->
                         {#each comment.replies.slice(0, visibileReplies[comment.id] ? comment.replies.length : 2) as reply (reply.id)}
                             <div class="reply">
-                                <img src={reply.profilePic} alt="Profile Picture" class="reply-profile-picture"/>
                                 <div class="reply-content">
                                     <strong class="comment-username">{reply.username}</strong>
                                     <p class="comment-text">{reply.text}</p>
