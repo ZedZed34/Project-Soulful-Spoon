@@ -15,6 +15,7 @@
     import instalogo from '$lib/components/images/instalogo.png';
     import xlogo from '$lib/components/images/xlogo.png';
     import whatsapplogo from '$lib/components/images/whatsapplogo.png';
+    import Userdashboard from '../Userdashboard/Userdashboard.svelte';
     import {auth, logout} from '$lib/firebase';
 
     import { onMount } from 'svelte'; //added
@@ -203,7 +204,10 @@
 
  <main>
     <h1>Welcome to Soulful Spoon</h1>
-
+    <!-- only show when authenticated -->
+     <!-- {#if isAuthenticated} -->
+     <!-- <Userdashboard/> -->
+    <!-- {/if} -->
 </main>
 
 <section class="image-layout">
