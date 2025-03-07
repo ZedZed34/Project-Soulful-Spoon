@@ -25,6 +25,14 @@
     let isAuthenticated = false;
     let user = null;
 
+
+    function clearFilters() {
+        searchQuery = "";
+        selectedCourse = "";
+        selectedDiet = "";
+        filteredImages = images;
+    }
+    
     onMount (() => {
         auth.onAuthStateChanged((u) => {
             if (u) {

@@ -305,7 +305,9 @@
 <!-- Navbar -->
 <nav class="navbar">
     <div class="logo-container">
-        <img src={logo} alt="Soulful Spoon Logo" class="logo" />
+        <a href="/#">
+            <img src={logo} alt="Soulful Spoon Logo" class="logo" />
+        </a>
         <span class="site">Soulful Spoon</span>
     </div>
     <ul class="nav-buttons">
@@ -395,7 +397,7 @@
             <ul class="comments-list">
                 {#each comments.slice(0, visibleComments) as comment (comment.id)}
                 <li class="comment">
-                    <img src={comment.profilePic} alt="Profile Picture" class="profile-picture"/>
+                    <!-- <img src={comment.profilePic} alt="Profile Picture" class="profile-picture"/> -->
                     <div class="comment-content">
                         <strong class="comment-username">{comment.username}</strong>
                         <p class="comment-text">{comment.text}</p>
