@@ -64,7 +64,7 @@
             (searchQuery === "" ||
                 image.text.toLowerCase().includes(searchQuery.toLowerCase()) ||
                 image.course.some(c => c.toLowerCase().includes(searchQuery.toLowerCase())) ||
-                image.diet.some(d => d.toLowerCase(),includes(searchQuery.toLowerCase()))
+                image.diet.some(d => d.toLowerCase().includes(searchQuery.toLowerCase()))
     
         ) &&
         (selectedCourse === "" || image.course.includes(selectedCourse)) &&
