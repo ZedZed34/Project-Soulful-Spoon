@@ -24,7 +24,7 @@
     </div>
     <ul class="nav-buttons">
         <li class="dropdown">
-            <a href="#/">Recipes</a>
+            <a href="/recipes">Recipes</a>
             <ul class="dropdown-content">
             <li><a href="/breakfast">Breakfast</a></li>
             <li><a href="/lunch">Lunch</a></li>
@@ -37,13 +37,29 @@
             </ul>
         </li>
         <li><a href="/Tips&tricks">Tips & Tricks</a></li>
-        <li><a href="/Aboutus">About us</a></li>
+        <li><a href="/Aboutus">Aboutus</a></li>
     </ul>
 
-    <div class="action-buttons">
+    <!-- <div class="action-buttons">
     <button class="add-button" title="Add New">+</button>
         <img src={profileicon} alt="Profile" class="profile-icon" />
     </div>
+</nav> -->
+
+<div class="action-buttons">
+    <!-- lined to publish article page (change to actual one) -->
+    <button class="add-button" title="Add New" on:click={() => window.location.href='/mockarticlepublish'}>+</button>
+
+ <!-- profile dropdown login.signup -->
+ <div class="profile-dropdown">
+    <img src={profileicon} alt="Profile" class="profile-icon"/>
+    
+    <ul class="dropdown-menu">
+        <li><a href="/login" rel="external">Login</a></li>
+        <li><a href="/signup"rel="external">Sign Up</a></li>
+    </ul>
+ </div>
+</div>
 </nav>
 
 <!-- Filters -->

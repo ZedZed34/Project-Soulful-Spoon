@@ -35,10 +35,26 @@
         <li><a href="/Aboutus">About us</a></li>
     </ul>
 
-    <div class="action-buttons">
+    <!-- <div class="action-buttons">
     <button class="add-button" title="Add New">+</button>
         <img src={profileicon} alt="Profile" class="profile-icon" />
     </div>
+</nav> -->
+
+<div class="action-buttons">
+    <!-- lined to publish article page (change to actual one) -->
+    <button class="add-button" title="Add New" on:click={() => window.location.href='/mockarticlepublish'}>+</button>
+
+ <!-- profile dropdown login.signup -->
+ <div class="profile-dropdown">
+    <img src={profileicon} alt="Profile" class="profile-icon"/>
+    
+    <ul class="dropdown-menu">
+        <li><a href="/login" rel="external">Login</a></li>
+        <li><a href="/signup"rel="external">Sign Up</a></li>
+    </ul>
+ </div>
+</div>
 </nav>
 
  <h1>About Soulful Spoon</h1>
