@@ -19,8 +19,8 @@
     let selectedCourse = [];
     let selectedDiet = [];
 
-    let courseOptions = ["Breakfast", "Lunch", "Dinner", "Snack", "Dessert"]
-    let dietOptions = ["Vegan", "Halal", "Gluten-Free", "Keto", "Vegetarian"]
+    let courseOptions = ["Breakfast", "Lunch", "Dinner", "Bites", "Dessert", "High Protein", "Baking"]
+    let dietOptions = ["Vegan", "Vegetarian", "Halal", "Gluten Free", "Dairy Free"]
 
 
     // let error = false;
