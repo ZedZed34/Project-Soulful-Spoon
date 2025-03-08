@@ -3,6 +3,7 @@
     import { POST_URL } from "$lib/js/api-urls.js";
     import Editor from '@tinymce/tinymce-svelte';
     
+    
       export let data;
     let article_title = "";
     let article_content = "";

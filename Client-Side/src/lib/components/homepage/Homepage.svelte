@@ -26,27 +26,25 @@
     let selectedDiet = "";
     let isAuthenticated = false;
     let user = null;
-    let isDarkMode = false; //light mode default
+    // let isDarkMode = false; //light mode default
 
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme) {
-        isDarkMode = savedTheme === "dark";
-        applyTheme();
-    }
+    // const savedTheme = localStorage.getItem("theme");
+    // if (savedTheme) {
+    //     isDarkMode = savedTheme === "dark";
+    //     applyTheme();
+    // }
 
-    //toggle light and dark mode
-    function toggleTheme() {
-        isDarkMode = !isDarkMode;
-        localStorage.setItem("theme", isDarkMode ? "dark" : "light");
-        applyTheme();
-    }
+    // //toggle light and dark mode
+    // function toggleTheme() {
+    //     isDarkMode = !isDarkMode;
+    //     localStorage.setItem("theme", isDarkMode ? "dark" : "light");
+    //     applyTheme();
+    // }
 
-    //applying theme 
-    function applyTheme() {
-        document.documentElement.classList.toggle("dark-mode", isDarkMode);
-    }
-
-
+    // //applying theme 
+    // function applyTheme() {
+    //     document.documentElement.classList.toggle("dark-mode", isDarkMode);
+    // }
 
 
     function clearFilters() {
@@ -55,8 +53,8 @@
         selectedDiet = "";
         filteredImages = images;
 
-    document.querySelectorAll('input[name="course"]'),forEach((el) => el.checked = false);
-    document.querySelectorAll('input[name="diet"]'),forEach((el) => el.checked = false);
+    document.querySelectorAll('input[name="course"]').forEach((el) => el.checked = false);
+    document.querySelectorAll('input[name="diet"]').forEach((el) => el.checked = false);
     }
     
     
@@ -136,7 +134,7 @@
 <!-- Navbar -->
 <nav class="navbar">
     <div class="logo-container">
-    <a href="/">
+        <a href="/" rel="external">
         <img src={logo} alt="Soulful Spoon Logo" class="logo" />
     </a>
         <span class="site">Soulful Spoon</span>
@@ -160,12 +158,12 @@
         <li><a href="/Userdashboard">⚙️</a></li>
     </ul>
 
-    <div class="action-buttons">
+    <!-- <div class="action-buttons">  -->
         <!-- toggle -->
-         <button class="theme-toggle" on:click={toggleTheme}>
+          <!-- <button class="theme-toggle" on:click={toggleTheme}>
             {isDarkMode ? "🌙 Dark Mode" : " 🔆Light Mode"}
          </button>
-    </div>
+    </div>  -->
 
     <div class="action-buttons">
     <!-- lined to publish article page (change to actual one) -->
@@ -234,14 +232,18 @@
  </div>
  </div>
 
- <main class={isDarkMode ? "dark-mode" : ""}>
+ <!-- <main class={isDarkMode ? "dark-mode" : ""}>
     <h2>Welcome to Soulful Spoon</h2>
-    <!-- only show when authenticated
+     only show when authenticated
      {#if isAuthenticated}
      <Userdashboard/>
      {:else}
      <p>Please log in to view your profile.</p>
     {/if} -->
+<!-- </main> -->
+
+<main>
+    <h2>Welcome to Soulful Spoon</h2>
 </main>
 
 <section class="image-layout">

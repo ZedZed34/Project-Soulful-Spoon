@@ -12,25 +12,25 @@
     let showMore = false;
     let showMoreScraper = false;
 
-    let isDarkMode = false; //light mode default
+   // let isDarkMode = false; //light mode default
 
-const savedTheme = localStorage.getItem("theme");
-if (savedTheme) {
-    isDarkMode = savedTheme === "dark";
-    applyTheme();
-}
+// const savedTheme = localStorage.getItem("theme");
+// if (savedTheme) {
+//     isDarkMode = savedTheme === "dark";
+//     applyTheme();
+// }
 
-//toggle light and dark mode
-function toggleTheme() {
-    isDarkMode = !isDarkMode;
-    localStorage.setItem("theme", isDarkMode ? "dark" : "light");
-    applyTheme();
-}
+// //toggle light and dark mode
+// function toggleTheme() {
+//     isDarkMode = !isDarkMode;
+//     localStorage.setItem("theme", isDarkMode ? "dark" : "light");
+//     applyTheme();
+// }
 
-//applying theme 
-function applyTheme() {
-    document.documentElement.classList.toggle("dark-mode", isDarkMode);
-}
+// //applying theme 
+// function applyTheme() {
+//     document.documentElement.classList.toggle("dark-mode", isDarkMode);
+// }
 </script>
 
 <div>
@@ -42,7 +42,7 @@ function applyTheme() {
 <!-- Navbar -->
 <nav class="navbar">
     <div class="logo-container">
-    <a href="/#">
+        <a href="/" rel="external">
         <img src={logo} alt="Soulful Spoon Logo" class="logo" />
     </a>
         <span class="site">Soulful Spoon</span>
@@ -62,15 +62,15 @@ function applyTheme() {
             </ul>
         </li>
         <li><a href="/Tips&tricks">Tips & Tricks</a></li>
-        <li><a href="/Aboutus">Aboutus</a></li>
+        <li><a href="/Aboutus">About us</a></li>
     </ul>
 
-    <div class="action-buttons">
-        <!-- toggle -->
-         <button class="theme-toggle" on:click={toggleTheme}>
+    <!-- <div class="action-buttons">
+       toggle -->
+         <!-- <button class="theme-toggle" on:click={toggleTheme}>
             {isDarkMode ? "🌙 Dark Mode" : " 🔆Light Mode"}
          </button>
-    </div>
+    </div> --> 
 
 <div class="action-buttons">
     <!-- lined to publish article page (change to actual one) -->
@@ -154,7 +154,7 @@ function applyTheme() {
             <ul class="footer-links">
                 <li><a href="/Recipepage">Recipes</a></li>
                 <li><a href="/Tips&tricks">Tips & Tricks</a></li>
-                <li><a href="/About us">Aboutus</a></li>
+                <li><a href="/About us">About us</a></li>
             </ul>
           </div>
           <!-- social media -->

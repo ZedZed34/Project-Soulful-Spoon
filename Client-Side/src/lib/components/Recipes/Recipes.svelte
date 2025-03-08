@@ -37,31 +37,15 @@
     import CheeseSticks from '$lib/components/images/cheesesticks.jpg';
     import SweetPotatoWedges from '$lib/components/images/potatowedges.jpg';
     import BananaSmoothie from '$lib/components/images/BananaSmoothie.jpg';
+    import facebooklogo from '$lib/components/images/facebooklogo.png';
+    import instalogo from '$lib/components/images/instalogo.png';
+    import xlogo from '$lib/components/images/xlogo.png';
+    import whatsapplogo from '$lib/components/images/whatsapplogo.png';
 
 
     // importing the javascript to recipe.js
     import { onMount } from "svelte";
     import smoothScroll from "$lib/components/Recipes/recipe.js"; 
-
-    let isDarkMode = false; //light mode default
-
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme) {
-        isDarkMode = savedTheme === "dark";
-        applyTheme();
-    }
-
-    //toggle light and dark mode
-    function toggleTheme() {
-        isDarkMode = !isDarkMode;
-        localStorage.setItem("theme", isDarkMode ? "dark" : "light");
-        applyTheme();
-    }
-
-    //applying theme 
-    function applyTheme() {
-        document.documentElement.classList.toggle("dark-mode", isDarkMode);
-    }
 
     // allow smooth scrolling
     onMount(() => {
@@ -119,7 +103,7 @@
 <!-- Navbar -->
 <nav class="navbar">
     <div class="logo-container">
-        <a href="/">
+        <a href="/" rel="external">
             <img src={logo} alt="Soulful Spoon Logo" class="logo" />
         </a>
         <span class="site">Soulful Spoon</span>
@@ -141,12 +125,6 @@
         <li><a href="/About us">Aboutus</a></li>
     </ul>
 
-    <div class="action-buttons">
-        <!-- toggle -->
-         <button class="theme-toggle" on:click={toggleTheme}>
-            {isDarkMode ? "🌙 Dark Mode" : " 🔆Light Mode"}
-         </button>
-    </div>
 
     <!-- <div class="action-buttons">
     <button class="add-button" title="Add New">+</button>
@@ -170,15 +148,6 @@
 </div>
 </nav>
 
-<main class={isDarkMode ? "dark-mode" : ""}>
-    <!-- <h2>Welcome to Soulful Spoon</h2> -->
-    <!-- only show when authenticated
-     {#if isAuthenticated}
-     <Userdashboard/>
-     {:else}
-     <p>Please log in to view your profile.</p>
-    {/if} -->
-</main>
 
 
 
@@ -288,3 +257,39 @@
     </div>
 </section>
 
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-container">
+        <!-- logo and about us  -->
+         <div class="footer-column">
+            <img src={logo} alt="Soulful Spoon Logo" class="footer-logo">
+            <p class="footer-about">Discover delicious recipes, tips and tricks for a healthier lifestyle.</p>
+         </div>
+         <!-- links for quick acess -->
+          <div class="footer-column">
+            <h4>Quick Links</h4>
+            <ul class="footer-links">
+                <li><a href="/Recipepage">Recipes</a></li>
+                <li><a href="/Tips&tricks">Tips & Tricks</a></li>
+                <li><a href="/About us">About us</a></li>
+            </ul>
+          </div>
+          <!-- social media -->
+           <div class="footer-column">
+            <div class="social-icons">
+                <a href="/#" class="social-link">
+                    <img src={facebooklogo} alt="Facebook">
+                </a>
+                <a href="/#" class="social-link">
+                    <img src={instalogo} alt="Instagram">
+                </a>
+                <a href="/#" class="social-link">
+                    <img src={xlogo} alt="X">
+                </a>
+                <a href="/#" class="social-link">
+                    <img src={whatsapplogo} alt="Whatsapp">
+                </a>
+            </div>
+        </div>
+    </div>
+ </footer>
