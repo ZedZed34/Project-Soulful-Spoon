@@ -379,3 +379,52 @@ html, body{
   max-width: 600px;
   margin: auto;
 }
+
+/* Default Light Mode */
+body {
+  background-color: #ffffff;
+  color: #000000;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Apply Dark Mode */
+.dark-mode {
+  background-color: #1a1a1a !important;
+  color: #ffffff !important;
+}
+
+/* Navbar */
+.dark-mode .navbar {
+  background-color: #333 !important;
+  color: white !important;
+}
+
+/* Kitchen Section */
+.dark-mode .kitchen-section {
+  background-color: #222 !important;
+  color: white !important;
+}
+
+/* Video Section */
+.dark-mode .video-container {
+  background-color: #222 !important;
+  color: white !important;
+}
+
+/* Footer */
+.dark-mode .footer {
+  background-color: #111 !important;
+  color: white !important;
+}
+
+/* Buttons */
+.dark-mode .button,
+.dark-mode .read-more-button {
+  background-color: #444 !important;
+  color: white !important;
+}
+
+.dark-mode .button:hover,
+.dark-mode .read-more-button:hover {
+  background-color: black!important;
+}

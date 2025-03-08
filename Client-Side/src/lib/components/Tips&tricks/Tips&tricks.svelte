@@ -11,6 +11,26 @@
 
     let showMore = false;
     let showMoreScraper = false;
+
+    let isDarkMode = false; //light mode default
+
+const savedTheme = localStorage.getItem("theme");
+if (savedTheme) {
+    isDarkMode = savedTheme === "dark";
+    applyTheme();
+}
+
+//toggle light and dark mode
+function toggleTheme() {
+    isDarkMode = !isDarkMode;
+    localStorage.setItem("theme", isDarkMode ? "dark" : "light");
+    applyTheme();
+}
+
+//applying theme 
+function applyTheme() {
+    document.documentElement.classList.toggle("dark-mode", isDarkMode);
+}
 </script>
 
 <div>
@@ -45,6 +65,13 @@
         <li><a href="/Aboutus">Aboutus</a></li>
     </ul>
 
+    <div class="action-buttons">
+        <!-- toggle -->
+         <button class="theme-toggle" on:click={toggleTheme}>
+            {isDarkMode ? "🌙 Dark Mode" : " 🔆Light Mode"}
+         </button>
+    </div>
+
 <div class="action-buttons">
     <!-- lined to publish article page (change to actual one) -->
     <button class="add-button" title="Add New" on:click={() => window.location.href='/mockarticlepublish'}>+</button>
@@ -60,7 +87,6 @@
  </div>
 </div>
 </nav>
-
 
 <!-- Kitchen section -->
  <section class="kitchen-section">

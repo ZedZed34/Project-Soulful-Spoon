@@ -19,12 +19,34 @@
     import {auth, logout} from '$lib/firebase';
 
     import { onMount } from 'svelte'; //added
+	import { applyAction } from '$app/forms';
 
     let searchQuery = "";
     let selectedCourse = "";
     let selectedDiet = "";
     let isAuthenticated = false;
     let user = null;
+    let isDarkMode = false; //light mode default
+
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) {
+        isDarkMode = savedTheme === "dark";
+        applyTheme();
+    }
+
+    //toggle light and dark mode
+    function toggleTheme() {
+        isDarkMode = !isDarkMode;
+        localStorage.setItem("theme", isDarkMode ? "dark" : "light");
+        applyTheme();
+    }
+
+    //applying theme 
+    function applyTheme() {
+        document.documentElement.classList.toggle("dark-mode", isDarkMode);
+    }
+
+
 
 
     function clearFilters() {
@@ -135,7 +157,15 @@
         </li>
         <li><a href="/Tips&tricks">Tips & Tricks</a></li>
         <li><a href="/Aboutus">About us</a></li>
+        <li><a href="/Userdashboard">⚙️</a></li>
     </ul>
+
+    <div class="action-buttons">
+        <!-- toggle -->
+         <button class="theme-toggle" on:click={toggleTheme}>
+            {isDarkMode ? "🌙 Dark Mode" : " 🔆Light Mode"}
+         </button>
+    </div>
 
     <div class="action-buttons">
     <!-- lined to publish article page (change to actual one) -->
@@ -149,16 +179,17 @@
         {#if isAuthenticated}
         <li><a href="Articlepublish">Articlepublish</a></li>
         <li><a href="/profile">Profile</a></li>
-        <li><a href="/#" on:click={handleSignOut}>Sign Out</a></li>
         {:else}
         <li><a href="/login" rel="external">Login</a></li>
         <li><a href="/signup"rel="external">Sign Up</a></li>
+        <li><a href="/#" on:click={handleSignOut}>Sign Out</a></li>
         <li>Sign Out</li>
         {/if}
     </ul>
  </div>
 </div>
 </nav>
+
 
 <!-- search bar -->
 <div class="search-filter-container">
@@ -203,12 +234,14 @@
  </div>
  </div>
 
- <main>
+ <main class={isDarkMode ? "dark-mode" : ""}>
     <h2>Welcome to Soulful Spoon</h2>
-    <!-- only show when authenticated -->
-     <!-- {#if isAuthenticated} -->
-     <!-- <Userdashboard/> -->
-    <!-- {/if} -->
+    <!-- only show when authenticated
+     {#if isAuthenticated}
+     <Userdashboard/>
+     {:else}
+     <p>Please log in to view your profile.</p>
+    {/if} -->
 </main>
 
 <section class="image-layout">
