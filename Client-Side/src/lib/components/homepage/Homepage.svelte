@@ -153,6 +153,7 @@
         {:else}
         <li><a href="/login" rel="external">Login</a></li>
         <li><a href="/signup"rel="external">Sign Up</a></li>
+        <li>Sign Out</li>
         {/if}
     </ul>
  </div>
@@ -198,12 +199,12 @@
         placeholder="Search recipes..."
         class="search-input"
         />
-        <button class="search-button" on:click={handleSearch}>🔍</button>
+        <button class="search-button" on:click={handleSearch}>⌕</button>
  </div>
  </div>
 
  <main>
-    <h1>Welcome to Soulful Spoon</h1>
+    <h2>Welcome to Soulful Spoon</h2>
     <!-- only show when authenticated -->
      <!-- {#if isAuthenticated} -->
      <!-- <Userdashboard/> -->

@@ -152,65 +152,73 @@ html, body{
   transform: translateY(0);
 } 
 
-.filter-box {
+
+
+/* profile dropdown */
+.profile-dropdown {
   position: relative;
   display: inline-block;
-  margin: 1rem;
 }
 
-.filter-button {
-  background-color: darkolivegreen;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
+.profile-icon {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
   cursor: pointer;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
+  transition: transform 0.3s ease;
 }
 
-.filter-button:hover {
-  background-color: navy;
+.profile-icon:hover .profile-icon {
+  transform: scale(1.1);
 }
 
-.filter-dropdown {
-  display: none;
+.dropdown-menu {
   position: absolute;
+  right: 0;
+  top: 60px;
   background-color: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 1rem;
-  z-index: 10;
-  border-radius: 4px;
-  top: 100%;
-  min-width: 250px;
-  white-space: nowrap;
-}
-
-.filter-box:hover .filter-dropdown {
-  display: block;
-}
-
-.filter-category h4 {
-  margin-bottom: 0.5rem;
-  color: darkolivegreen;
-}
-
-.filter-category ul {
   list-style: none;
   padding: 0;
   margin: 0;
+  border-radius: 5px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+
 }
 
-.filter-category li {
-  margin-bottom: 0.5rem;
+.profile-dropdown:hover .dropdown-menu, .dropdown-menu:hover {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
-.filter-category input {
-  margin-right: 0.5rem;
+.dropdown-menu li {
+  padding: 10px;
+  text-align: center;
+}
+
+.dropdown-menu li a {
+  text-decoration: none;
+  color: black;
+  display: block;
+  padding: 8px;
+  transition: background-color 0.5s ease;
+}
+
+.dropdown-menu li a:hover {
+  background-color: darkolivegreen;
+  color: white;
+}
+
+.profile-dropdown:hover .dropdown-menu {
+  display: block;
 }
 
 /* video */
-
 .video-container {
   text-align: center;
   padding: 2rem;
@@ -310,4 +318,49 @@ html, body{
 .social-link img:hover {
   transform: scale(1.1);
   opacity: 0.8;
+}
+
+.kitchen-section {
+  text-align: center;
+  padding: 2rem;
+}
+
+.kitchen-section h2 {
+ color: darkolivegreen;
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.kitchenaid-image {
+  width: 100%;
+  max-width: 200px;
+  border-radius: 10px;
+}
+.read-more-button {
+  background-color: darkolivegreen;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+.read-more-button:hover {
+  background-color: navy;
+}
+
+.read-more-content {
+  margin-top: 1rem;
+  background-color: white;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  max-width: 600px;
+  margin: auto;
 }

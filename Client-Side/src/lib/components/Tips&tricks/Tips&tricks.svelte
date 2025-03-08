@@ -6,6 +6,9 @@
     import instalogo from '$lib/components/images/instalogo.png';
     import xlogo from '$lib/components/images/xlogo.png';
     import whatsapplogo from '$lib/components/images/whatsapplogo.png';
+    import kitchenaid from '$lib/components/images/kitchenaid.jpeg';
+
+    let showMore = false;
 </script>
 
 <div>
@@ -40,12 +43,6 @@
         <li><a href="/Aboutus">Aboutus</a></li>
     </ul>
 
-    <!-- <div class="action-buttons">
-    <button class="add-button" title="Add New">+</button>
-        <img src={profileicon} alt="Profile" class="profile-icon" />
-    </div>
-</nav> -->
-
 <div class="action-buttons">
     <!-- lined to publish article page (change to actual one) -->
     <button class="add-button" title="Add New" on:click={() => window.location.href='/mockarticlepublish'}>+</button>
@@ -62,35 +59,27 @@
 </div>
 </nav>
 
-<!-- Filters -->
-<div class="filter-box">
-    <button class="filter-button">
-        Filter Options ⇩
-    </button>
+<!-- Kitchen section -->
+ <section class="kitchen-section">
+    <h2>Kitchen Essential: Stand Mixer</h2>
 
-    <div class="filter-dropdown">
-        <h4>Courses</h4>
-        <ul>
-            <li><input type="radio" name="course" /> <label for="breakfast">Breakfast</label></li>
-            <li><input type="radio" name="course" /> <label for="lunch">Lunch</label></li>
-            <li><input type="radio" name="course" /> <label for="dinner">Dinner</label></li>
-            <li><input type="radio" name="course" /> <label for="bites">Bites</label></li>
-            <li><input type="radio" name="course" /> <label for="highProtein">High Protein</label></li>
-            <li><input type="radio" name="course" /> <label for="dessert">Dessert</label></li>
-            <li><input type="radio" name="course" /> <label for="baking">Baking</label></li>
-        </ul>
-        <h4>Dietary Requirements</h4>
-        <ul>
-            <li><input type="radio" name="diet" /> <label for="vegan">Vegan</label></li>
-            <li><input type="radio" name="course" /> <label for="vegetarian">Vegetarian</label></li>
-            <li><input type="radio" name="course" /> <label for="halal">Halal</label></li>
-            <li><input type="radio" name="course" /> <label for="dairyFree">Dairy Free</label></li>
-            <li><input type="radio" name="course" /> <label for="glutenFree">Gluten Free</label></li>
-        </ul>
-    </div>
- </div>
+    <div class="image-container">
+        <img src={kitchenaid} alt="Kitchen Stand Mixer" class="kitchenaid-image">
+     </div>
+     <button class="read-more-button" on:click={() => showMore = !showMore}>
+        {showMore ? "Read Less" : "Read More"}
+     </button>
 
- <h4>Kitchen</h4>
+     {#if showMore}
+     <div class="read-more-content">
+        <p>
+            The KitchenAid stand mixer is an essential kitchen appliance for home bakers and professional chefs alike.
+            It simplifies mixing, kneading, and whipping, saving time and effort. With multiple attachments, you can 
+            make pasta, grind meat, and even churn ice cream, making it a versatile tool for any kitchen.
+        </p>
+     </div>
+     {/if}
+ </section>
 
  <section class="video-container">
     <h4>Cooking Tips & Tricks</h4>
