@@ -7,8 +7,10 @@
     import xlogo from '$lib/components/images/xlogo.png';
     import whatsapplogo from '$lib/components/images/whatsapplogo.png';
     import kitchenaid from '$lib/components/images/kitchenaid.jpeg';
+    import stainlesssteelbench from '$lib/components/images/stainlesssteelbench.jpg';
 
     let showMore = false;
+    let showMoreScraper = false;
 </script>
 
 <div>
@@ -59,13 +61,15 @@
 </div>
 </nav>
 
+
 <!-- Kitchen section -->
  <section class="kitchen-section">
-    <h2>Kitchen Essential: Stand Mixer</h2>
+    <h2>Kitchen Essential</h2>
 
-    <div class="image-container">
-        <img src={kitchenaid} alt="Kitchen Stand Mixer" class="kitchenaid-image">
-     </div>
+    <div class="kitchen-tools">
+        <!-- kitchen tool -->
+        <div class="kitchen-tool">
+        <img src={kitchenaid} alt="Kitchen Stand Mixer" class="kitchen-image">
      <button class="read-more-button" on:click={() => showMore = !showMore}>
         {showMore ? "Read Less" : "Read More"}
      </button>
@@ -79,10 +83,29 @@
         </p>
      </div>
      {/if}
- </section>
+     </div>
+
+    <!-- stainless steel -->
+        <div class="kitchen-tool">
+            <img src={stainlesssteelbench} alt="Stainless Steel Bench Scraper" class="kitchen-image">
+         <button class="read-more-button" on:click={() => showMoreScraper = !showMoreScraper}>
+            {showMoreScraper ? "Read Less" : "Read More"}
+         </button>
+         {#if showMoreScraper}
+         <div class="read-more-content">
+            <p>
+                A stainless steel bench scraper is a must have tool for baking cooking. It helps in cutting dough, 
+                scraping work surfaces, and even measuring with built-in ruler. Whether you're working with dough bread 
+                or chopping herbs, this tool makes your prep work efficent and mess-free.
+            </p>
+         </div>
+         {/if}
+        </div>
+    </div>
+     </section>
 
  <section class="video-container">
-    <h4>Cooking Tips & Tricks</h4>
+    <h2>Cooking Tips & Tricks</h2>
     <div class="video-wrapper">
         <iframe width="560" height="315" src="https://www.youtube.com/embed/BHcyuzXRqLs?si=Bbc8AiykeNZJ1lWd" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
         </iframe>

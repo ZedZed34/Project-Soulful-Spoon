@@ -46,6 +46,7 @@
     // importing the javascript to recipe.js
     import { onMount } from "svelte";
     import smoothScroll from "$lib/components/Recipes/recipe.js"; 
+    
 
     // allow smooth scrolling
     onMount(() => {

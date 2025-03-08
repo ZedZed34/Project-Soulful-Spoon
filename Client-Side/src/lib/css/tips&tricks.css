@@ -224,7 +224,7 @@ html, body{
   padding: 2rem;
 }
 
-.video-container h4 {
+.video-container h2 {
   color: darkolivegreen;
   margin-bottom: 1.5rem;
 }
@@ -320,6 +320,7 @@ html, body{
   opacity: 0.8;
 }
 
+/* kitchen tools */
 .kitchen-section {
   text-align: center;
   padding: 2rem;
@@ -329,15 +330,28 @@ html, body{
  color: darkolivegreen;
 }
 
-.image-container {
+.kitchen-tools {
   display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.kitchen-tool {
+  width: 300px;
+  text-align: center;
+}
+
+.kitchen-tool {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   margin-bottom: 1rem;
 }
 
-.kitchenaid-image {
+.kitchen-image {
   width: 100%;
-  max-width: 200px;
+  max-width: 400px;
   border-radius: 10px;
 }
 .read-more-button {
@@ -349,6 +363,7 @@ html, body{
   cursor: pointer;
   border-radius: 5px;
   margin-top: 10px;
+  max-width: 400px;
 }
 .read-more-button:hover {
   background-color: navy;
