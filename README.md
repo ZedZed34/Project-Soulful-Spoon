@@ -1,6 +1,6 @@
 # Project-Soulful-Spoon
 
-A frontend JavaScript technology Svelte framework based blogging website application with Node.Js and Express.Js combination as full-stack project. Mainly emphasized on publishing articles of recipes with lots of dietry filtering options as part of the main features empowering user credentials login and signup functions with hashing and salting passwords for user's privacy.
+A frontend JavaScript technology Svelte framework based blogging website application with Node.Js and Express.Js combination as full-stack project. Mainly emphasized on publishing articles of recipes with lots of dietry filtering options as part of the main features empowering user credentials login and signup functions with hashing and salting passwords for user's privacy concern.
 
 ## **Setup Instructions**
 
