@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
 <<<<<<<< HEAD:Client-Side/src/routes/recipes/+page.svelte
 	import Recipes from "$lib/components/Recipes/Recipes.svelte";
 ========
@@ -14,4 +14,4 @@
   <Recipes/>
 ========
   <Recipepage/>
->>>>>>>> alisha:Client-Side/src/routes/RecipePage/+page.svelte
+>>>>>>>> alisha:Client-Side/src/routes/RecipePage/+page.svelte -->
