@@ -5,8 +5,6 @@ import { getArticlelink } from "../../db/getArticlelink.js";
 import { getArticleid } from "../../db/getArticlelink.js";
 import { patchLikes } from "../../db/getArticlelink.js";
 
-
-
 const router = express.Router();
 
 

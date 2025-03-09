@@ -1,162 +1,157 @@
 <script>
-    import "$lib/css/articlepublish.css";  
-    import { POST_URL } from "$lib/js/api-urls.js";
-    import Editor from '@tinymce/tinymce-svelte';
-    
-    
-      export let data;
-    let article_title = "";
-    let article_content = "";
-    let username = data.username;
-    let likes ;
-    let dislikes;
-    let date_published;
-    let image_path;
-    
-    
-    let error = false;
-    let success = false;
-    
-    
-    
-        let showModal = false;
-        function toggleModal() {
-          showModal = !showModal;
-        }
-    
-    //-----------------------------------------------------------------
-      async function createArticle() {
-        error = false;
-        success = false;
-    
-        try{
-         console.log({ article_title, article_content , username , likes, dislikes, date_published, image_path})
-          const response = await fetch(POST_URL, {
-            method: "POST",
-            credentials: "include",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ article_title, article_content , username , likes, dislikes, date_published, image_path})
-          });
-    
-    
-        if (!response.ok){
-          const errorMessage = await response.json();
-          throw new Error(errorMessage.error);
-        }
-        success = true;
-    
-        article_content = "";
-        article_title = "";
-      }
-    
-        catch (error) {
-                console.error('Error creating article:', error.message);
-                alert('Error creating article: ' + error.message);
-    
-      }
-    
-    }
-    
-    function handleFileChange(event) {
-        const file = event.target.files[0];
-        if (file) {
-          const reader = new FileReader();
-          reader.onload = function(e) {
-            const imageDataUrl = e.target.result;
-            // Concatenate the image data URL to the article content
-            article_content += `<img src="${imageDataUrl}" alt="Uploaded image">`;
-          };
-          reader.readAsDataURL(file);
-        }
-      }
-    
-    
+  import "$lib/css/articlepublish.css";  
+  import { POST_URL } from "$lib/js/api-urls";
+  import Editor from '@tinymce/tinymce-svelte';
+  import { user } from "$lib/components/user"; // Ensures proper user state tracking
+
+  import logo from '$lib/components/images/Logo.png'; 
+  import profileicon from '$lib/components/images/profileicon.jpg';
+  import facebooklogo from '$lib/components/images/facebooklogo.png';
+  import instalogo from '$lib/components/images/instalogo.png';
+  import xlogo from '$lib/components/images/xlogo.png';
+  import whatsapplogo from '$lib/components/images/whatsapplogo.png';
+
+  let article_title = "";
+  let article_content = "";
+  let username = user?.name || "Guest";
+  let likes = 0;
+  let dislikes = 0;
+  let date_published = new Date().toISOString();
+  let image_path = "src/lib/components/images/publish-article.jpg";
+
+  let selectedCourse = [];
+  let selectedDiet = [];
+
+  let courseOptions = ["Breakfast", "Lunch", "Dinner", "Snack", "Dessert"];
+  let dietOptions = ["Vegan", "Halal", "Gluten-Free", "Keto", "Vegetarian"];
+
+  let success = false;
+  let error = null;
+  let showLoginPopup = false;
+  let isAuthenticated = user ? true : false;
+
+  if (!isAuthenticated) {
+      showLoginPopup = true;
+  }
+
+  async function createArticle(event) {
+      event.preventDefault();
       
-    </script>
-    
-    
-    <form on:submit|preventDefault={createArticle}> 
-      <div id="publishArticles-container">
-        
-        <div>
-        <p>Title</p>
-        <textarea id="article_title" bind:value={article_title} rows="1" cols="40" maxlength="20" required></textarea>
-        </div>
-    
-        <div id="content-upload">
-        <div >
-          <p> 
-           Content
-          </p>
-          <div class = "AC">
-          <textarea id="article_content" bind:value={article_content} rows="4" cols="40" maxlength="1000" required
-          > </textarea> 
-          
-    
-                                                         
-          <Editor   id="article_content" 
-          apiKey="47j9ca2i2bj3u4tecumr45esqktc9oooh23le1byo4z4lzqt" bind:value={article_content} />
-         
-          </div>
-          </div>
-    
-        <div class="fileinput-button">
-          <span id="text">Add image</span>
-          <input type="file" id="content-image" name="content-image" accept="image/*" onchange={handleFileChange}/>
-        </div>
+      if (!isAuthenticated) {
+          error = "You must be logged in to publish an article.";
+          return;
+      }
+
+      let newArticle = {
+          title: article_title,
+          content: article_content,
+          username,
+          likes,
+          dislikes,
+          date_published,
+          image_path,
+          course: selectedCourse,
+          diet: selectedDiet
+      };
+
+      try {
+          const response = await fetch(POST_URL, {
+              method: "POST",
+              credentials: "include",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(newArticle)
+          });
+
+          if (!response.ok) {
+              throw new Error("Failed to publish article.");
+          }
+
+          success = true;
+          article_title = "";
+          article_content = "";
+          selectedCourse = [];
+          selectedDiet = [];
+          error = null;
+      } catch (err) {
+          console.error(err);
+          error = err.message;
+      }
+  }
+</script>
+
+<main>
+  <h1>Publish an Article</h1>
+
+  {#if showLoginPopup}
+      <p class="error">Please <a href="/login">log in</a> to publish an article.</p>
+  {/if}
+
+  <form on:submit|preventDefault={createArticle}>
+      <input type="text" bind:value={article_title} placeholder="Article Title" required />
+
+      <Editor bind:value={article_content} apiKey="your-tinymce-api-key" />
+
+      <div class="selection-container">
+          <label>Course Category:</label>
+          {#each courseOptions as course}
+              <label><input type="checkbox" bind:group={selectedCourse} value={course} /> {course}</label>
+          {/each}
       </div>
-    
-        <div>
-        <button id="submit">Submit now!</button>
-        </div>
-    
-        {#if showModal}
-        <div class="pop-up-publish">
-          <p>Do you want to submit?</p>
-          <button on:click={createArticle}>Yes</button>
-          <button on:click={toggleModal}>No</button>
-        </div>
-        {/if}
-    
-        {#if error}<span class="error">Could not save!</span>{/if}
-        {#if success}<span class="success">Saved!</span>{/if}
-        
-       </div>
-    </form>
-    
-    
-    <style>
-    
-    .error,
-      .success {
-        font-weight: bold;
-        padding: 5px;
-        text-align: center;
-      }
-    
-      .error {
-        color: darkred;
-        background-color: lightcoral;
-      }
-    
-      .success {
-        color: darkgreen;
-        background-color: lightgreen;
-      }
-      .AC{
-        position: relative;
-      top: 30px;
-      left: 350px;
-      width: 800px;
-      height: 500px;
-      font-size: 20px;
-      color:black;
-      font-family: Arial, sans-serif;
-      border: 1px solid #ccc;
-      border-radius: 2px;
-      padding: 5px;
-      box-shadow: 1px 1px 2px #ccc;
-      }
-    
-    </style>
-    
+
+      <div class="selection-container">
+          <label>Dietary Preferences:</label>
+          {#each dietOptions as diet}
+              <label><input type="checkbox" bind:group={selectedDiet} value={diet} /> {diet}</label>
+          {/each}
+      </div>
+
+      <button type="submit">Publish</button>
+  </form>
+
+  {#if success}
+      <p class="success">Article published successfully!</p>
+  {/if}
+
+  {#if error}
+      <p class="error">{error}</p>
+  {/if}
+
+  <footer>
+      <img src={logo} alt="Logo" />
+      <img src={profileicon} alt="Profile Icon" />
+      <div class="social-icons">
+          <img src={facebooklogo} alt="Facebook" />
+          <img src={instalogo} alt="Instagram" />
+          <img src={xlogo} alt="Twitter" />
+          <img src={whatsapplogo} alt="WhatsApp" />
+      </div>
+  </footer>
+</main>
+
+<style>
+  main {
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+  }
+  input, button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+  }
+  .selection-container {
+      margin-top: 10px;
+  }
+  .success {
+      color: green;
+      font-weight: bold;
+  }
+  .error {
+      color: red;
+  }
+  .social-icons img {
+      width: 30px;
+      margin-right: 10px;
+  }
+</style>

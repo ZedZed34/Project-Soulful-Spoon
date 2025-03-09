@@ -10,6 +10,7 @@ import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
+import apiRoutes from './routes/api/api.js';
 
 // Set's our port to the PORT environment variable, or 3000 by default if the env is not configured.
 const PORT = process.env.PORT ?? 3000;
@@ -38,6 +39,9 @@ app.use("/", routes);
 // TODO Make sure the database is created and available.
 import { getDatabase } from "./db/database.js";
 await getDatabase();
+
+// Load API routes
+app.use('/api', apiRoutes);
 
 // Start the server running.
 app.listen(PORT, () => {

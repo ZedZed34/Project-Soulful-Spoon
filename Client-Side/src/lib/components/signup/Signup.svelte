@@ -1,359 +1,169 @@
 <script>
-  //commented out for now to view css and html (couldnt work if i did not comment out)
-  //import { user } from "../../../lib/components/user.js";
-  import { SIGNUP_URL } from "../../../lib/js/api-urls.js";
+  import { SIGNUP_URL } from "$lib/js/api-urls";
   import "$lib/css/signup.css";  
-	import { goto } from "$app/navigation";
-  import {loginWithGoogle, logout, auth} from "$lib/firebase";
-  import {onMount} from "svelte";
+  import { goto } from "$app/navigation";
+  import { loginWithGoogle, logout, auth } from "$lib/firebase";
+  import { onMount } from "svelte";
 
   let user = null;
   let username = "";
   let firstName = "";
   let lastName = "";
-  let email ="";
-  // let birthday ="";
+  let email = "";
   let password = "";
   let confirmedPassword = "";
   let profilePicture = "";
-
+  
   let error = false;
   let passwordMatchError = false;
   let usernameTakenError = false;
   let emailTakenError = false;
 
-  let images = ["/src/lib/components/images/pp-jaguar.png", "/src/lib/components/images/pp-parrot.png", "/src/lib/components/images/pp-panda.png","/src/lib/components/images/pp-turtle.png", "/src/lib/components/images/pp-butterfly.png", "/src/lib/components/images/pp-jacutinga.png"];
+  let images = [
+    "/src/lib/components/images/pp-jaguar.png", 
+    "/src/lib/components/images/pp-parrot.png", 
+    "/src/lib/components/images/pp-panda.png",
+    "/src/lib/components/images/pp-turtle.png", 
+    "/src/lib/components/images/pp-butterfly.png", 
+    "/src/lib/components/images/pp-jacutinga.png"
+  ];
   
   let currentImage = 0;
   let selectedImage = images[currentImage];
 
-  async function googleLogin(){
-    try{
+  async function googleLogin() {
+    try {
       const result = await loginWithGoogle();
       user = result.user;
-     // goto("/", { replaceState: true });
-     window.location.href = "/"; //had to change to this to ensure the page reloads completely
-
       const uniqueUsername = user.displayName.replace(" ", "_") + "_" + Math.floor(Math.random() * 10000);
-      //send google user data to backend
-      await fetch(SIGNUP_URL, {
+
+      const response = await fetch(SIGNUP_URL, {
         method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ 
           username: uniqueUsername, 
           email: user.email,
-          profilePicture: user.photoURL})
-        });
-    
-      console.log("Google Login Sucess:", user);
-      // goto("/", { replaceState: true });
-    } catch (error){
-        console.log("Google Login Failed:", error);
+          profilePicture: user.photoURL 
+        })
+      });
+
+      if (!response.ok) throw new Error("Google sign-up failed");
+
+      console.log("Google Login Success:", user);
+      window.location.href = "/";
+    } catch (err) {
+      console.error("Google Login Error:", err);
+      error = true;
     }
   }
 
-  function handleLogout(){
-    logout();
-    user = null;
-    console.log("User is logged out");
+  async function signupUser() {
+    if (password !== confirmedPassword) {
+      passwordMatchError = true;
+      return;
+    }
+
+    try {
+      const response = await fetch(SIGNUP_URL, {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username,
+          firstName,
+          lastName,
+          email,
+          password,
+          profilePicture: selectedImage
+        })
+      });
+
+      if (response.status === 409) {
+        const errorData = await response.json();
+        if (errorData.message.includes("username")) usernameTakenError = true;
+        if (errorData.message.includes("email")) emailTakenError = true;
+        return;
+      }
+
+      if (!response.ok) throw new Error("Signup failed");
+
+      console.log("Signup successful");
+      goto("/login");
+    } catch (err) {
+      console.error("Signup Error:", err);
+      error = true;
+    }
   }
 
-  onMount(() => {
-    auth.onAuthStateChanged((u) => {
-      if(u){
-        user = u; //contains displayName, email, photoURL, uid, emailVerified
-        console.log("User is logged in", u);
-      }
-      // user.u;
-    });
-  });
-
-  // profile picture function
-  function toggleImage() {
-    // currentImage = (currentImage + 1) % images.length; //setting default image
-    selectedImage = images[(currentImage + 1) % images.length];
+  function changeProfilePicture() {
     currentImage = (currentImage + 1) % images.length;
-
-    const fileInput = document.getElementById("profilePicture");
-    if(fileInput){
-      fileInput.value = "";
-    }
-  }
-
-  // profile picture - file upload
-  function handleFileUpload(event){
-    const file = event.target.files[0];
-    if(file){
-      selectedImage = URL.createObjectURL(file);
-    }
-  }
-
-  // function handleFileUpload(event){
-  //   const file = event.target.files[0];
-  //   if(file){
-  //     selectedImage = URL.createObjectURL(file);
-  //   }
-  // }
-
-
-  async function handleSignup() {
-    error = false;
-    passwordMatchError = false;
-    usernameTakenError = false;
-    emailTakenError = false;
-
-    // Validate that birthday is chosen
-    // if (!birthday) {
-    //   error = true;
-    //   return;
-    // }
-
-    const response = await fetch(SIGNUP_URL, {
-    method: "POST",
-    credentials: "include",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ 
-      username,
-      firstName,
-      lastName,
-      email,
-      password,
-      confirmedPassword,
-      // birthday,
-      profilePicture: selectedImage, })
-    });
-
-    if (response.ok) {
-      // Signup successful
-      const userData = await response.json();
-      user = userData; //store user after signup
-      console.log("User Signed Up Successfully:", userData);
-      // user.login({ username: userData.username, email: userData.email, password: userData.password, confirmedPassword: userData.confirmedPassword });
-      goto("/", { replaceState: true });
-      
-    }   
-    else {
-      const data = await response.json();
-      console.log(data.error);
-      if (response.status === 400) {
-        
-        if (data.error === 'username_taken') {
-            usernameTakenError = true;
-        } 
-        if (data.error === 'email_taken') {
-            emailTakenError = true;
-        }
-        if (password !== confirmedPassword) {
-          passwordMatchError = true;
-        }
-      }
-      else {
-        // Handle other errors (e.g., server errors)
-        console.log(data.error);
-        console.error("Signup failed:", response.statusText);
-        // Display a generic error message to the user  
-      }
-    }
+    selectedImage = images[currentImage];
   }
 </script>
 
-<svelte:head>
-  <!-- <link rel="preload" href="/login"> -->
-  <title>Sign Up</title>
-</svelte:head>
-
-
-
-
-<div id="signup-container" >
-  <div class="signup-image"></div>
-  <!-- sign up form -->
-  <div class="signup-form">
-    <!-- <button class="close-button" on:click={() => goto('/')}>x</button> -->
-    <button class="close-button" on:click={() => window.location.href = "/"}>x</button>
-    <h2>Create Account</h2>
-    <form on:submit|preventDefault={handleSignup}>
-      
-      <!-- form columns -->
-      <div class="form-columns">
-        <!-- left column -->
-        <div class="form-column">
-          <!-- username -->
-          <label for="username">Username:</label>
-          <input type="text" bind:value={username} required />
-          {#if usernameTakenError}
-            <p class="error">Username is already taken. Please use a different username.</p>
-          {/if}
-
-          <!-- first name -->
-          <div class="name-field">
-            <div>
-              <label for="firstName">First Name:</label>
-              <input type="text" bind:value={firstName} required />
-            </div>
-          </div>
-
-           <!-- password -->
-           <label for="password">Password:</label>
-           <input type="password" bind:value={password} required />
-        </div>
-        
-        <!-- right column -->
-        <div class="form-column">
-
-          <!-- email -->
-          <label for="email">Email:</label>
-          <input type="email" bind:value={email} required />
-          {#if emailTakenError}
-              <p class="error">Email is already taken. Please use a different email address.</p>
-          {/if}
-
-          <!-- last name -->
-          <div class="name-field">
-            <div>
-              <label for="lastName">Last Name:</label>
-              <input type="text" bind:value={lastName} required />
-            </div>
-          </div>
-        
-          <!-- confirm password -->
-          <label for="confirmedPassword">Confirm Password:</label>
-          <input type="password" bind:value={confirmedPassword} required />
-          {#if passwordMatchError}
-          <p class="error">Password does not match. Re-enter password.</p>
-          {/if}
-
-
-          <!-- profile picture -->
-          <!-- <div class="profile-picture">
-              <label for="profilePicture">Profile Picture:</label>
-              <img src={images[currentImage]} alt="Profile Picture">
-              <button type="button" on:click={toggleImage}>Next</button>
-          </div> -->
-
-        </div>
-        
-      </div>
-
-       <!-- birthday -->
-       <!-- <label for="birthday">Birthday:</label>
-       <input type="date" bind:value={birthday} required /> -->
-
-       <!-- updated profile picture section -->
-       <div class="profile-picture">
-        <label class="profile-picture-label" for="profilePicture">Profile Picture:</label>
-        <div class="profile-picture-image">
-          <img src={selectedImage} alt="Profile">
-          <input type="file" id="profilePicture" accept="image/*" on:change={handleFileUpload}>
-          <button type="button" on:click={toggleImage}>Next</button>
-        </div>
-      </div> 
-
-      <!-- signup button -->
-      <button id="signup-button" type="submit">Sign Up</button>
-    </form>
-
-    {#if user}
-      <div class="user-info">
-        <img src={user.photoURL} alt="Profile">
-        <p>Welcome, {user.displayName}!</p>
-        <button on:click={handleLogout}>Logout</button>
-      </div>
-    {:else}
-    <div class="social-login">
-      <p>Or Log In With:</p>
-      <div class="social-icons">
-        <button on:click={googleLogin}>
-          <img src="src/lib/components/images/google-icon.png" alt="Google" />
-        </button>
-        <!-- <img src="src/lib/components/images/facebook-icon.png" alt="Facebook" /> -->
-      </div>
-    </div>
+<main>
+  <h1>Sign Up</h1>
+  
+  <form on:submit|preventDefault={signupUser}>
+    <input type="text" bind:value={username} placeholder="Username" required />
+    {#if usernameTakenError}
+      <p class="error">Username is already taken.</p>
     {/if}
 
-    <!-- login redirect -->
-     <div class="login">
-      <p>Already Have an Account?
-        <!-- <a href="/login" on:click={() => goto("/login")}>Login</a> -->
-        <!-- <button class="login-button" on:click={() => goto('/login')}>Login</button> -->
-        <a href="/login" rel="external">Login</a>
-
-      </p>
-     </div>
+    <input type="text" bind:value={firstName} placeholder="First Name" required />
+    <input type="text" bind:value={lastName} placeholder="Last Name" required />
     
-      <!-- <p class="login">
-        Already Have an Account? <a href="/login">Login</a>
-      </p> -->
-  
-  </div>
-</div>
+    <input type="email" bind:value={email} placeholder="Email" required />
+    {#if emailTakenError}
+      <p class="error">Email is already registered.</p>
+    {/if}
 
-<!-- <svelte:head>
-  <title>Sign Up</title>
-</svelte:head>
+    <input type="password" bind:value={password} placeholder="Password" required />
+    <input type="password" bind:value={confirmedPassword} placeholder="Confirm Password" required />
+    {#if passwordMatchError}
+      <p class="error">Passwords do not match.</p>
+    {/if}
 
-<h1 id="registerHeader">Register</h1>
-
-    <form id="register-container"> 
-      
-      <label for="username">Enter your username:</label>
-      <div>
-        <input type="text" name ="username" bind:value={username} required />
-        {#if usernameTakenError}
-        <p style="color: red;">Username is already taken.</p>
-        {/if}
-      </div>
-      
-      <label for="firstName">Enter your first name:</label>
-      <input type="text" name="firstName" bind:value={firstName} required />
-      <label for="lastName">Enter your last name:</label>
-      <input type="text" name="lastName" bind:value={lastName} required />
-      
-
-      <label for="email">Enter your email:</label>
-      <div>
-      <input type="email" name="email" bind:value={email} required />
-      {#if emailTakenError}
-      <p style="color: red;">Email is already taken. Please use a different email address.</p>
-      {/if}
-     </div>
-
-
-      <label for="birthday">Choose your birthday:</label>
-      <input type="date" name="birthday" bind:value={birthday} required />
-
-
-        <label for="password">Enter your password:</label>
-      <input type="password" name="password" bind:value={password} required />
-      <label for="confirmedPassword">Confirm your password:</label>
-      <div>
-      <input type="password" name="confirmedPassword" bind:value={confirmedPassword} required />
-      {#if passwordMatchError}
-      <p style="color: red;">Password does not match.</p>
-      {/if}
-      </div>
-      
-
-      <div class="pickPP">
-        <div class="pickPP-label">
-          <label for="profilePicture">Profile pictures:</label>
-        </div>
-      <div class="pickPP-image">
-        <img src={images[currentImage]} alt="nextImage">
-        <button on:click={toggleImage}>next</button>
-      </div>
+    <div class="profile-picture">
+      <img src={selectedImage} alt="Profile Picture" />
+      <button type="button" on:click={changeProfilePicture}>Change Picture</button>
     </div>
 
+    <button type="submit">Sign Up</button>
+  </form>
 
+  <p>Or sign up using Google:</p>
+  <button on:click={googleLogin}>Sign in with Google</button>
 
-      <button id="registerButton" type="submit" on:click={handleSignup} >Signup</button>
-      <div class="login">
-        <span class="signingin">Already have an account?
-      
-          <a href="/login" on:click={() => goto("/login")}>&#x1F64C Log in</a> 
-          
-        </span>
-      </div>
+  {#if error}
+    <p class="error">An error occurred. Please try again.</p>
+  {/if}
+</main>
 
-    </form> -->
+<style>
+  main {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+  }
+  input, button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+  }
+  .profile-picture {
+    text-align: center;
+  }
+  .profile-picture img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+  .error {
+    color: red;
+    font-size: 0.9em;
+  }
+</style>
