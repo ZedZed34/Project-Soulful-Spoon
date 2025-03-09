@@ -294,6 +294,10 @@ body{
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.contact-item h2 {
+  color: black;
+}
+
 .contact-item h3 {
   color: black;
 }

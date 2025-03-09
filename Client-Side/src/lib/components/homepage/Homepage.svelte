@@ -177,10 +177,11 @@
         {#if isAuthenticated}
         <li><a href="Articlepublish">Articlepublish</a></li>
         <li><a href="/profile">Profile</a></li>
+        <li><a href="/#" on:click={handleSignOut}>Sign Out</a></li>
         {:else}
         <li><a href="/login" rel="external">Login</a></li>
         <li><a href="/signup"rel="external">Sign Up</a></li>
-        <li><a href="/#" on:click={handleSignOut}>Sign Out</a></li>
+        <!-- <li><a href="/#" on:click={handleSignOut}>Sign Out</a></li> -->
         <li>Sign Out</li>
         {/if}
     </ul>
