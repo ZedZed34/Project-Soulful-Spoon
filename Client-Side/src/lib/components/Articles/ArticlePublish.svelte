@@ -1,7 +1,8 @@
 <script>
- 
+    import "$lib/css/articlepublish.css";  
     import { POST_URL } from "$lib/js/api-urls.js";
     import Editor from '@tinymce/tinymce-svelte';
+    
     
       export let data;
     let article_title = "";
@@ -74,9 +75,7 @@
     </script>
     
     
-    
-    <form on:submit|preventDefault={createArticle}>
-    
+    <form on:submit|preventDefault={createArticle}> 
       <div id="publishArticles-container">
         
         <div>
@@ -90,8 +89,8 @@
            Content
           </p>
           <div class = "AC">
-          <!-- <textarea id="article_content" bind:value={article_content} rows="4" cols="40" maxlength="1000" required
-          > </textarea> --> 
+          <textarea id="article_content" bind:value={article_content} rows="4" cols="40" maxlength="1000" required
+          > </textarea> 
           
     
                                                          

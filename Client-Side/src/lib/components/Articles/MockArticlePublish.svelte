@@ -1,0 +1,228 @@
+<script>
+
+    import "$lib/css/mockarticlepublish.css"
+    import logo from '$lib/components/images/Logo.png'; 
+    import profileicon from '$lib/components/images/profileicon.jpg'
+    import facebooklogo from '$lib/components/images/facebooklogo.png';
+    import instalogo from '$lib/components/images/instalogo.png';
+    import xlogo from '$lib/components/images/xlogo.png';
+    import whatsapplogo from '$lib/components/images/whatsapplogo.png';
+
+    import Editor from '@tinymce/tinymce-svelte';
+	import { user } from "../user";
+
+  
+    let article_title = "";
+    let article_content = "";
+    let username = "Tester";
+    let likes = 0;
+    let dislikes = 0;
+    let date_published = new Date().toISOString();
+    let image_path = "src/lib/components/images/publish-article.jpg"
+
+    let selectedCourse = [];
+    let selectedDiet = [];
+
+    let courseOptions = ["Breakfast", "Lunch", "Dinner", "Snack", "Dessert"]
+    let dietOptions = ["Vegan", "Halal", "Gluten-Free", "Keto", "Vegetarian"]
+
+
+    // let error = false;
+    let success = false;
+
+    let showLoginPopup = false;
+    let ifAuthenticated = false; //change 
+    
+    if (!ifAuthenticated){
+        showLoginPopup = true;
+    }
+
+    //added
+    function createArticle(event){
+        event.preventDefault();
+        if(!ifAuthenticated){
+            return;
+        }
+
+        let newRecipe = {
+            title: article_title,
+            content: article_content,
+            username: username, 
+            date_published: date_published, 
+            image_path: image_path,
+            courses: selectedCourse,
+            diets: selectedDiet
+        };
+
+        let recipes = JSON.parse(localStorage.getItem("recipes")) || [];
+
+        recipes.push(newRecipe);
+
+        localStorage.setItem("recipes", JSON.stringify(recipes))
+
+        success = true;
+        article_title = "";
+        selectedCourse = [];
+        selectedDiet = [];
+        article_content = "";
+        console.log("Article Created:", {article_title, username});
+    }
+
+    function handleFileChange(event) {
+        const file = event.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            image_path = e.target.result;
+          };
+          reader.readAsDataURL(file);
+        }
+      }
+
+      function toggleCourse(course){
+        if(selectedCourse.includes(course)){
+            selectedCourse = selectedCourse.filter(c => c !== course);
+        }
+        else{
+            selectedCourse = [...selectedCourse, course];
+        }
+      }
+      
+      function toggleDiet(diet){
+        if(selectedDiet.includes(diet)){
+            selectedDiet = selectedDiet.filter(d => d !== diet);
+        }
+        else{
+            selectedDiet = [...selectedDiet, diet];
+        }
+      }
+
+
+</script>
+
+<!-- Navbar -->
+<nav class="navbar">
+    <div class="logo-container">
+        <a href="/" rel="external">
+        <img src={logo} alt="Soulful Spoon Logo" class="logo" />
+    </a>
+        <span class="site">Soulful Spoon</span>
+    </div>
+    <ul class="nav-buttons">
+        <li class="dropdown">
+            <a href="#/">Recipes</a>
+            <ul class="dropdown-content">
+            <li><a href="/breakfast">Breakfast</a></li>
+            <li><a href="/lunch">Lunch</a></li>
+            <li><a href="/dinner">Dinner</a></li>
+            <li><a href="/desserts">Desserts</a></li>
+            <li><a href="/snacks">Snacks</a></li>
+            <li><a href="/snacks">Snacks</a></li>
+            <li><a href="/quick-easy">Quick and Easy</a></li>
+            <li><a href="/airfryer">Airfryer</a></li>
+            </ul>
+        </li>
+        <li><a href="/Tips&tricks">Tips & Tricks</a></li>
+        <li><a href="/Aboutus">About us</a></li>
+    </ul>
+
+    <div class="action-buttons">
+    <button class="add-button" title="Add New">+</button>
+        <img src={profileicon} alt="Profile" class="profile-icon" />
+    </div>
+</nav>
+
+{#if showLoginPopup}
+    <div class="popup">
+        <div class="popup-content">
+            <p>Please Log In to Publish Your Recipe.</p>
+            <button onclick={() => window.location.href = '/login'}>Login</button>
+        </div>
+    </div>
+{/if}
+<div class="article-page {showLoginPopup ? 'blur-background' : ''}">
+    <div class="publish-container">
+        <div class="image-container">
+            <img src={image_path} alt="Recipe Image">  
+        </div>
+        <div class="form-container">
+            <h2>Publish Your Recipe!</h2>
+            <p class="username">By: <strong>{username}</strong></p>
+            <form onsubmit={createArticle}>
+                <label>Title</label>
+                <input type="text" bind:value={article_title} placeholder="Enter Recipe Title" required />
+                <label>Course</label>
+                <div class="course-selection">
+                    {#each courseOptions as course}
+                        <button
+                            type="button"
+                            class="course-button {selectedCourse.includes(course) ? 'selected' : ''}"
+                            onclick={() => toggleCourse(course)}> {course}
+                        </button>
+                    {/each}
+                </div>
+                <label>Diet</label>
+                <div class="diet-selection">
+                    {#each dietOptions as diet}
+                        <button
+                            type="button"
+                            class="diet-button {selectedDiet.includes(diet) ? 'selected' : ''}"
+                            onclick={() => toggleDiet(diet)}> {diet}
+                        </button>
+                    {/each}
+                </div>
+                {#if !showLoginPopup}
+                    <label>Recipe Content</label>
+                    <Editor   id="article_content" 
+                    apiKey="47j9ca2i2bj3u4tecumr45esqktc9oooh23le1byo4z4lzqt" bind:value={article_content} />
+                {/if}
+                <label class="file-upload">
+                    Upload Image
+                    <input type="file" id="content-image" name="content-image" accept="image/*" onchange={handleFileChange} />
+                </label>
+                <button type="submit" class="upload-button">Publish Recipe</button>
+                {#if success}
+                    <p class="sucesss-message">Your Recipe Has Been Published!</p>
+                {/if}
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-container">
+        <!-- logo and about us  -->
+         <div class="footer-column">
+            <img src={logo} alt="Soulful Spoon Logo" class="footer-logo">
+            <p class="footer-about">Discover delicious recipes, tips and tricks for a healthier lifestyle.</p>
+         </div>
+         <!-- links for quick acess -->
+          <div class="footer-column">
+            <h4>Quick Links</h4>
+            <ul class="footer-links">
+                <li><a href="/Recipepage">Recipes</a></li>
+                <li><a href="/Tips&tricks">Tips & Tricks</a></li>
+                <li><a href="/About us">Aboutus</a></li>
+            </ul>
+          </div>
+          <!-- social media -->
+           <div class="footer-column">
+            <h4>Follow us!</h4>
+            <div class="social-icons">
+                <a href="/#" class="social-link">
+                    <img src={facebooklogo} alt="Facebook">
+                </a>
+                <a href="/#" class="social-link">
+                    <img src={instalogo} alt="Instagram">
+                </a>
+                <a href="/#" class="social-link">
+                    <img src={xlogo} alt="X">
+                </a>
+                <a href="/#" class="social-link">
+                    <img src={whatsapplogo} alt="Whatsapp">
+                </a>
+            </div>
+        </div>
+    </div>
+ </footer>

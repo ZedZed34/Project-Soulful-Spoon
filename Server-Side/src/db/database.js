@@ -53,3 +53,18 @@ async function initDatabase(db) {
   await db.exec(sql);
   console.log("Database initialized successfully!");
 }
+
+// for recipes after clicking image
+// export async function insertRecipe(title, imagePath, link) {
+//   const db = await getDatabase();
+//   await db.run(
+//     "INSERT INTO recipes (title, image_path, link) VALUES (?, ?,?)",
+//     [title, imagePath, link]
+//   );
+// }
+
+// export async function getRecipes() {
+//   const db = await getDatabase();
+//   return await db.all("SELECT * FROM recipes")
+// }
+
