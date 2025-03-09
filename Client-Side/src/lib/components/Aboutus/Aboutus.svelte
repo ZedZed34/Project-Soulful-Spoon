@@ -147,7 +147,7 @@
             <ul class="footer-links">
                 <li><a href="/Recipepage">Recipes</a></li>
                 <li><a href="/Tips&tricks">Tips & Tricks</a></li>
-                <li><a href="/About us">Aboutus</a></li>
+                <li><a href="/About us">About us</a></li>
             </ul>
           </div>
           <!-- social media -->
