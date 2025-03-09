@@ -8,9 +8,11 @@
     import whatsapplogo from '$lib/components/images/whatsapplogo.png';
     import kitchenaid from '$lib/components/images/kitchenaid.jpeg';
     import stainlesssteelbench from '$lib/components/images/stainlesssteelbench.jpg';
+    import airfryer from '$lib/components/images/airfryer.jpeg'
 
     let showMore = false;
     let showMoreScraper = false;
+    let showMoreFryer = false;
 
    // let isDarkMode = false; //light mode default
 
@@ -123,6 +125,32 @@
                 A stainless steel bench scraper is a must have tool for baking cooking. It helps in cutting dough, 
                 scraping work surfaces, and even measuring with built-in ruler. Whether you're working with dough bread 
                 or chopping herbs, this tool makes your prep work efficent and mess-free.
+            </p>
+         </div>
+         {/if}
+        </div>
+        <div class="kitchen-tool">
+            <img src={airfryer} alt="Air fryer" class="kitchen-image">
+         <button class="read-more-button" on:click={() => showMoreFryer  = !showMoreFryer}>
+            {showMoreFryer  ? "Read Less" : "Read More"}
+         </button>
+         {#if showMoreFryer}
+         <div class="read-more-content">
+            <p>
+                Air fryer are a great alternative to deep frying, to remove the need for high-fat and high-calorie oils.
+                They use rapid air circulation technology to cook food with little to no oil while still achieving the
+                crispy texture of deep-fried food.
+            </p>
+            <p>Health benefits of using an airfryer include:
+                <ul>
+                    <li>Reduces **saturated fat intake**, helping to manage cholesterol levels.</li>
+                    <li>Decreases the **risk of cardiovascular disease** by lowering unhealthy fat consumption.</li>
+                    <li>Preserves nutrients better than deep frying, making meals healthier.</li>
+                    <li>Requires **less oil**, leading top meals with fewer calories while mainting taste and texture</li>
+                </ul>
+            <p>
+                If you're looking for a way to enjoy crispy, delicious food with a fractrion of fat and calories,
+                air fryer is a must-have kitchen essential.
             </p>
          </div>
          {/if}
