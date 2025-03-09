@@ -1,5 +1,5 @@
 <script>
-    import ArticlePublish from "$lib/components/Articles/ArticlePublish.svelte";
+    import ArticlePublish from "$lib/components/Articles/MockArticlePublish.svelte";
   </script>
   
   <svelte:head>
