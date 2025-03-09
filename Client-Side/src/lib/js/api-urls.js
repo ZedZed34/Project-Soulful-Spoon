@@ -23,3 +23,8 @@ export const LIKE_URL = `${BASE_URL}/likes`;
 
 // Messaging
 export const MESSAGE_URL = `${BASE_URL}/messages`;
+
+
+// For testing
+console.log("Base API URL:", BASE_URL);
+console.log("POST_URL:", POST_URL);

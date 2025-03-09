@@ -2,7 +2,7 @@
     import "$lib/css/mockarticlepublish.css";  
     import { POST_URL } from "$lib/js/api-urls";
     import Editor from '@tinymce/tinymce-svelte';
-    import { user } from "$lib/components/user"; // Ensures user state tracking
+    import { user } from "$lib/components/user";
 
     import logo from '$lib/components/images/Logo.png'; 
     import profileicon from '$lib/components/images/profileicon.jpg';
@@ -27,7 +27,9 @@
 
     let success = false;
     let error = null;
-    let showLoginPopup = !user; // Show login popup if user is not authenticated
+    let showLoginPopup = !user;
+
+    console.log("POST_URL:", POST_URL); // Debugging log
 
     async function createArticle(event) {
         event.preventDefault();
@@ -50,6 +52,7 @@
         };
 
         try {
+            console.log("Sending article:", newArticle);
             const response = await fetch(POST_URL, {
                 method: "POST",
                 credentials: "include",
@@ -61,6 +64,9 @@
                 throw new Error("Failed to publish article.");
             }
 
+            const responseData = await response.json();
+            console.log("Article Published Successfully:", responseData);
+
             success = true;
             article_title = "";
             article_content = "";
@@ -68,7 +74,7 @@
             selectedDiet = [];
             error = null;
         } catch (err) {
-            console.error(err);
+            console.error("Error publishing article:", err);
             error = err.message;
         }
     }
@@ -136,6 +142,9 @@
     </div>
 {/if}
 
+
+
+
 <div class="article-page {showLoginPopup ? 'blur-background' : ''}">
     <div class="publish-container">
         <div class="image-container">
@@ -144,43 +153,32 @@
         <div class="form-container">
             <h2>Publish Your Article</h2>
             <p class="username">By: <strong>{username}</strong></p>
-            <form on:submit|preventDefault={createArticle}>
+        
+            <!-- Updated Form -->
+            <form onsubmit={createArticle}>
                 <label>Title</label>
                 <input type="text" bind:value={article_title} placeholder="Enter Title" required />
-                
-                <label>Course Category</label>
-                <div class="course-selection">
-                    {#each courseOptions as course}
-                        <button type="button" class="course-button {selectedCourse.includes(course) ? 'selected' : ''}" on:click={() => toggleCourse(course)}>
-                            {course}
-                        </button>
-                    {/each}
-                </div>
-
-                <label>Dietary Preferences</label>
-                <div class="diet-selection">
-                    {#each dietOptions as diet}
-                        <button type="button" class="diet-button {selectedDiet.includes(diet) ? 'selected' : ''}" on:click={() => toggleDiet(diet)}>
-                            {diet}
-                        </button>
-                    {/each}
-                </div>
-
+        
                 <label>Content</label>
                 <Editor id="article_content" apiKey="your-tinymce-api-key" bind:value={article_content} />
-
+        
                 <label class="file-upload">Upload Image
                     <input type="file" accept="image/*" on:change={handleFileChange} />
                 </label>
-
+        
                 <button type="submit">Publish</button>
+        
                 {#if success}
                     <p class="success-message">Your Article Has Been Published!</p>
+                {/if}
+                {#if error}
+                    <p class="error-message">{error}</p>
                 {/if}
             </form>
         </div>
     </div>
 </div>
+
 
 <!-- Footer -->
 <footer class="footer">

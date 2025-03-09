@@ -43,6 +43,8 @@ await getDatabase();
 // Load API routes
 app.use('/api', apiRoutes);
 
+app.use(cors({ origin: "*", credentials: true }));
+
 // Start the server running.
 app.listen(PORT, () => {
   console.log(`Express server listening on port ${PORT}`);
