@@ -23,7 +23,7 @@ npm run dev
 ### **3. Install npm dependacies for client side**
 
 ```bash
-cd Server-Side
+cd Client-Side
 npm install
 npm run dev
 ```
