@@ -99,7 +99,7 @@
           </p>
           <button class="login-button" type="submit">Login</button>
         </form>
-
+        <!-- profile picture -->
           {#if user}
           <div class="user-info">
             <img src={user.photoURL} alt="Profile">

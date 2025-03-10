@@ -1,5 +1,5 @@
 <script>
-
+    //importing necessary assets and styles
     import "$lib/css/articledetail.css"
     import logo from '$lib/components/images/Logo.png'; 
     import profileicon from '$lib/components/images/profileicon.jpg'
@@ -9,6 +9,7 @@
     import xlogo from '$lib/components/images/xlogo.png';
     import whatsapplogo from '$lib/components/images/whatsapplogo.png';
 
+    //exporting props to be recieved from the parent component
     export let id = ""; //unique recipe ID
     export let article_title = "Unknown Title";
     export let article_content = "No Content Available";
@@ -18,10 +19,12 @@
     export let date_published = "Unknown Date";
     export let image_path = "";
 
+    //state variable
     let userReaction = null;
     let showShareMenu = false;
     let currentURL = "";
 
+    //authentication state
     let isAuthenticated = false; // this is to track if a user is logged in
     let loggedInUser = "Anonymous"; //no user
 
@@ -43,23 +46,26 @@
     let successMessage = "";
     let loggedInUserEmail = "";
 
+    //run when component is mounted
     onMount(async() => {
         currentURL = window.location.href;
         //using local storage first instead of backend
         if(typeof window !== "undefined"){
             try{
-             
-
+        
+                //fetch recipes from json file
                 const response = await fetch("/recipes.json");
                 if(!response.ok) throw new Error("Failed to fetch recipes.");
                 const data = await response.json();
                 const currentRecipe = data.find(recipe => recipe.id === id);
 
+                //update likes and dislikes from fetched data
                 if(currentRecipe){
                     likes = currentRecipe.likes;
                     dislikes = currentRecipe.dislikes
                 }
 
+                //retrieve stored user interaction
                 let storedLikes = localStorage.getItem(`likes-${id}`);
                 let storedDislikes = localStorage.getItem(`dislikes-${id}`);
                 let storedReaction = localStorage.getItem(`reaction-${id}`);
@@ -68,6 +74,7 @@
                 dislikes = storedDislikes  ? parseInt(storedDislikes, 10) : dislikes;
                 userReaction = storedReaction || null;
 
+                //fetching and sorting most liked and latest recipes 
                 mostLikedRecipes = data.map(recipe => {
                     let storedLikes = localStorage.getItem(`likes-${recipe.id}`);
                     return{
@@ -95,6 +102,7 @@
             loggedInUser = storedUser ? storedUser : "Anonymous";
             loggedInUserEmail = storedEmail ? storedEmail : null;
 
+            //check subscription status
             if(loggedInUserEmail){
                 let storedSubscription = JSON.parse(localStorage.getItem(`newsletter-${loggedInUserEmail}`));
                 isSubscribed = storedSubscription ?? false;
@@ -104,6 +112,7 @@
         }   
     });
 
+    //user authentication status
     $: isAuthenticated = loggedInUser !== "Anonymous";
 
     onDestroy(() => {
@@ -112,6 +121,7 @@
         }
     });
     
+    //handles user reactions
     function updateReaction(type){
         if(type === "like"){
             if(userReaction === "like"){
@@ -193,6 +203,7 @@
         })
     }
 
+    //adds a new comment
     function addComment(){
         if (newComment.trim() === ""){
             return;
@@ -212,11 +223,13 @@
         newComment ="";
     }
 
+    //to delete a comment
     function deleteComment(commentID){
         comments = comments.filter(comment => comment.id !== commentID);
         localStorage.setItem(`comments-${id}`, JSON.stringify(comments));
     }
 
+    //to add reply
     function addReply(commentID){
         if(replyText.trim() === ""){
             return;
@@ -248,6 +261,7 @@
 
     }
 
+    //delete reply
     function deleteReply(commentID, replyID){
         comments = comments.map(comment => {
             if (comment.id === commentID){
@@ -287,6 +301,7 @@
         window.location.href = `/recipes/${recipeID}`;
     }
 
+    //most liked recipes section
     function updateMostLikedRecipes(){
         if(typeof window !== "undefined"){
             fetch("/recipes.json")
@@ -338,12 +353,14 @@
     </div>
 </nav>
 
+<!-- page -->
 <div class="page-container">
     <div class="content">
         <div id="recipe-container">
             <div class="recipe-header">
+                <!-- title -->
                 <h1>{article_title}</h1>
-                
+                <!-- buttons -->
                 <div class="reaction-buttons">
                     <button 
                         on:click|preventDefault={() => updateReaction("like")}
@@ -371,6 +388,7 @@
                     {/if}
                 </div> 
             </div>
+            <!-- meta data -->
             <div class="recipe-meta">
                 <p><strong>By:</strong> {username}</p>
                 <p><strong>Published:</strong> {date_published}</p>
@@ -386,6 +404,7 @@
             <p>{@html article_content}</p>
         </div>
 
+        <!-- comment section -->
         <section class = "comments-section">
             <h2 class="comment-title">Comments</h2>
 
@@ -397,7 +416,7 @@
             {:else}
                 <p class="login-prompt">Sign In to Comment.</p>
             {/if}
-
+            <!-- comments -->
             <ul class="comments-list">
                 {#each comments.slice(0, visibleComments) as comment (comment.id)}
                 <li class="comment">
@@ -407,7 +426,8 @@
                         <p class="comment-text">{comment.text}</p>
                         <small class="comment-date">{comment.date}</small>
                         <!-- <button class="reply-button" on:click={() => addReply(comment.id, prompt(`Replying to @${comment.username}: `))}>Reply</button> -->
-                    {#if isAuthenticated}
+                        <!-- reply and delete button -->
+                        {#if isAuthenticated}
                         <button class="reply-button" on:click={() => {
                                 replyingTo = { commentID: comment.id, replyID: null };
                                 replyingToUsername = null;
@@ -432,6 +452,7 @@
                                     <p class="comment-text">{reply.text}</p>
                                     <small class="comment-date">{reply.date}</small> 
                                     <!-- <button class="reply-button" on:click={() => addReply(comment.id, prompt(`Replying to @${reply.username}: `), reply.username)}>Reply</button> -->
+                                    <!-- reply and delete button -->
                                     {#if isAuthenticated}
                                         <button class="reply-button" on:click={() => {
                                             replyingTo = { commentID: comment.id, replyID: reply.id};
@@ -452,6 +473,7 @@
                             </div>
                         {/each}
 
+                        <!-- toggle view -->
                         {#if comment.replies.length > 2}
                             <button class="view-more-replies" on:click={() => toggleReplies(comment.id)}>
                                 {visibileReplies[comment.id] ? "Hide Replies" : `View More Replies (${comment.replies.length -2})`}
@@ -461,6 +483,7 @@
                 </li>
                 {/each}
             </ul>
+            <!-- toggle view -->
             {#if comments.length > 7}
                 <button class="view-more-comments" on:click={toggleComments}>
                     {commentsExpanded ? "Hide Comments" : `View More Comments (${comments.length - visibleComments})`}

@@ -9,6 +9,7 @@
   </script><script src="https://files.bpcontent.cloud/2025/02/25/06/20250225063934-HGA74MAU.js"></script>
   </svelte:head>
 
+<!-- article details -->
 {#if data?.recipe}
 <ArticleDetail
     id={data.recipe.id}

@@ -1,4 +1,5 @@
 <script>
+    // import necessary assets
     import "$lib/css/mockarticlepublish.css";  
     import { POST_URL } from "$lib/js/api-urls";
     import Editor from '@tinymce/tinymce-svelte';
@@ -31,6 +32,7 @@
 
     console.log("POST_URL:", POST_URL); // Debugging log
 
+    // creates an article
     async function createArticle(event) {
         event.preventDefault();
         
@@ -79,6 +81,7 @@
         }
     }
 
+    //article image
     function handleFileChange(event) {
         const file = event.target.files[0];
         if (file) {
@@ -90,6 +93,7 @@
         }
     }
 
+    //course selection
     function toggleCourse(course) {
         if (selectedCourse.includes(course)) {
             selectedCourse = selectedCourse.filter(c => c !== course);
@@ -98,6 +102,7 @@
         }
     }
 
+    //diet selection
     function toggleDiet(diet) {
         if (selectedDiet.includes(diet)) {
             selectedDiet = selectedDiet.filter(d => d !== diet);
@@ -133,6 +138,7 @@
     </ul>
 </nav>
 
+<!-- login prompt if not signed in -->
 {#if showLoginPopup}
     <div class="popup">
         <div class="popup-content">
@@ -144,7 +150,7 @@
 
 
 
-
+<!-- article content -->
 <div class="article-page {showLoginPopup ? 'blur-background' : ''}">
     <div class="publish-container">
         <div class="image-container">
@@ -154,14 +160,14 @@
             <h2>Publish Your Article</h2>
             <p class="username">By: <strong>{username}</strong></p>
         
-            <!-- Updated Form -->
+            <!-- Form -->
             <form onsubmit={createArticle}>
                 <label>Title</label>
                 <input type="text" bind:value={article_title} placeholder="Enter Title" required />
-        
+                <!-- content -->
                 <label>Content</label>
                 <Editor id="article_content" apiKey="your-tinymce-api-key" bind:value={article_content} />
-        
+                <!-- recipe image -->
                 <label class="file-upload">Upload Image
                     <input type="file" accept="image/*" on:change={handleFileChange} />
                 </label>

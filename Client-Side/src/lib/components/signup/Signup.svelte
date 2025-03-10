@@ -1,4 +1,5 @@
 <script>
+  // import necessary styles
   import { SIGNUP_URL } from "$lib/js/api-urls";
   import "$lib/css/signup.css";  
   import { goto } from "$app/navigation";
@@ -19,6 +20,7 @@
   let usernameTakenError = false;
   let emailTakenError = false;
 
+  // default images
   let images = [
     "/src/lib/components/images/pp-jaguar.png", 
     "/src/lib/components/images/pp-parrot.png", 
@@ -31,6 +33,7 @@
   let currentImage = 0;
   let selectedImage = images[currentImage];
 
+  //google authentication
   async function googleLogin() {
     try {
       const result = await loginWithGoogle();
@@ -96,6 +99,7 @@
     }
   }
 
+  //profile picture
   function changeProfilePicture() {
     currentImage = (currentImage + 1) % images.length;
     selectedImage = images[currentImage];
@@ -106,25 +110,29 @@
   <h1>Sign Up</h1>
   
   <form on:submit|preventDefault={signupUser}>
+    <!-- username -->
     <input type="text" bind:value={username} placeholder="Username" required />
     {#if usernameTakenError}
       <p class="error">Username is already taken.</p>
     {/if}
-
+    <!-- first name and last name -->
     <input type="text" bind:value={firstName} placeholder="First Name" required />
     <input type="text" bind:value={lastName} placeholder="Last Name" required />
     
+    <!-- email -->
     <input type="email" bind:value={email} placeholder="Email" required />
     {#if emailTakenError}
       <p class="error">Email is already registered.</p>
     {/if}
 
+    <!-- password -->
     <input type="password" bind:value={password} placeholder="Password" required />
     <input type="password" bind:value={confirmedPassword} placeholder="Confirm Password" required />
     {#if passwordMatchError}
       <p class="error">Passwords do not match.</p>
     {/if}
 
+    <!-- profile picture -->
     <div class="profile-picture">
       <img src={selectedImage} alt="Profile Picture" />
       <button type="button" on:click={changeProfilePicture}>Change Picture</button>
@@ -133,6 +141,7 @@
     <button type="submit">Sign Up</button>
   </form>
 
+  <!-- google authentication -->
   <p>Or sign up using Google:</p>
   <button on:click={googleLogin}>Sign in with Google</button>
 
