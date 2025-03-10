@@ -45,18 +45,18 @@
     // function applyTheme() {
     //     document.documentElement.classList.toggle("dark-mode", isDarkMode);
     // }
-
-
+ 
+//  clear filter button functions
     function clearFilters() {
         searchQuery = "";
         selectedCourse = "";
         selectedDiet = "";
+        // filtering image initalisation
         filteredImages = images;
 
     document.querySelectorAll('input[name="course"]').forEach((el) => el.checked = false);
     document.querySelectorAll('input[name="diet"]').forEach((el) => el.checked = false);
     }
-    
     
     onMount (() => {
         auth.onAuthStateChanged((u) => {
@@ -246,6 +246,7 @@
     <h2>Welcome to Soulful Spoon</h2>
 </main>
 
+<!-- image layout all 8 images -->
 <section class="image-layout">
     {#each filteredImages as image}
     <div class="imagetext">

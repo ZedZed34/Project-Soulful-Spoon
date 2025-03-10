@@ -157,7 +157,7 @@
         </div>
     </div>
      </section>
-
+<!-- video embed -->
  <section class="video-container">
     <h2>Cooking Tips & Tricks</h2>
     <div class="video-wrapper">
