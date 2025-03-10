@@ -112,13 +112,14 @@
         <li class="dropdown">
             <a href="#/">Recipes</a>
             <ul class="dropdown-content">
-            <li><a href="/breakfast">Breakfast</a></li>
-            <li><a href="/lunch">Lunch</a></li>
-            <li><a href="/dinner">Dinner</a></li>
-            <li><a href="/desserts">Desserts</a></li>
-            <li><a href="/snacks">Snacks</a></li>
-            <li><a href="/quick-easy">Quick and Easy</a></li>
-            <li><a href="/airfryer">Airfryer</a></li>
+                <li><a href="/recipes#breakfast">Breakfast</a></li>
+                <li><a href="/recipes#lunch">Lunch</a></li>
+                <li><a href="/recipes#dinner">Dinner</a></li>
+                <li><a href="/recipes#desserts">Desserts</a></li>
+                <li><a href="/recipes#snacks">Snacks</a></li>
+                <li><a href="/recipes#snacks">Snacks</a></li>
+                <li><a href="/recipes#quick-easy">Quick and Easy</a></li>
+                <li><a href="/recipes#airfryer">Airfryer</a></li>
             </ul>
         </li>
         <li><a href="/Tips&tricks">Tips & Tricks</a></li>
