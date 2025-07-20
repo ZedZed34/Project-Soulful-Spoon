@@ -6,10 +6,10 @@ A frontend JavaScript technology Svelte framework based blogging website applica
 
 ### **1. Clone the Repository**
 
-```bash
+`
 git clone <repository-url>
 cd <repository-folder>
-```
+`
 
 ### **2. Install npm dependacies for server side**
 
